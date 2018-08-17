@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="TitleBar">
+        <!-- 标题 -->
+        <attr name="title" format="string" />
+        <attr name="title_left" format="string"/>
+        <attr name="title_right" format="string" />
+        <!-- 图标 -->
+        <attr name="icon_left" format="reference" />
+        <attr name="icon_right" format="reference" />
+        <!-- 返回按钮，默认开 -->
+        <attr name="icon_back" format="boolean" />
+        <!-- 文字颜色 -->
+        <attr name="color_title" format="color" />
+        <attr name="color_right" format="color" />
+        <attr name="color_left" format="color" />
+        <!-- 文字大小 -->
+        <attr name="size_title" format="dimension" />
+        <attr name="size_right" format="dimension" />
+        <attr name="size_left" format="dimension" />
+        <!-- 按钮背景 -->
+        <attr name="background_left" format="reference|color" />
+        <attr name="background_right" format="reference|color" />
+        <!-- 分割线 -->
+        <attr name="line" format="boolean" />
+        <attr name="color_line" format="color" />
+    </declare-styleable>
+
+</resources>
