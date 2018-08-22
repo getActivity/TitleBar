@@ -8,13 +8,4 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="TitleBarNightStyle">
-        <item name="android:background">#000000</item>
-        <item name="icon_left">@mipmap/ico_back_white</item>
-        <item name="color_title">#FFFFFF</item>
-        <item name="color_right">#FFFFFF</item>
-        <item name="color_left">#FFFFFF</item>
-        <item name="color_line">#FFFFFF</item>
-    </style>
-
 </resources>

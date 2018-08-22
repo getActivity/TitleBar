@@ -5,6 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Toast;
 
+import com.hjq.bar.ITitleBarStyle;
+import com.hjq.bar.OnTitleBarListener;
 import com.hjq.bar.TitleBar;
 import com.hjq.bar.demo.R;
 
@@ -17,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mTitleBar = (TitleBar) findViewById(R.id.tb_main_title_bar);
-        mTitleBar.setOnTitleBarListener(new TitleBar.OnTitleBarListener() {
+        mTitleBar.setOnTitleBarListener(new OnTitleBarListener() {
 
             @Override
             public void onLeftClick(View v) {

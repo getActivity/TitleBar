@@ -98,6 +98,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
+                app:title_left="返回"
+                app:title_right="设置"
                 app:title="夜间模式的标题栏" />
 
             <com.hjq.bar.TitleBar
@@ -106,13 +108,30 @@
                 android:layout_marginTop="20dp"
                 app:icon_back="false">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:drawableLeft="@mipmap/ic_launcher"
-                    android:gravity="center"
-                    android:text="TitleBar可以当做FrameLayout使用\n在这里也可以添加自定义布局" />
+                <LinearLayout
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <android.support.v7.widget.AppCompatCheckBox
+                        android:checked="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="TitleBar可以当做FrameLayout使用\n也可以在这里也可以添加自定义布局" />
+
+                    <android.support.v7.widget.SwitchCompat
+                        android:checked="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
 
             </com.hjq.bar.TitleBar>
 

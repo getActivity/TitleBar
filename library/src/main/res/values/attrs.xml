@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
-    <declare-styleable name="TitleBar">
+    <declare-styleable name="TitleBar"  tools:ignore="ResourceName">
         <!-- 标题 -->
         <attr name="title" format="string" />
         <attr name="title_left" format="string"/>

@@ -1,6 +1,10 @@
 # 标题栏
 
->[点击此处下载Demo](https://raw.githubusercontent.com/getActivity/TitleBar/master/TitleBar.apk)，博客地址：[纯手工打造一个通用的标题栏TitleBar](https://www.jianshu.com/p/ccf6506335e7)
+> 博客地址：[Android标题栏（TitleBar）绝佳解决方案](https://www.jianshu.com/p/617be02dc265)
+
+> 已投入公司项目多时，没有任何毛病，可胜任任何需求，[点击此处下载Demo](https://raw.githubusercontent.com/getActivity/TitleBar/master/TitleBar.apk)
+
+> 想了解实现原理的可以参考文章：[纯手工打造一个通用的标题栏TitleBar](https://www.jianshu.com/p/ccf6506335e7)
 
 ![](TitleBar.png)
 
@@ -9,10 +13,38 @@
 #### 集成步骤
 
     dependencies {
-        implementation 'com.hjq:titlebar:1.5'
+        implementation 'com.hjq:titlebar:2.0'
     }
 
-####XML示例
+#### 属性大全（划重点，要考）
+
+    <declare-styleable name="TitleBar"  tools:ignore="ResourceName">
+        <!-- 标题 -->
+        <attr name="title" format="string" />
+        <attr name="title_left" format="string"/>
+        <attr name="title_right" format="string" />
+        <!-- 图标 -->
+        <attr name="icon_left" format="reference" />
+        <attr name="icon_right" format="reference" />
+        <!-- 返回按钮，默认开 -->
+        <attr name="icon_back" format="boolean" />
+        <!-- 文字颜色 -->
+        <attr name="color_title" format="color" />
+        <attr name="color_right" format="color" />
+        <attr name="color_left" format="color" />
+        <!-- 文字大小 -->
+        <attr name="size_title" format="dimension" />
+        <attr name="size_right" format="dimension" />
+        <attr name="size_left" format="dimension" />
+        <!-- 按钮背景 -->
+        <attr name="background_left" format="reference|color" />
+        <attr name="background_right" format="reference|color" />
+        <!-- 分割线 -->
+        <attr name="line" format="boolean" />
+        <attr name="color_line" format="color" />
+    </declare-styleable>
+
+#### XML示例
 
     <com.hjq.bar.TitleBar
         android:layout_width="match_parent"
@@ -87,6 +119,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
+        app:title_left="返回"
+        app:title_right="设置"
         app:title="夜间模式的标题栏" />
 
     <com.hjq.bar.TitleBar
@@ -95,19 +129,36 @@
         android:layout_marginTop="20dp"
         app:icon_back="false">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:drawableLeft="@mipmap/ic_launcher"
-            android:gravity="center"
-            android:text="TitleBar可以当做FrameLayout使用\n在这里也可以添加自定义布局" />
+        <LinearLayout
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <android.support.v7.widget.AppCompatCheckBox
+                android:checked="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="TitleBar可以当做FrameLayout使用\n也可以在这里也可以添加自定义布局" />
+
+            <android.support.v7.widget.SwitchCompat
+                android:checked="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
 
     </com.hjq.bar.TitleBar>
 
-#### 设置点击监听
+#### 设置监听事件
 
-    mTitleBar.setOnTitleBarListener(new TitleBar.OnTitleBarListener() {
+    mTitleBar.setOnTitleBarListener(new OnTitleBarListener() {
 
         @Override
         public void onLeftClick(View v) {
@@ -124,6 +175,19 @@
             Toast.makeText(MainActivity.this, "右项被点击", Toast.LENGTH_SHORT).show();
         }
     });
+
+#### 统一TitleBar样式
+
+> 如果对TitleBar的默认样式不满意，可以在Application初始化样式，具体可参考[DefaultStyle](https://github.com/getActivity/TitleBar/blob/master/library/src/main/java/com/hjq/bar/DefaultStyle.java)这个类的实现
+
+	public class XXApplication extends Application {
+	
+	    @Override
+	    public void onCreate() {
+	        super.onCreate();
+	        TitleBar.initStyle(new ITitleBarStyle());
+		}
+	}
 
 ## License
 
