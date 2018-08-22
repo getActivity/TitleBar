@@ -116,20 +116,24 @@ public class TitleBar extends FrameLayout
         }
 
         //文字颜色设置
+
         mLeftView.setTextColor(ta.getColor(R.styleable.TitleBar_color_left, sDefaultValue.getLeftViewColor()));
         mTitleView.setTextColor(ta.getColor(R.styleable.TitleBar_color_title, sDefaultValue.getTitleViewColor()));
         mRightView.setTextColor(ta.getColor(R.styleable.TitleBar_color_right, sDefaultValue.getRightViewColor()));
 
         //文字大小设置
+
         mLeftView.setTextSize(TypedValue.COMPLEX_UNIT_PX, ta.getDimensionPixelSize(R.styleable.TitleBar_size_left, ViewBuilder.sp2px(getContext(), sDefaultValue.getLeftViewSize())));
         mTitleView.setTextSize(TypedValue.COMPLEX_UNIT_PX, ta.getDimensionPixelSize(R.styleable.TitleBar_size_title, ViewBuilder.sp2px(getContext(), sDefaultValue.getTitleViewSize())));
         mRightView.setTextSize(TypedValue.COMPLEX_UNIT_PX, ta.getDimensionPixelSize(R.styleable.TitleBar_size_right, ViewBuilder.sp2px(getContext(), sDefaultValue.getRightViewSize())));
 
         //背景设置
+
         mLeftView.setBackgroundResource(ta.getResourceId(R.styleable.TitleBar_background_left, sDefaultValue.getLeftViewBackground()));
         mRightView.setBackgroundResource(ta.getResourceId(R.styleable.TitleBar_background_right, sDefaultValue.getRightViewBackground()));
 
         //分割线设置
+        
         mLineView.setVisibility(ta.getBoolean(R.styleable.TitleBar_line, sDefaultValue.getLineVisibility()) ? View.VISIBLE : View.GONE);
         mLineView.setBackgroundColor(ta.getColor(R.styleable.TitleBar_color_line, sDefaultValue.getLineBackgroundColor()));
 
