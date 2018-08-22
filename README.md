@@ -189,6 +189,20 @@
 		}
 	}
 
+#### 框架亮点
+
+* 性能最佳：不使用LayoutInflater，而使用代码创建View的形式
+
+* 体验最优：TitleBar默认样式效果已经非常好，可下载Demo测试
+
+* 支持夜间模式：可以直接引用框架中的TitleBarNightStyle样式
+
+* 支持自定义布局：可将TitleBar当做FrameLayout使用，直接在XML中自定义布局
+
+* 支持全局配置样式：可以在Application中初始化TitleBar样式，达到一劳永逸的效果
+
+#### Android技术讨论Q群：78797078
+
 ## License
 
 ```text
