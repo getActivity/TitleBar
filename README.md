@@ -186,8 +186,8 @@
 	    public void onCreate() {
 	        super.onCreate();
 	        TitleBar.initStyle(new ITitleBarStyle());
-		}
-	}
+        }
+   }
 
 #### 框架亮点
 
