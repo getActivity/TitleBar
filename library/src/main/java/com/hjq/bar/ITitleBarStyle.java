@@ -1,8 +1,5 @@
 package com.hjq.bar;
 
-import android.annotation.ColorInt;
-import android.annotation.DrawableRes;
-
 /**
  *    author : HJQ
  *    github : https://github.com/getActivity/TitleBar

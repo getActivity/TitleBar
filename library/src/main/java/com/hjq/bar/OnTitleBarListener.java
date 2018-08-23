@@ -1,6 +1,7 @@
 package com.hjq.bar;
 
 import android.view.View;
+
 /**
  *    author : HJQ
  *    github : https://github.com/getActivity/TitleBar
