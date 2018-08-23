@@ -13,7 +13,7 @@
 #### 集成步骤
 
     dependencies {
-        implementation 'com.hjq:titlebar:2.0'
+        implementation 'com.hjq:titlebar:2.2'
     }
 
 #### 属性大全（划重点，要考）
@@ -197,7 +197,13 @@
 
 * 支持夜间模式：可以直接引用框架中的TitleBarNightStyle样式
 
+* 支持操控子控件：可以在代码中获取TitleBar的子控件进行调用相关的API
+
 * 支持自定义布局：可将TitleBar当做FrameLayout使用，直接在XML中自定义布局
+
+* 兼容沉浸式状态栏：兼容Github的沉浸式状态栏框架，达到完全沉浸的效果
+
+* 框架兼容性良好：本框架不依赖任何第三方库，支持Eclipse和Studio的使用
 
 * 支持全局配置样式：可以在Application中初始化TitleBar样式，达到一劳永逸的效果
 

@@ -133,7 +133,7 @@ public class TitleBar extends FrameLayout
         mRightView.setBackgroundResource(ta.getResourceId(R.styleable.TitleBar_background_right, sDefaultValue.getRightViewBackground()));
 
         //分割线设置
-        
+
         mLineView.setVisibility(ta.getBoolean(R.styleable.TitleBar_line, sDefaultValue.getLineVisibility()) ? View.VISIBLE : View.GONE);
         mLineView.setBackgroundColor(ta.getColor(R.styleable.TitleBar_color_line, sDefaultValue.getLineBackgroundColor()));
 
