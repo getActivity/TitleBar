@@ -13,7 +13,7 @@
 #### 集成步骤
 
     dependencies {
-        implementation 'com.hjq:titlebar:2.2'
+        implementation 'com.hjq:titlebar:2.3'
     }
 
 #### 属性大全（划重点，要考）
