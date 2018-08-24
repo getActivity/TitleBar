@@ -150,10 +150,13 @@ public class TitleBar extends FrameLayout
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         //设置TitleBar默认的高度
         if (MeasureSpec.getMode(heightMeasureSpec) == MeasureSpec.AT_MOST || MeasureSpec.getMode(heightMeasureSpec) == MeasureSpec.UNSPECIFIED) {
-            super.onMeasure(widthMeasureSpec, MeasureSpec.makeMeasureSpec(ViewBuilder.getActionBarHeight(getContext()), MeasureSpec.EXACTLY));
-        } else {
-            super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+            int titleBarHeight = sDefaultValue.getTitleBarHeight();
+            if (titleBarHeight <= 0) {
+                titleBarHeight = ViewBuilder.getActionBarHeight(getContext());
+                heightMeasureSpec = MeasureSpec.makeMeasureSpec(titleBarHeight, MeasureSpec.EXACTLY);
+            }
         }
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
     }
 
     public void setTitle(CharSequence text) {
@@ -236,11 +239,12 @@ public class TitleBar extends FrameLayout
     public void onClick(View v) {
         if (mListener == null) return;
 
-        if (v == mLeftView) {
+        int id = v.getId();
+        if (id == R.id.bar_id_left_view) {
             mListener.onLeftClick(v);
-        } else if (v == mTitleView) {
+        }else if (id == R.id.bar_id_title_view) {
             mListener.onTitleClick(v);
-        } else if (v == mRightView) {
+        }else if (id == R.id.bar_id_right_view) {
             mListener.onRightClick(v);
         }
     }

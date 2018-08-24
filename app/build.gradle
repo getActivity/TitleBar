@@ -7,8 +7,8 @@ android {
         applicationId "com.hjq.bar.demo"
         minSdkVersion 14
         targetSdkVersion 26
-        versionCode 23
-        versionName "2.3"
+        versionCode 25
+        versionName "2.5"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {

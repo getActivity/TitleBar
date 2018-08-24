@@ -8,6 +8,7 @@ package com.hjq.bar;
  */
 public interface ITitleBarStyle {
 
+    int getTitleBarHeight();//标题栏高度
     int getBackgroundColor();//背景颜色
     int getBackIconResource();//返回按钮图标
 

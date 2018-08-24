@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- 左项 -->
+    <item name="bar_id_left_view" type="id" />
+    <!-- 标题 -->
+    <item name="bar_id_title_view" type="id" />
+    <!-- 右项 -->
+    <item name="bar_id_right_view" type="id" />
+
+    <!-- 主布局 -->
+    <item name="bar_id_main_layout" type="id" />
+
+    <!-- 分割线 -->
+    <item name="bar_id_line_view" type="id" />
+
+</resources>

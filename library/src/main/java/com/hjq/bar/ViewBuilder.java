@@ -27,10 +27,12 @@ class ViewBuilder {
 
     ViewBuilder(Context context) {
         mMainLayout = new LinearLayout(context);
+        mMainLayout.setId(R.id.bar_id_main_layout);
         mMainLayout.setOrientation(LinearLayout.HORIZONTAL);
         mMainLayout.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
 
         mLeftView = new TextView(context);
+        mLeftView.setId(R.id.bar_id_left_view);
         mLeftView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT));
         mLeftView.setPadding(dp2px(context, 15), 0, dp2px(context, 15), 0);
         mLeftView.setCompoundDrawablePadding(dp2px(context, 5));
@@ -40,6 +42,7 @@ class ViewBuilder {
         mLeftView.setEnabled(false);
 
         mTitleView = new TextView(context);
+        mTitleView.setId(R.id.bar_id_title_view);
         LinearLayout.LayoutParams titleParams = new LinearLayout.LayoutParams(1, ViewGroup.LayoutParams.MATCH_PARENT);
         titleParams.weight = 1;
         titleParams.leftMargin = dp2px(context, 10);
@@ -51,6 +54,7 @@ class ViewBuilder {
         mTitleView.setEnabled(false);
 
         mRightView = new TextView(context);
+        mRightView.setId(R.id.bar_id_right_view);
         mRightView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT));
         mRightView.setPadding(dp2px(context, 15), 0, dp2px(context, 15), 0);
         mRightView.setCompoundDrawablePadding(dp2px(context, 5));
@@ -60,6 +64,7 @@ class ViewBuilder {
         mRightView.setEnabled(false);
 
         mLineView = new View(context);
+        mLineView.setId(R.id.bar_id_line_view);
         FrameLayout.LayoutParams lineParams = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 1);
         lineParams.gravity = Gravity.BOTTOM;
         mLineView.setLayoutParams(lineParams);

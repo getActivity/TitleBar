@@ -10,9 +10,18 @@ import android.view.View;
  */
 public interface OnTitleBarListener {
 
+    /**
+     * 左项被点击
+     */
     void onLeftClick(View v);
 
+    /**
+     * 标题被点击
+     */
     void onTitleClick(View v);
 
+    /**
+     * 右项被点击
+     */
     void onRightClick(View v);
 }

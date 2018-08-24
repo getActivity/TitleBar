@@ -9,6 +9,11 @@ package com.hjq.bar;
 public class DefaultStyle implements ITitleBarStyle {
 
     @Override
+    public int getTitleBarHeight() {
+        return 0;
+    }
+
+    @Override
     public int getBackgroundColor() {
         return 0xFFFFFFFF;
     }
