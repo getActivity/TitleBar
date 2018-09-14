@@ -4,9 +4,9 @@ package com.hjq.bar;
  *    author : HJQ
  *    github : https://github.com/getActivity/TitleBar
  *    time   : 2018/08/20
- *    desc   : 默认参数实现
+ *    desc   : 默认日间样式实现
  */
-public class DefaultStyle implements ITitleBarStyle {
+public class TitleBarLightStyle implements ITitleBarStyle {
 
     @Override
     public int getTitleBarHeight() {

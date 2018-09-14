@@ -13,7 +13,7 @@
 #### 集成步骤
 
     dependencies {
-        implementation 'com.hjq:titlebar:2.5'
+        implementation 'com.hjq:titlebar:2.6'
     }
 
 #### 属性大全（划重点，要考）
@@ -178,7 +178,7 @@
 
 #### 统一TitleBar样式
 
-> 如果对TitleBar的默认样式不满意，可以在Application初始化样式，具体可参考[DefaultStyle](https://github.com/getActivity/TitleBar/blob/master/library/src/main/java/com/hjq/bar/DefaultStyle.java)这个类的实现
+> 如果对TitleBar的默认样式不满意，可以在Application初始化样式，具体可参考[TitleBarLightStyle](https://github.com/getActivity/TitleBar/blob/master/library/src/main/java/com/hjq/bar/TitleBarLightStyle.java)或者[TitleBarNightStyle](https://github.com/getActivity/TitleBar/blob/master/library/src/main/java/com/hjq/bar/TitleBarNightStyle.java)类的实现
 
 	public class XXApplication extends Application {
 	
