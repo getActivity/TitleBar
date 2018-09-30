@@ -5,10 +5,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Toast;
 
-import com.hjq.bar.ITitleBarStyle;
 import com.hjq.bar.OnTitleBarListener;
 import com.hjq.bar.TitleBar;
-import com.hjq.bar.demo.R;
+import com.hjq.bar.style.TitleBarLightStyle;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -16,8 +15,12 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //在这里可以初始化样式
+        TitleBar.initStyle(new TitleBarLightStyle());
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         mTitleBar = (TitleBar) findViewById(R.id.tb_main_title_bar);
         mTitleBar.setOnTitleBarListener(new OnTitleBarListener() {
 

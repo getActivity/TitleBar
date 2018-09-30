@@ -2,6 +2,7 @@ package com.hjq.bar;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.drawable.Drawable;
 import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.View;
@@ -16,7 +17,7 @@ import android.widget.TextView;
  *    time   : 2018/08/20
  *    desc   : View构建器
  */
-class ViewBuilder {
+final class ViewBuilder {
 
     private LinearLayout mMainLayout;
     private TextView mLeftView;
@@ -94,10 +95,14 @@ class ViewBuilder {
      * 获取ActionBar的高度
      */
     static int getActionBarHeight(Context context) {
-        TypedArray ta = context.obtainStyledAttributes(new int[]{android.R.attr.actionBarSize});
-        int actionBarSize = (int) ta.getDimension(0, 0);
-        ta.recycle();
-        return actionBarSize;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.HONEYCOMB) {
+            TypedArray ta = context.obtainStyledAttributes(new int[]{android.R.attr.actionBarSize});
+            int actionBarSize = (int) ta.getDimension(0, 0);
+            ta.recycle();
+            return actionBarSize;
+        }else {
+            return ViewBuilder.dp2px(context, 100);
+        }
     }
 
     /**
@@ -114,5 +119,21 @@ class ViewBuilder {
     static int sp2px(Context context, float spValue) {
         final float fontScale = context.getResources().getDisplayMetrics().scaledDensity;
         return (int) (spValue * fontScale + 0.5f);
+    }
+
+
+    /**
+     * 检查TextView的任意方向图标是否有不为空的
+     */
+    static boolean hasCompoundDrawables(TextView view) {
+        Drawable[] drawables = view.getCompoundDrawables();
+        if (drawables != null) {
+            for (Drawable drawable : drawables) {
+                if (drawable != null) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }

@@ -2,7 +2,8 @@
 <resources>
 
     <color name="bar_transparent">#00000000</color>
-    <color name="bar_pressed_black">#0c000000</color>
-    <color name="bar_pressed_white">#66FFFFFF</color>
+    <color name="bar_pressed_black5">#0c000000</color>
+    <color name="bar_pressed_black20">#22000000</color>
+    <color name="bar_pressed_white40">#66FFFFFF</color>
 
 </resources>

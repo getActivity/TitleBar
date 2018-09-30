@@ -1,10 +1,13 @@
-package com.hjq.bar;
+package com.hjq.bar.style;
+
+import com.hjq.bar.ITitleBarStyle;
+import com.hjq.bar.R;
 
 /**
  *    author : HJQ
  *    github : https://github.com/getActivity/TitleBar
  *    time   : 2018/08/20
- *    desc   : 默认日间样式实现
+ *    desc   : 默认日间主题样式实现
  */
 public class TitleBarLightStyle implements ITitleBarStyle {
 
@@ -54,16 +57,6 @@ public class TitleBarLightStyle implements ITitleBarStyle {
     }
 
     @Override
-    public int getLeftViewBackground() {
-        return R.drawable.bar_selector_selectable_white;
-    }
-
-    @Override
-    public int getRightViewBackground() {
-        return R.drawable.bar_selector_selectable_white;
-    }
-
-    @Override
     public boolean getLineVisibility() {
         return true;
     }
@@ -71,5 +64,15 @@ public class TitleBarLightStyle implements ITitleBarStyle {
     @Override
     public int getLineBackgroundColor() {
         return 0xFFECECEC;
+    }
+
+    @Override
+    public int getLeftViewBackground() {
+        return R.drawable.bar_selector_selectable_white;
+    }
+
+    @Override
+    public int getRightViewBackground() {
+        return R.drawable.bar_selector_selectable_white;
     }
 }

@@ -1,5 +1,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
+    <style name="TitleBarLightStyle" tools:ignore="ResourceName" />
+
     <style name="TitleBarNightStyle" tools:ignore="ResourceName">
         <item name="android:background">#FF000000</item>
         <item name="icon_left">@mipmap/bar_icon_back_white</item>
@@ -9,6 +11,18 @@
         <item name="color_line">#FFFFFFFF</item>
         <item name="background_left">@drawable/bar_selector_selectable_black</item>
         <item name="background_right">@drawable/bar_selector_selectable_black</item>
+    </style>
+
+    <style name="TitleBarTransparentStyle" tools:ignore="ResourceName">
+        <item name="android:background">#00000000</item>
+        <item name="icon_left">@mipmap/bar_icon_back_white</item>
+        <item name="color_left">#FFFFFFFF</item>
+        <item name="color_title">#FFFFFFFF</item>
+        <item name="color_right">#FFFFFFFF</item>
+        <item name="color_line">#00000000</item>
+        <item name="line">false</item>
+        <item name="background_left">@drawable/bar_selector_selectable_transparent</item>
+        <item name="background_right">@drawable/bar_selector_selectable_transparent</item>
     </style>
 
 </resources>

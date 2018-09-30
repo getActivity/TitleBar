@@ -8,12 +8,6 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <com.hjq.bar.TitleBar
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:icon_back="false"
-        app:title="https://github.com/getActivity/TitleBar" />
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -28,7 +22,14 @@
             <com.hjq.bar.TitleBar
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="60dp"
+                android:layout_marginTop="400dp"
+                app:icon_back="false"
+                app:title="https://github.com/getActivity/TitleBar" />
+
+            <com.hjq.bar.TitleBar
+                android:layout_marginTop="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 app:title="默认的标题栏" />
 
             <com.hjq.bar.TitleBar
@@ -98,39 +99,46 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
+                app:title="夜间模式的标题栏"
                 app:title_left="返回"
-                app:title_right="设置"
-                app:title="夜间模式的标题栏" />
+                app:title_right="设置" />
 
             <com.hjq.bar.TitleBar
+                style="@style/TitleBarTransparentStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                app:icon_back="false">
+                android:background="@drawable/shape_gradient"
+                app:title="仿QQ渐变样式"
+                app:title_left="返回"
+                app:title_right="设置" />
+
+            <com.hjq.bar.TitleBar
+                style="@style/TitleBarTransparentStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@mipmap/title_bar_head"
+                app:title="自定义TitleBar">
 
                 <LinearLayout
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:orientation="vertical">
 
-                    <android.support.v7.widget.AppCompatCheckBox
-                        android:checked="true"
+                    <ImageView
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/ic_launcher" />
 
                     <TextView
-                        android:layout_weight="1"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:text="TitleBar可以当做FrameLayout使用\n也可以在这里也可以添加自定义布局" />
-
-                    <android.support.v7.widget.SwitchCompat
-                        android:checked="true"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:text="TitleBar可以当做FrameLayout使用\n也可以在这里也可以添加自定义布局"
+                        android:textColor="#FFFFFF" />
                 </LinearLayout>
 
             </com.hjq.bar.TitleBar>

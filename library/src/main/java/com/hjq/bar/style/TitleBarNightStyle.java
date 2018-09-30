@@ -1,10 +1,12 @@
-package com.hjq.bar;
+package com.hjq.bar.style;
+
+import com.hjq.bar.R;
 
 /**
  *    author : HJQ
  *    github : https://github.com/getActivity/TitleBar
  *    time   : 2018/08/20
- *    desc   : 默认夜间样式实现
+ *    desc   : 默认夜间主题样式实现
  */
 public class TitleBarNightStyle extends TitleBarLightStyle {
 
@@ -34,6 +36,11 @@ public class TitleBarNightStyle extends TitleBarLightStyle {
     }
 
     @Override
+    public int getLineBackgroundColor() {
+        return 0xFFFFFFFF;
+    }
+
+    @Override
     public int getLeftViewBackground() {
         return R.drawable.bar_selector_selectable_black;
     }
@@ -41,10 +48,5 @@ public class TitleBarNightStyle extends TitleBarLightStyle {
     @Override
     public int getRightViewBackground() {
         return R.drawable.bar_selector_selectable_black;
-    }
-
-    @Override
-    public int getLineBackgroundColor() {
-        return 0xFFFFFFFF;
     }
 }

@@ -13,12 +13,12 @@
 #### 集成步骤
 
     dependencies {
-        implementation 'com.hjq:titlebar:2.6'
+        implementation 'com.hjq:titlebar:3.0'
     }
 
 #### 属性大全（划重点，要考）
 
-    <declare-styleable name="TitleBar"  tools:ignore="ResourceName">
+    <declare-styleable name="TitleBar">
         <!-- 标题 -->
         <attr name="title" format="string" />
         <attr name="title_left" format="string"/>
@@ -46,130 +46,27 @@
 
 #### XML示例
 
+> [点我查看完整的Demo示例](https://github.com/getActivity/TitleBar/blob/master/app/src/main/res/layout/activity_main.xml)
+
     <com.hjq.bar.TitleBar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
         app:title="默认的标题栏" />
-
-    <com.hjq.bar.TitleBar
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        app:icon_back="false"
-        app:title="不带箭头的标题栏" />
-
-    <com.hjq.bar.TitleBar
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        app:line="false"
-        app:title="不带分割线的标题栏" />
-
-    <com.hjq.bar.TitleBar
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginTop="20dp"
-        app:title="自定义高度的标题栏" />
-
-    <com.hjq.bar.TitleBar
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        app:icon_left="@mipmap/ic_launcher"
-        app:icon_right="@mipmap/ic_launcher"
-        app:title="带图标的标题栏" />
-
-    <com.hjq.bar.TitleBar
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        app:icon_back="false"
-        app:title="带文本的标题栏\n12345"
-        app:title_left="左边"
-        app:title_right="右边" />
-
-    <com.hjq.bar.TitleBar
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        app:color_left="#FF3300"
-        app:color_right="#0033FF"
-        app:icon_back="false"
-        app:size_left="18sp"
-        app:size_right="18sp"
-        app:size_title="20sp"
-        app:title="文字大小和颜色"
-        app:title_left="左边"
-        app:title_right="右边" />
-
-    <com.hjq.bar.TitleBar
-        android:id="@+id/tb_main_title_bar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        app:icon_left="@mipmap/ic_launcher"
-        app:icon_right="@mipmap/ic_launcher"
-        app:title="监听事件的标题栏"
-        app:title_left="左边"
-        app:title_right="右边" />
-
-    <com.hjq.bar.TitleBar
-        style="@style/TitleBarNightStyle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        app:title_left="返回"
-        app:title_right="设置"
-        app:title="夜间模式的标题栏" />
-
-    <com.hjq.bar.TitleBar
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        app:icon_back="false">
-
-        <LinearLayout
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <android.support.v7.widget.AppCompatCheckBox
-                android:checked="true"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            <TextView
-                android:layout_weight="1"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:text="TitleBar可以当做FrameLayout使用\n也可以在这里也可以添加自定义布局" />
-
-            <android.support.v7.widget.SwitchCompat
-                android:checked="true"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-        </LinearLayout>
-
-    </com.hjq.bar.TitleBar>
 
 #### 设置监听事件
 
     mTitleBar.setOnTitleBarListener(new OnTitleBarListener() {
-
+    
         @Override
         public void onLeftClick(View v) {
             Toast.makeText(MainActivity.this, "左项被点击", Toast.LENGTH_SHORT).show();
         }
-
+    
         @Override
         public void onTitleClick(View v) {
             Toast.makeText(MainActivity.this, "标题被点击", Toast.LENGTH_SHORT).show();
         }
-
+    
         @Override
         public void onRightClick(View v) {
             Toast.makeText(MainActivity.this, "右项被点击", Toast.LENGTH_SHORT).show();
@@ -186,8 +83,8 @@
 	    public void onCreate() {
 	        super.onCreate();
 	        TitleBar.initStyle(new ITitleBarStyle());
-        }
-    }
+	    }
+	}
 
 #### 框架亮点
 
@@ -203,7 +100,7 @@
 
 * 兼容沉浸式状态栏：兼容Github的沉浸式状态栏框架，达到完全沉浸的效果
 
-* 框架兼容性良好：本框架不依赖任何第三方库，支持Eclipse和Studio的使用
+* 框架兼容性良好：本框架不依赖任何第三方库，支持兼容所有的安卓版本
 
 * 支持全局配置样式：可以在Application中初始化TitleBar样式，达到一劳永逸的效果
 
