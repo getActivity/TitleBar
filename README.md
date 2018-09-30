@@ -75,7 +75,7 @@
 
 #### 统一TitleBar样式
 
-> 如果对TitleBar的默认样式不满意，可以在Application初始化样式，具体可参考[TitleBarLightStyle](https://github.com/getActivity/TitleBar/blob/master/library/src/main/java/com/hjq/bar/TitleBarLightStyle.java)或者[TitleBarNightStyle](https://github.com/getActivity/TitleBar/blob/master/library/src/main/java/com/hjq/bar/TitleBarNightStyle.java)类的实现
+> 如果对TitleBar的默认样式不满意，可以在Application初始化样式，具体可参考[TitleBarLightStyle](https://github.com/getActivity/TitleBar/blob/master/library/src/main/java/com/hjq/bar/style/TitleBarLightStyle.java)的实现
 
 	public class XXApplication extends Application {
 	
