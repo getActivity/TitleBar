@@ -7,7 +7,7 @@ import com.hjq.bar.R;
  *    author : HJQ
  *    github : https://github.com/getActivity/TitleBar
  *    time   : 2018/08/20
- *    desc   : 默认日间主题样式实现
+ *    desc   : 默认日间主题样式实现（布局属性：app:bar_style="light"）
  */
 public class TitleBarLightStyle implements ITitleBarStyle {
 

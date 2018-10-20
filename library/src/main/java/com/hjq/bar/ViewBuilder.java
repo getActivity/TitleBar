@@ -35,8 +35,8 @@ final class ViewBuilder {
         mLeftView = new TextView(context);
         mLeftView.setId(R.id.bar_id_left_view);
         mLeftView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT));
-        mLeftView.setPadding(dp2px(context, 15), 0, dp2px(context, 15), 0);
-        mLeftView.setCompoundDrawablePadding(dp2px(context, 5));
+        mLeftView.setPadding(dp2px(context, 12), 0, dp2px(context, 12), 0);
+        mLeftView.setCompoundDrawablePadding(dp2px(context, 2));
         mLeftView.setGravity(Gravity.CENTER_VERTICAL);
         mLeftView.setSingleLine();
         mLeftView.setEllipsize(TextUtils.TruncateAt.END);
@@ -44,7 +44,7 @@ final class ViewBuilder {
 
         mTitleView = new TextView(context);
         mTitleView.setId(R.id.bar_id_title_view);
-        LinearLayout.LayoutParams titleParams = new LinearLayout.LayoutParams(1, ViewGroup.LayoutParams.MATCH_PARENT);
+        LinearLayout.LayoutParams titleParams = new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.MATCH_PARENT);
         titleParams.weight = 1;
         titleParams.leftMargin = dp2px(context, 10);
         titleParams.rightMargin = dp2px(context, 10);
@@ -57,8 +57,8 @@ final class ViewBuilder {
         mRightView = new TextView(context);
         mRightView.setId(R.id.bar_id_right_view);
         mRightView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT));
-        mRightView.setPadding(dp2px(context, 15), 0, dp2px(context, 15), 0);
-        mRightView.setCompoundDrawablePadding(dp2px(context, 5));
+        mRightView.setPadding(dp2px(context, 12), 0, dp2px(context, 12), 0);
+        mRightView.setCompoundDrawablePadding(dp2px(context, 2));
         mRightView.setGravity(Gravity.CENTER_VERTICAL);
         mRightView.setSingleLine();
         mRightView.setEllipsize(TextUtils.TruncateAt.END);
@@ -99,10 +99,9 @@ final class ViewBuilder {
             TypedArray ta = context.obtainStyledAttributes(new int[]{android.R.attr.actionBarSize});
             int actionBarSize = (int) ta.getDimension(0, 0);
             ta.recycle();
-            return actionBarSize;
-        }else {
-            return ViewBuilder.dp2px(context, 100);
+            if (actionBarSize > 0) return actionBarSize;
         }
+        return ViewBuilder.dp2px(context, 100);
     }
 
     /**

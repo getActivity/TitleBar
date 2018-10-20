@@ -2,6 +2,12 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
     <declare-styleable name="TitleBar"  tools:ignore="ResourceName">
+        <!-- 标题栏的样式 -->
+        <attr name="bar_style">
+            <enum name="light" value="0x10" />
+            <enum name="night" value="0x20" />
+            <enum name="transparent" value="0x30" />
+        </attr>
         <!-- 标题 -->
         <attr name="title" format="string" />
         <attr name="title_left" format="string"/>

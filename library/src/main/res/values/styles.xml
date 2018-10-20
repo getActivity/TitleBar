@@ -1,7 +1,5 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
-    <style name="TitleBarLightStyle" tools:ignore="ResourceName" />
-
     <style name="TitleBarNightStyle" tools:ignore="ResourceName">
         <item name="android:background">#FF000000</item>
         <item name="icon_left">@mipmap/bar_icon_back_white</item>

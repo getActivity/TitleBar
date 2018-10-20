@@ -8,17 +8,23 @@
 
 ![](TitleBar.png)
 
-![](TitleBar.jpg)
+![](TitleBar.gif)
 
 #### 集成步骤
 
     dependencies {
-        implementation 'com.hjq:titlebar:3.0'
+        implementation 'com.hjq:titlebar:3.2'
     }
 
 #### 属性大全（划重点，要考）
 
-    <declare-styleable name="TitleBar">
+    <declare-styleable name="TitleBar" >
+        <!-- 标题栏的样式 -->
+        <attr name="bar_style">
+            <enum name="light" value="0x10" />
+            <enum name="night" value="0x20" />
+            <enum name="transparent" value="0x30" />
+        </attr>
         <!-- 标题 -->
         <attr name="title" format="string" />
         <attr name="title_left" format="string"/>

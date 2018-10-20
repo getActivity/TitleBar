@@ -6,7 +6,7 @@ import com.hjq.bar.R;
  *    author : HJQ
  *    github : https://github.com/getActivity/TitleBar
  *    time   : 2018/08/20
- *    desc   : 默认透明主题样式实现
+ *    desc   : 默认透明主题样式实现（布局属性：app:bar_style="transparent"）
  */
 public class TitleBarTransparentStyle extends TitleBarNightStyle {
 

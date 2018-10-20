@@ -27,7 +27,7 @@ import com.hjq.bar.style.TitleBarTransparentStyle;
 public class TitleBar extends FrameLayout
         implements View.OnClickListener, Runnable {
 
-    private static ITitleBarStyle sDefaultStyle;
+    private static ITitleBarStyle sDefaultStyle = new TitleBarLightStyle();
 
     private OnTitleBarListener mListener;
 
@@ -54,13 +54,13 @@ public class TitleBar extends FrameLayout
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        //设置TitleBar默认的宽度
+        // 设置TitleBar默认的宽度
         if (MeasureSpec.getMode(heightMeasureSpec) == MeasureSpec.AT_MOST
                 || MeasureSpec.getMode(heightMeasureSpec) == MeasureSpec.UNSPECIFIED) {
             widthMeasureSpec = MeasureSpec.makeMeasureSpec(widthMeasureSpec, MeasureSpec.EXACTLY);
         }
 
-        //设置TitleBar默认的高度
+        // 设置TitleBar默认的高度
         if (MeasureSpec.getMode(heightMeasureSpec) == MeasureSpec.AT_MOST
                 || MeasureSpec.getMode(heightMeasureSpec) == MeasureSpec.UNSPECIFIED) {
 
@@ -73,7 +73,7 @@ public class TitleBar extends FrameLayout
             Drawable background = getBackground();
             //如果当前背景是一张图片的话
             if (background instanceof BitmapDrawable) {
-                mMainLayout.getLayoutParams().height = heightMeasureSpec;
+                mMainLayout.getLayoutParams().height = MeasureSpec.getSize(heightMeasureSpec);
                 //算出标题栏的高和图片的高之比例
                 double ratio = (double) MeasureSpec.getSize(widthMeasureSpec) / (double) background.getIntrinsicWidth();
                 heightMeasureSpec = MeasureSpec.makeMeasureSpec((int) (ratio * background.getIntrinsicHeight()), MeasureSpec.EXACTLY);
@@ -101,11 +101,24 @@ public class TitleBar extends FrameLayout
 
     private void initStyle(AttributeSet attrs) {
 
-        if (sDefaultStyle == null) {
-            sDefaultStyle  = new TitleBarLightStyle();
-        }
+        final TypedArray ta = getContext().obtainStyledAttributes(attrs, R.styleable.TitleBar);
 
-        TypedArray ta = getContext().obtainStyledAttributes(attrs, R.styleable.TitleBar);
+        final ITitleBarStyle style;
+        // 样式设置
+        switch (ta.getInt(R.styleable.TitleBar_bar_style, 0)) {
+            case 0x10:
+                style = new TitleBarLightStyle();
+                break;
+            case 0x20:
+                style = new TitleBarNightStyle();
+                break;
+            case 0x30:
+                style = new TitleBarTransparentStyle();
+                break;
+            default:
+                style = TitleBar.sDefaultStyle;
+                break;
+        }
 
         //标题设置
         if (ta.hasValue(R.styleable.TitleBar_title_left)) {
@@ -138,14 +151,12 @@ public class TitleBar extends FrameLayout
             setRightTitle(ta.getString(R.styleable.TitleBar_title_right));
         }
 
-        // 图标设置
-
         if (ta.hasValue(R.styleable.TitleBar_icon_left)) {
             setLeftIcon(getContext().getResources().getDrawable(ta.getResourceId(R.styleable.TitleBar_icon_left, 0)));
-        } else {
-            // 显示返回图标
+        }else {
             if (ta.getBoolean(R.styleable.TitleBar_icon_back, true)) {
-                setLeftIcon(getContext().getResources().getDrawable(sDefaultStyle.getBackIconResource()));
+                // 显示返回图标
+                setLeftIcon(getContext().getResources().getDrawable(style.getBackIconResource()));
             }
         }
 
@@ -153,30 +164,30 @@ public class TitleBar extends FrameLayout
             setRightIcon(getContext().getResources().getDrawable(ta.getResourceId(R.styleable.TitleBar_icon_right, 0)));
         }
 
-        //文字颜色设置
-        mLeftView.setTextColor(ta.getColor(R.styleable.TitleBar_color_left, sDefaultStyle.getLeftViewColor()));
-        mTitleView.setTextColor(ta.getColor(R.styleable.TitleBar_color_title, sDefaultStyle.getTitleViewColor()));
-        mRightView.setTextColor(ta.getColor(R.styleable.TitleBar_color_right, sDefaultStyle.getRightViewColor()));
+        // 文字颜色设置
+        setLeftColor(ta.getColor(R.styleable.TitleBar_color_left, style.getLeftViewColor()));
+        setTitleColor(ta.getColor(R.styleable.TitleBar_color_title, style.getTitleViewColor()));
+        setRightColor(ta.getColor(R.styleable.TitleBar_color_right, style.getRightViewColor()));
 
-        //文字大小设置
-        mLeftView.setTextSize(TypedValue.COMPLEX_UNIT_PX, ta.getDimensionPixelSize(R.styleable.TitleBar_size_left, ViewBuilder.sp2px(getContext(), sDefaultStyle.getLeftViewSize())));
-        mTitleView.setTextSize(TypedValue.COMPLEX_UNIT_PX, ta.getDimensionPixelSize(R.styleable.TitleBar_size_title, ViewBuilder.sp2px(getContext(), sDefaultStyle.getTitleViewSize())));
-        mRightView.setTextSize(TypedValue.COMPLEX_UNIT_PX, ta.getDimensionPixelSize(R.styleable.TitleBar_size_right, ViewBuilder.sp2px(getContext(), sDefaultStyle.getRightViewSize())));
+        // 文字大小设置
+        setLeftSize(TypedValue.COMPLEX_UNIT_PX, ta.getDimensionPixelSize(R.styleable.TitleBar_size_left, ViewBuilder.sp2px(getContext(), style.getLeftViewSize())));
+        setTitleSize(TypedValue.COMPLEX_UNIT_PX, ta.getDimensionPixelSize(R.styleable.TitleBar_size_title, ViewBuilder.sp2px(getContext(), style.getTitleViewSize())));
+        setRightSize(TypedValue.COMPLEX_UNIT_PX, ta.getDimensionPixelSize(R.styleable.TitleBar_size_right, ViewBuilder.sp2px(getContext(), style.getRightViewSize())));
 
-        //背景设置
-        mLeftView.setBackgroundResource(ta.getResourceId(R.styleable.TitleBar_background_left, sDefaultStyle.getLeftViewBackground()));
-        mRightView.setBackgroundResource(ta.getResourceId(R.styleable.TitleBar_background_right, sDefaultStyle.getRightViewBackground()));
+        // 背景设置
+        setLeftBackground(ta.getResourceId(R.styleable.TitleBar_background_left, style.getLeftViewBackground()));
+        setRightBackground(ta.getResourceId(R.styleable.TitleBar_background_right, style.getRightViewBackground()));
 
-        //分割线设置
-        mLineView.setVisibility(ta.getBoolean(R.styleable.TitleBar_line, sDefaultStyle.getLineVisibility()) ? View.VISIBLE : View.GONE);
-        mLineView.setBackgroundColor(ta.getColor(R.styleable.TitleBar_color_line, sDefaultStyle.getLineBackgroundColor()));
+        // 分割线设置
+        setLineVisible(ta.getBoolean(R.styleable.TitleBar_line, style.getLineVisibility()));
+        setLineColor(ta.getColor(R.styleable.TitleBar_color_line, style.getLineBackgroundColor()));
 
-        //回收TypedArray
+        // 回收TypedArray
         ta.recycle();
 
         //设置默认背景
         if (getBackground() == null) {
-            setBackgroundColor(sDefaultStyle.getBackgroundColor());
+            setBackgroundColor(style.getBackgroundColor());
         }
     }
 
@@ -186,8 +197,8 @@ public class TitleBar extends FrameLayout
     @Override
     public void run() {
         //更新中间标题的内边距，避免向左或者向右偏移
-        int leftSize = mLeftView.getWidth();
-        int rightSize = mRightView.getWidth();
+        final int leftSize = mLeftView.getWidth();
+        final int rightSize = mRightView.getWidth();
         if (leftSize != rightSize) {
             if (leftSize > rightSize) {
                 mTitleView.setPadding(0, 0, leftSize - rightSize, 0);
@@ -211,7 +222,7 @@ public class TitleBar extends FrameLayout
     @Override
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
-        //设置监听
+        // 设置监听
         mTitleView.setOnClickListener(this);
         mLeftView.setOnClickListener(this);
         mRightView.setOnClickListener(this);
@@ -219,7 +230,7 @@ public class TitleBar extends FrameLayout
 
     @Override
     protected void onDetachedFromWindow() {
-        //移除监听
+        // 移除监听
         mTitleView.setOnClickListener(null);
         mLeftView.setOnClickListener(null);
         mRightView.setOnClickListener(null);
@@ -233,7 +244,7 @@ public class TitleBar extends FrameLayout
     public void onClick(View v) {
         if (getOnTitleBarListener() == null) return;
 
-        int id = v.getId();
+        final int id = v.getId();
         if (id == R.id.bar_id_left_view) {
             getOnTitleBarListener().onLeftClick(v);
         }else if (id == R.id.bar_id_title_view) {
@@ -302,6 +313,76 @@ public class TitleBar extends FrameLayout
     public void setRightIcon(Drawable drawable) {
         mRightView.setCompoundDrawablesWithIntrinsicBounds(null, null, drawable, null);
         postDelayed(this, 100);
+    }
+
+    /**
+     * 设置标题颜色
+     */
+    public void setTitleColor(int color) {
+        mTitleView.setTextColor(color);
+    }
+
+    /**
+     * 设置左标题颜色
+     */
+    public void setLeftColor(int color) {
+        mLeftView.setTextColor(color);
+    }
+
+    /**
+     * 设置右标题颜色
+     */
+    public void setRightColor(int color) {
+        mRightView.setTextColor(color);
+    }
+
+    /**
+     * 设置左标题状态选择器
+     */
+    public void setLeftBackground(int resourceId) {
+        mLeftView.setBackgroundResource(resourceId);
+    }
+
+    /**
+     * 设置右标题状态选择器
+     */
+    public void setRightBackground(int resourceId) {
+        mRightView.setBackgroundResource(resourceId);
+    }
+
+    /**
+     * 设置左标题的文本大小
+     */
+    public void setLeftSize(int unit, float size) {
+        mLeftView.setTextSize(unit, size);
+    }
+
+    /**
+     * 设置标题的文本大小
+     */
+    public void setTitleSize(int unit, float size) {
+        mTitleView.setTextSize(unit, size);
+    }
+
+    /**
+     * 设置右标题的文本大小
+     */
+    public void setRightSize(int unit, float size) {
+        mRightView.setTextSize(unit, size);
+    }
+
+    /**
+     * 设置分割线是否显示
+     */
+    public void setLineVisible(boolean visible) {
+        mLineView.setVisibility(visible ? VISIBLE : GONE);
+    }
+
+    /**
+     * 设置分割线的颜色
+     */
+    public void setLineColor(int color) {
+        mLineView.setBackgroundColor(color);
     }
 
     /**

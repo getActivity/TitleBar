@@ -7,8 +7,8 @@ android {
         applicationId "com.hjq.bar.demo"
         minSdkVersion 14
         targetSdkVersion 26
-        versionCode 30
-        versionName "3.0"
+        versionCode 32
+        versionName "3.2"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -23,4 +23,5 @@ dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation project(':library')
     implementation 'com.android.support:appcompat-v7:26.1.0'
+    implementation 'com.android.support:design:26.1.0'
 }
