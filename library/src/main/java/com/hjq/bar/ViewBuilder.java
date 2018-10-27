@@ -1,6 +1,9 @@
 package com.hjq.bar;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.text.TextUtils;
@@ -15,7 +18,7 @@ import android.widget.TextView;
  *    author : HJQ
  *    github : https://github.com/getActivity/TitleBar
  *    time   : 2018/08/20
- *    desc   : View构建器
+ *    desc   : 标题栏子View构建器
  */
 final class ViewBuilder {
 
@@ -40,7 +43,6 @@ final class ViewBuilder {
         mLeftView.setGravity(Gravity.CENTER_VERTICAL);
         mLeftView.setSingleLine();
         mLeftView.setEllipsize(TextUtils.TruncateAt.END);
-        mLeftView.setEnabled(false);
 
         mTitleView = new TextView(context);
         mTitleView.setId(R.id.bar_id_title_view);
@@ -52,7 +54,6 @@ final class ViewBuilder {
         mTitleView.setGravity(Gravity.CENTER);
         mTitleView.setSingleLine();
         mTitleView.setEllipsize(TextUtils.TruncateAt.END);
-        mTitleView.setEnabled(false);
 
         mRightView = new TextView(context);
         mRightView.setId(R.id.bar_id_right_view);
@@ -62,7 +63,6 @@ final class ViewBuilder {
         mRightView.setGravity(Gravity.CENTER_VERTICAL);
         mRightView.setSingleLine();
         mRightView.setEllipsize(TextUtils.TruncateAt.END);
-        mRightView.setEnabled(false);
 
         mLineView = new View(context);
         mLineView.setId(R.id.bar_id_line_view);
@@ -102,6 +102,27 @@ final class ViewBuilder {
             if (actionBarSize > 0) return actionBarSize;
         }
         return ViewBuilder.dp2px(context, 100);
+    }
+
+    /**
+     * 获取 Activity 的Label属性值
+     */
+    static CharSequence getActivityLabel(Activity activity) {
+        //获取清单文件中的label属性值
+        CharSequence label = activity.getTitle();
+        //如果Activity没有设置label属性，则默认会返回APP名称，需要过滤掉
+        if (label != null && !label.toString().equals("")) {
+
+            try {
+                PackageManager packageManager = activity.getPackageManager();
+                PackageInfo packageInfo = packageManager.getPackageInfo(activity.getPackageName(), 0);
+
+                if (!label.toString().equals(packageInfo.applicationInfo.loadLabel(packageManager).toString())) {
+                    return label;
+                }
+            } catch (PackageManager.NameNotFoundException ignored) {}
+        }
+        return null;
     }
 
     /**

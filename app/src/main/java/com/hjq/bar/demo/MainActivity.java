@@ -8,6 +8,7 @@ import android.widget.Toast;
 import com.hjq.bar.OnTitleBarListener;
 import com.hjq.bar.TitleBar;
 import com.hjq.bar.style.TitleBarLightStyle;
+import com.hjq.toast.ToastUtils;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -15,6 +16,9 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //建议在Application中初始化
+        ToastUtils.init(getApplicationContext());
+
         //在这里可以初始化样式
         TitleBar.initStyle(new TitleBarLightStyle());
 
@@ -26,17 +30,17 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onLeftClick(View v) {
-                Toast.makeText(MainActivity.this, "左项被点击", Toast.LENGTH_SHORT).show();
+                ToastUtils.show("左项View被点击");
             }
 
             @Override
             public void onTitleClick(View v) {
-                Toast.makeText(MainActivity.this, "标题被点击", Toast.LENGTH_SHORT).show();
+                ToastUtils.show("中间View被点击");
             }
 
             @Override
             public void onRightClick(View v) {
-                Toast.makeText(MainActivity.this, "右项被点击", Toast.LENGTH_SHORT).show();
+                ToastUtils.show("右项View被点击");
             }
         });
     }

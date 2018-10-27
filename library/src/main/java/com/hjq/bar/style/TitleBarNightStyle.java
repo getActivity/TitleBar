@@ -32,7 +32,7 @@ public class TitleBarNightStyle extends TitleBarLightStyle {
 
     @Override
     public int getRightViewColor() {
-        return 0x99FFFFFF;
+        return 0xCCFFFFFF;
     }
 
     @Override

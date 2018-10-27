@@ -1,16 +1,18 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
+    <!-- 不推荐这种，推荐使用：app:bar_style="night" -->
     <style name="TitleBarNightStyle" tools:ignore="ResourceName">
         <item name="android:background">#FF000000</item>
         <item name="icon_left">@mipmap/bar_icon_back_white</item>
         <item name="color_left">#CCFFFFFF</item>
         <item name="color_title">#EEFFFFFF</item>
-        <item name="color_right">#99FFFFFF</item>
+        <item name="color_right">#CCFFFFFF</item>
         <item name="color_line">#FFFFFFFF</item>
         <item name="background_left">@drawable/bar_selector_selectable_black</item>
         <item name="background_right">@drawable/bar_selector_selectable_black</item>
     </style>
 
+    <!-- 不推荐这种，推荐使用：app:bar_style="transparent" -->
     <style name="TitleBarTransparentStyle" tools:ignore="ResourceName">
         <item name="android:background">#00000000</item>
         <item name="icon_left">@mipmap/bar_icon_back_white</item>
