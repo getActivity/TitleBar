@@ -31,12 +31,12 @@ public class TitleBarTransparentStyle extends TitleBarNightStyle {
     }
 
     @Override
-    public boolean getLineVisibility() {
+    public boolean isLineVisible() {
         return false;
     }
 
     @Override
-    public int getLineBackgroundColor() {
+    public int getLineColor() {
         return 0x00000000;
     }
 

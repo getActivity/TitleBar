@@ -13,12 +13,12 @@
 #### 集成步骤
 
     dependencies {
-        implementation 'com.hjq:titlebar:3.3'
+        implementation 'com.hjq:titlebar:3.5'
     }
 
 #### 属性大全（划重点，要考）
 
-    <declare-styleable name="TitleBar" >
+    <declare-styleable name="TitleBar">
         <!-- 标题栏的样式 -->
         <attr name="bar_style">
             <enum name="light" value="0x10" />
@@ -46,8 +46,9 @@
         <attr name="background_left" format="reference|color" />
         <attr name="background_right" format="reference|color" />
         <!-- 分割线 -->
-        <attr name="line" format="boolean" />
-        <attr name="color_line" format="color" />
+        <attr name="line_visible" format="boolean" />
+        <attr name="line_color" format="color" />
+        <attr name="line_size" format="dimension" />
     </declare-styleable>
 
 #### XML示例
@@ -62,20 +63,20 @@
 #### 设置监听事件
 
     mTitleBar.setOnTitleBarListener(new OnTitleBarListener() {
-    
+
         @Override
         public void onLeftClick(View v) {
-            Toast.makeText(MainActivity.this, "左项被点击", Toast.LENGTH_SHORT).show();
+            ToastUtils.show("左项View被点击");
         }
-    
+
         @Override
         public void onTitleClick(View v) {
-            Toast.makeText(MainActivity.this, "标题被点击", Toast.LENGTH_SHORT).show();
+            ToastUtils.show("中间View被点击");
         }
-    
+
         @Override
         public void onRightClick(View v) {
-            Toast.makeText(MainActivity.this, "右项被点击", Toast.LENGTH_SHORT).show();
+            ToastUtils.show("右项View被点击");
         }
     });
 

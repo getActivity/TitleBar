@@ -57,13 +57,18 @@ public class TitleBarLightStyle implements ITitleBarStyle {
     }
 
     @Override
-    public boolean getLineVisibility() {
+    public boolean isLineVisible() {
         return true;
     }
 
     @Override
-    public int getLineBackgroundColor() {
+    public int getLineColor() {
         return 0xFFECECEC;
+    }
+
+    @Override
+    public int getLineSize() {
+        return 1;
     }
 
     @Override

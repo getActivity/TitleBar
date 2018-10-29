@@ -29,8 +29,9 @@
         <attr name="background_left" format="reference|color" />
         <attr name="background_right" format="reference|color" />
         <!-- 分割线 -->
-        <attr name="line" format="boolean" />
-        <attr name="color_line" format="color" />
+        <attr name="line_visible" format="boolean" />
+        <attr name="line_color" format="color" />
+        <attr name="line_size" format="dimension" />
     </declare-styleable>
 
 </resources>

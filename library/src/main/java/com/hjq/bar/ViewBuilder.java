@@ -22,12 +22,13 @@ import android.widget.TextView;
  */
 final class ViewBuilder {
 
-    private LinearLayout mMainLayout;
-    private TextView mLeftView;
-    private TextView mTitleView;
-    private TextView mRightView;
+    private final LinearLayout mMainLayout;
 
-    private View mLineView;
+    private final TextView mLeftView;
+    private final TextView mTitleView;
+    private final TextView mRightView;
+
+    private final View mLineView;
 
     ViewBuilder(Context context) {
         mMainLayout = new LinearLayout(context);

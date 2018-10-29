@@ -93,7 +93,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                app:line="false"
+                app:line_visible="false"
                 app:title="不带分割线的标题栏" />
 
             <com.hjq.bar.TitleBar

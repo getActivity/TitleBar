@@ -7,7 +7,7 @@
         <item name="color_left">#CCFFFFFF</item>
         <item name="color_title">#EEFFFFFF</item>
         <item name="color_right">#CCFFFFFF</item>
-        <item name="color_line">#FFFFFFFF</item>
+        <item name="line_color">#FFFFFFFF</item>
         <item name="background_left">@drawable/bar_selector_selectable_black</item>
         <item name="background_right">@drawable/bar_selector_selectable_black</item>
     </style>
@@ -19,8 +19,8 @@
         <item name="color_left">#FFFFFFFF</item>
         <item name="color_title">#FFFFFFFF</item>
         <item name="color_right">#FFFFFFFF</item>
-        <item name="color_line">#00000000</item>
-        <item name="line">false</item>
+        <item name="line_color">#00000000</item>
+        <item name="line_visible">false</item>
         <item name="background_left">@drawable/bar_selector_selectable_transparent</item>
         <item name="background_right">@drawable/bar_selector_selectable_transparent</item>
     </style>

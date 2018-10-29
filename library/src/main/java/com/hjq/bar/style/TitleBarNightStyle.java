@@ -36,7 +36,7 @@ public class TitleBarNightStyle extends TitleBarLightStyle {
     }
 
     @Override
-    public int getLineBackgroundColor() {
+    public int getLineColor() {
         return 0xFFFFFFFF;
     }
 

@@ -9,6 +9,7 @@ import android.os.Build;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -70,12 +71,12 @@ public class TitleBar extends FrameLayout
                 heightMeasureSpec = MeasureSpec.makeMeasureSpec(titleBarHeight, MeasureSpec.EXACTLY);
             }
 
-            Drawable background = getBackground();
+            final Drawable background = getBackground();
             // 如果当前背景是一张图片的话
             if (background instanceof BitmapDrawable) {
                 mMainLayout.getLayoutParams().height = MeasureSpec.getSize(heightMeasureSpec);
                 // 算出标题栏的宽度和图片的宽度之比例
-                double ratio = (double) MeasureSpec.getSize(widthMeasureSpec) / (double) background.getIntrinsicWidth();
+                final double ratio = (double) MeasureSpec.getSize(widthMeasureSpec) / (double) background.getIntrinsicWidth();
                 heightMeasureSpec = MeasureSpec.makeMeasureSpec((int) (ratio * background.getIntrinsicHeight()), MeasureSpec.EXACTLY);
             }
         }
@@ -141,6 +142,7 @@ public class TitleBar extends FrameLayout
             }
         }
 
+        // 图标设置
         if (ta.hasValue(R.styleable.TitleBar_title_right)) {
             setRightTitle(ta.getString(R.styleable.TitleBar_title_right));
         }
@@ -148,11 +150,9 @@ public class TitleBar extends FrameLayout
         if (ta.hasValue(R.styleable.TitleBar_icon_left)) {
             setLeftIcon(getContext().getResources().getDrawable(ta.getResourceId(R.styleable.TitleBar_icon_left, 0)));
         }else {
-            if (ta.getBoolean(R.styleable.TitleBar_icon_back, true)) {
+            if (ta.getBoolean(R.styleable.TitleBar_icon_back, style.getBackIconResource() > 0)) {
                 // 显示返回图标
-                if (style.getBackIconResource() != 0) {
-                    setLeftIcon(getContext().getResources().getDrawable(style.getBackIconResource()));
-                }
+                setLeftIcon(getContext().getResources().getDrawable(style.getBackIconResource()));
             }
         }
 
@@ -171,16 +171,13 @@ public class TitleBar extends FrameLayout
         setRightSize(TypedValue.COMPLEX_UNIT_PX, ta.getDimensionPixelSize(R.styleable.TitleBar_size_right, ViewBuilder.sp2px(getContext(), style.getRightViewSize())));
 
         // 背景设置
-        if (style.getLeftViewBackground() != 0) {
-            setLeftBackground(ta.getResourceId(R.styleable.TitleBar_background_left, style.getLeftViewBackground()));
-        }
-        if (style.getRightViewBackground() != 0) {
-            setRightBackground(ta.getResourceId(R.styleable.TitleBar_background_right, style.getRightViewBackground()));
-        }
+        setLeftBackground(ta.getResourceId(R.styleable.TitleBar_background_left, style.getLeftViewBackground()));
+        setRightBackground(ta.getResourceId(R.styleable.TitleBar_background_right, style.getRightViewBackground()));
 
         // 分割线设置
-        setLineVisible(ta.getBoolean(R.styleable.TitleBar_line, style.getLineVisibility()));
-        setLineColor(ta.getColor(R.styleable.TitleBar_color_line, style.getLineBackgroundColor()));
+        setLineVisible(ta.getBoolean(R.styleable.TitleBar_line_visible, style.isLineVisible()));
+        setLineColor(ta.getColor(R.styleable.TitleBar_line_color, style.getLineColor()));
+        setLineSize(ta.getDimensionPixelSize(R.styleable.TitleBar_line_size, style.getLineSize()));
 
         // 回收TypedArray
         ta.recycle();
@@ -219,6 +216,23 @@ public class TitleBar extends FrameLayout
         }
     }
 
+    /**
+     * {@link View.OnClickListener}
+     */
+    @Override
+    public void onClick(View v) {
+        if (getOnTitleBarListener() == null) return;
+
+        final int id = v.getId();
+        if (id == R.id.bar_id_left_view) {
+            getOnTitleBarListener().onLeftClick(v);
+        }else if (id == R.id.bar_id_title_view) {
+            getOnTitleBarListener().onTitleClick(v);
+        }else if (id == R.id.bar_id_right_view) {
+            getOnTitleBarListener().onRightClick(v);
+        }
+    }
+
     @Override
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
@@ -235,23 +249,6 @@ public class TitleBar extends FrameLayout
         mLeftView.setOnClickListener(null);
         mRightView.setOnClickListener(null);
         super.onDetachedFromWindow();
-    }
-
-    /**
-     * {@link View.OnClickListener}
-     */
-    @Override
-    public void onClick(View v) {
-        if (getOnTitleBarListener() == null) return;
-
-        final int id = v.getId();
-        if (id == R.id.bar_id_left_view) {
-            getOnTitleBarListener().onLeftClick(v);
-        }else if (id == R.id.bar_id_title_view) {
-            getOnTitleBarListener().onTitleClick(v);
-        }else if (id == R.id.bar_id_right_view) {
-            getOnTitleBarListener().onRightClick(v);
-        }
     }
 
     /**
@@ -278,61 +275,65 @@ public class TitleBar extends FrameLayout
     /**
      * 设置标题
      */
-    public void setTitle(int resourceId) {
-        setTitle(getResources().getString(resourceId));
+    public void setTitle(int stringId) {
+        setTitle(getResources().getString(stringId));
     }
 
     public void setTitle(CharSequence text) {
         mTitleView.setText(text);
-        postDelayed(this, 30);
+        post(this);
     }
 
     /**
      * 设置左边的标题
      */
-    public void setLeftTitle(int resourceId) {
-        setLeftTitle(getResources().getString(resourceId));
+    public void setLeftTitle(int stringId) {
+        setLeftTitle(getResources().getString(stringId));
     }
 
     public void setLeftTitle(CharSequence text) {
         mLeftView.setText(text);
-        postDelayed(this, 30);
+        post(this);
     }
 
     /**
      * 设置右边的标题
      */
-    public void setRightTitle(int resourceId) {
-        setRightTitle(getResources().getString(resourceId));
+    public void setRightTitle(int stringId) {
+        setRightTitle(getResources().getString(stringId));
     }
 
     public void setRightTitle(CharSequence text) {
         mRightView.setText(text);
-        postDelayed(this, 30);
+        post(this);
     }
 
     /**
      * 设置左边的图标
      */
-    public void setLeftIcon(int resourceId) {
-        setLeftIcon(getContext().getResources().getDrawable(resourceId));
+    public void setLeftIcon(int iconId) {
+        if (iconId > 0) {
+            setLeftIcon(getContext().getResources().getDrawable(iconId));
+        }
     }
 
     public void setLeftIcon(Drawable drawable) {
         mLeftView.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null);
-        postDelayed(this, 30);
+        post(this);
     }
 
     /**
      * 设置右边的图标
      */
-    public void setRightIcon(int resourceId) {
-        setRightIcon(getContext().getResources().getDrawable(resourceId));
+    public void setRightIcon(int iconId) {
+        if (iconId > 0) {
+            setRightIcon(getContext().getResources().getDrawable(iconId));
+        }
     }
 
     public void setRightIcon(Drawable drawable) {
         mRightView.setCompoundDrawablesWithIntrinsicBounds(null, null, drawable, null);
-        postDelayed(this, 30);
+        post(this);
     }
 
     /**
@@ -359,8 +360,10 @@ public class TitleBar extends FrameLayout
     /**
      * 设置左标题状态选择器
      */
-    public void setLeftBackground(int resourceId) {
-        mLeftView.setBackgroundResource(resourceId);
+    public void setLeftBackground(int bgId) {
+        if (bgId > 0) {
+            mLeftView.setBackgroundResource(bgId);
+        }
     }
 
     public void setLeftBackground(Drawable drawable) {
@@ -374,8 +377,10 @@ public class TitleBar extends FrameLayout
     /**
      * 设置右标题状态选择器
      */
-    public void setRightBackground(int resourceId) {
-        mRightView.setBackgroundResource(resourceId);
+    public void setRightBackground(int bgId) {
+        if (bgId > 0) {
+            mRightView.setBackgroundResource(bgId);
+        }
     }
 
     public void setRightBackground(Drawable drawable) {
@@ -419,6 +424,15 @@ public class TitleBar extends FrameLayout
      */
     public void setLineColor(int color) {
         mLineView.setBackgroundColor(color);
+    }
+
+    /**
+     * 设置分割线的大小
+     */
+    public void setLineSize(int size) {
+        ViewGroup.LayoutParams layoutParams = mLineView.getLayoutParams();
+        layoutParams.height = size;
+        mLineView.setLayoutParams(layoutParams);
     }
 
     /**
