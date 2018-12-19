@@ -1,59 +1,46 @@
 package com.hjq.bar.style;
 
-import com.hjq.bar.ITitleBarStyle;
+import android.content.Context;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
+
 import com.hjq.bar.R;
 
 /**
- *    author : HJQ
+ *    author : Android 轮子哥
  *    github : https://github.com/getActivity/TitleBar
  *    time   : 2018/08/20
  *    desc   : 默认日间主题样式实现（布局属性：app:bar_style="light"）
  */
-public class TitleBarLightStyle implements ITitleBarStyle {
+public class TitleBarLightStyle extends BaseTitleBarStyle {
 
-    @Override
-    public int getTitleBarHeight() {
-        return 0;
+    public TitleBarLightStyle(Context context) {
+        super(context);
     }
 
     @Override
-    public int getBackgroundColor() {
-        return 0xFFFFFFFF;
+    public Drawable getBackground() {
+        return new ColorDrawable(0xFFFFFFFF);
     }
 
     @Override
-    public int getBackIconResource() {
-        return R.mipmap.bar_icon_back_black;
+    public Drawable getBackIcon() {
+        return getDrawable(R.mipmap.bar_icon_back_black);
     }
 
     @Override
-    public int getLeftViewColor() {
+    public int getLeftColor() {
         return 0xFF666666;
     }
 
     @Override
-    public int getTitleViewColor() {
+    public int getTitleColor() {
         return 0xFF222222;
     }
 
     @Override
-    public int getRightViewColor() {
+    public int getRightColor() {
         return 0xFFA4A4A4;
-    }
-
-    @Override
-    public float getLeftViewSize() {
-        return 14;
-    }
-
-    @Override
-    public float getTitleViewSize() {
-        return 16;
-    }
-
-    @Override
-    public float getRightViewSize() {
-        return 14;
     }
 
     @Override
@@ -62,8 +49,8 @@ public class TitleBarLightStyle implements ITitleBarStyle {
     }
 
     @Override
-    public int getLineColor() {
-        return 0xFFECECEC;
+    public Drawable getLineDrawable() {
+        return new ColorDrawable(0xFFECECEC);
     }
 
     @Override
@@ -72,12 +59,12 @@ public class TitleBarLightStyle implements ITitleBarStyle {
     }
 
     @Override
-    public int getLeftViewBackground() {
-        return R.drawable.bar_selector_selectable_white;
+    public Drawable getLeftBackground() {
+        return getDrawable(R.drawable.bar_selector_selectable_white);
     }
 
     @Override
-    public int getRightViewBackground() {
-        return R.drawable.bar_selector_selectable_white;
+    public Drawable getRightBackground() {
+        return getDrawable(R.drawable.bar_selector_selectable_white);
     }
 }

@@ -7,8 +7,8 @@ android {
         applicationId "com.hjq.bar.demo"
         minSdkVersion 14
         targetSdkVersion 26
-        versionCode 35
-        versionName "3.5"
+        versionCode 50
+        versionName "5.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -24,5 +24,5 @@ dependencies {
     implementation project(':library')
     implementation 'com.android.support:appcompat-v7:26.1.0'
     implementation 'com.android.support:design:26.1.0'
-    implementation 'com.hjq:toast:2.5'
+    implementation 'com.hjq:toast:5.0'
 }

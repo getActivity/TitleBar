@@ -28,15 +28,15 @@
                 app:layout_collapseMode="parallax" />
 
             <android.support.v7.widget.Toolbar
-                android:layout_marginRight="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="?android:attr/actionBarSize"
+                android:layout_marginRight="20dp"
                 app:layout_collapseMode="pin" />
 
             <com.hjq.bar.TitleBar
                 android:layout_width="match_parent"
                 android:layout_height="?android:attr/actionBarSize"
-                app:bar_style="transparent"
+                app:barStyle="transparent"
                 app:layout_collapseMode="pin" />
 
             <TextView
@@ -86,14 +86,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                app:icon_back="false"
+                app:backButton="false"
                 app:title="不带箭头的标题栏" />
 
             <com.hjq.bar.TitleBar
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                app:line_visible="false"
+                app:lineVisible="false"
                 app:title="不带分割线的标题栏" />
 
             <com.hjq.bar.TitleBar
@@ -106,69 +106,69 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                app:icon_left="@mipmap/ic_launcher"
-                app:icon_right="@mipmap/ic_launcher"
+                app:leftIcon="@mipmap/ic_launcher"
+                app:rightIcon="@mipmap/ic_launcher"
                 app:title="带图标的标题栏" />
 
             <com.hjq.bar.TitleBar
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                app:icon_back="false"
-                app:title="带文本的标题栏\n12345"
-                app:title_left="左边"
-                app:title_right="右边" />
+                app:backButton="false"
+                app:leftTitle="左边"
+                app:rightTitle="右边"
+                app:title="带文本的标题栏\n12345" />
 
             <com.hjq.bar.TitleBar
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                app:color_left="#FF3300"
-                app:color_right="#0033FF"
-                app:icon_back="false"
-                app:size_left="18sp"
-                app:size_right="18sp"
-                app:size_title="20sp"
+                app:backButton="false"
+                app:leftColor="#FF3300"
+                app:leftSize="18sp"
+                app:leftTitle="左边"
+                app:rightColor="#0033FF"
+                app:rightSize="18sp"
+                app:rightTitle="右边"
                 app:title="文字大小和颜色"
-                app:title_left="左边"
-                app:title_right="右边" />
+                app:titleSize="20sp" />
 
             <com.hjq.bar.TitleBar
                 android:id="@+id/tb_main_title_bar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                app:icon_left="@mipmap/ic_launcher"
-                app:icon_right="@mipmap/ic_launcher"
-                app:title="监听事件的标题栏"
-                app:title_left="左边"
-                app:title_right="右边" />
+                app:leftIcon="@mipmap/ic_launcher"
+                app:leftTitle="左边"
+                app:rightIcon="@mipmap/ic_launcher"
+                app:rightTitle="右边"
+                app:title="监听事件的标题栏" />
 
             <com.hjq.bar.TitleBar
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                app:bar_style="night"
-                app:title="夜间模式的标题栏"
-                app:title_left="返回"
-                app:title_right="设置" />
+                app:barStyle="night"
+                app:leftTitle="返回"
+                app:rightTitle="设置"
+                app:title="夜间模式的标题栏" />
 
             <com.hjq.bar.TitleBar
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:background="@drawable/shape_gradient"
-                app:bar_style="transparent"
-                app:title="仿QQ渐变样式"
-                app:title_left="返回"
-                app:title_right="设置" />
+                app:barStyle="transparent"
+                app:leftTitle="返回"
+                app:rightTitle="设置"
+                app:title="仿QQ渐变样式" />
 
             <com.hjq.bar.TitleBar
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:background="@mipmap/title_bar_head"
-                app:bar_style="transparent"
+                app:barStyle="transparent"
                 app:title="自定义TitleBar">
 
                 <LinearLayout

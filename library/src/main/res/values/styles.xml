@@ -3,26 +3,26 @@
     <!-- 不推荐这种，推荐使用：app:bar_style="night" -->
     <style name="TitleBarNightStyle" tools:ignore="ResourceName">
         <item name="android:background">#FF000000</item>
-        <item name="icon_left">@mipmap/bar_icon_back_white</item>
-        <item name="color_left">#CCFFFFFF</item>
-        <item name="color_title">#EEFFFFFF</item>
-        <item name="color_right">#CCFFFFFF</item>
-        <item name="line_color">#FFFFFFFF</item>
-        <item name="background_left">@drawable/bar_selector_selectable_black</item>
-        <item name="background_right">@drawable/bar_selector_selectable_black</item>
+        <item name="leftIcon">@mipmap/bar_icon_back_white</item>
+        <item name="leftColor">#CCFFFFFF</item>
+        <item name="titleColor">#EEFFFFFF</item>
+        <item name="rightColor">#CCFFFFFF</item>
+        <item name="lineColor">#FFFFFFFF</item>
+        <item name="leftBackground">@drawable/bar_selector_selectable_black</item>
+        <item name="rightBackground">@drawable/bar_selector_selectable_black</item>
     </style>
 
     <!-- 不推荐这种，推荐使用：app:bar_style="transparent" -->
     <style name="TitleBarTransparentStyle" tools:ignore="ResourceName">
         <item name="android:background">#00000000</item>
-        <item name="icon_left">@mipmap/bar_icon_back_white</item>
-        <item name="color_left">#FFFFFFFF</item>
-        <item name="color_title">#FFFFFFFF</item>
-        <item name="color_right">#FFFFFFFF</item>
-        <item name="line_color">#00000000</item>
-        <item name="line_visible">false</item>
-        <item name="background_left">@drawable/bar_selector_selectable_transparent</item>
-        <item name="background_right">@drawable/bar_selector_selectable_transparent</item>
+        <item name="leftIcon">@mipmap/bar_icon_back_white</item>
+        <item name="leftColor">#FFFFFFFF</item>
+        <item name="titleColor">#FFFFFFFF</item>
+        <item name="rightColor">#FFFFFFFF</item>
+        <item name="lineColor">#00000000</item>
+        <item name="lineVisible">false</item>
+        <item name="leftBackground">@drawable/bar_selector_selectable_transparent</item>
+        <item name="rightBackground">@drawable/bar_selector_selectable_transparent</item>
     </style>
 
 </resources>

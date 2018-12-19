@@ -10,45 +10,44 @@
 
 ![](TitleBar.gif)
 
+## 5.0 版本、5.0 版本、5.0 版本 XML 属性已经改头换面了，请尽快进行[适配](Adaptive.md)
+
 #### 集成步骤
 
     dependencies {
-        implementation 'com.hjq:titlebar:3.5'
+        implementation 'com.hjq:titlebar:5.0'
     }
 
-#### 属性大全（划重点，要考）
+#### 属性大全，[如何适配旧版本的属性？](Adaptive.md)
 
-    <declare-styleable name="TitleBar">
-        <!-- 标题栏的样式 -->
-        <attr name="bar_style">
+    <declare-styleable name="TitleBar" >
+        <!-- 整体样式 -->
+        <attr name="barStyle">
             <enum name="light" value="0x10" />
             <enum name="night" value="0x20" />
             <enum name="transparent" value="0x30" />
         </attr>
-        <!-- 标题 -->
+        <!-- 中间 -->
         <attr name="title" format="string" />
-        <attr name="title_left" format="string"/>
-        <attr name="title_right" format="string" />
-        <!-- 图标 -->
-        <attr name="icon_left" format="reference" />
-        <attr name="icon_right" format="reference" />
-        <!-- 返回按钮，默认开 -->
-        <attr name="icon_back" format="boolean" />
-        <!-- 文字颜色 -->
-        <attr name="color_title" format="color" />
-        <attr name="color_right" format="color" />
-        <attr name="color_left" format="color" />
-        <!-- 文字大小 -->
-        <attr name="size_title" format="dimension" />
-        <attr name="size_right" format="dimension" />
-        <attr name="size_left" format="dimension" />
-        <!-- 按钮背景 -->
-        <attr name="background_left" format="reference|color" />
-        <attr name="background_right" format="reference|color" />
+        <attr name="titleColor" format="color" />
+        <attr name="titleSize" format="dimension" />
+        <!-- 左边 -->
+        <attr name="leftTitle" format="string"/>
+        <attr name="leftIcon" format="reference" /><!-- leftIcon 优先于 backButton -->
+        <attr name="backButton" format="boolean" /><!-- 返回按钮（默认开） -->
+        <attr name="leftColor" format="color" />
+        <attr name="leftSize" format="dimension" />
+        <attr name="leftBackground" format="reference|color" />
+        <!-- 右边 -->
+        <attr name="rightTitle" format="string" />
+        <attr name="rightIcon" format="reference" />
+        <attr name="rightColor" format="color" />
+        <attr name="rightSize" format="dimension" />
+        <attr name="rightBackground" format="reference|color" />
         <!-- 分割线 -->
-        <attr name="line_visible" format="boolean" />
-        <attr name="line_color" format="color" />
-        <attr name="line_size" format="dimension" />
+        <attr name="lineVisible" format="boolean" />
+        <attr name="lineColor" format="reference|color" />
+        <attr name="lineSize" format="dimension" />
     </declare-styleable>
 
 #### XML示例
@@ -112,6 +111,10 @@
 * 支持全局配置样式：可以在Application中初始化TitleBar样式，达到一劳永逸的效果
 
 #### Android技术讨论Q群：78797078
+
+#### 如果您觉得我的开源库帮你节省了大量的开发时间，请扫描下方的二维码随意打赏，要是能打赏个 10.24 :monkey_face:就太:thumbsup:了。您的支持将鼓励我继续创作:octocat:
+
+![](pay_ali.png) ![](pay_wechat.png)
 
 ## License
 
