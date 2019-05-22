@@ -248,15 +248,6 @@ public class TitleBar extends FrameLayout
     }
 
     @Override
-    protected void onAttachedToWindow() {
-        super.onAttachedToWindow();
-        // 设置监听
-        mTitleView.setOnClickListener(this);
-        mLeftView.setOnClickListener(this);
-        mRightView.setOnClickListener(this);
-    }
-
-    @Override
     protected void onDetachedFromWindow() {
         // 移除监听
         mTitleView.setOnClickListener(null);
@@ -277,6 +268,10 @@ public class TitleBar extends FrameLayout
      */
     public void setOnTitleBarListener(OnTitleBarListener l) {
         mListener = l;
+        // 设置监听
+        mTitleView.setOnClickListener(this);
+        mLeftView.setOnClickListener(this);
+        mRightView.setOnClickListener(this);
     }
 
     /**

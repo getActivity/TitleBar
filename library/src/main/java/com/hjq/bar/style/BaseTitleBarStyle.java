@@ -1,6 +1,7 @@
 package com.hjq.bar.style;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 
@@ -17,7 +18,7 @@ public abstract class BaseTitleBarStyle implements ITitleBarStyle {
     private Context mContext;
 
     public BaseTitleBarStyle(Context context) {
-        mContext = context;
+        mContext = context.getApplicationContext();
     }
 
     protected Context getContext() {
@@ -44,7 +45,7 @@ public abstract class BaseTitleBarStyle implements ITitleBarStyle {
      * dp转px
      */
     protected int dp2px(float dpValue) {
-        final float scale = getContext().getResources().getDisplayMetrics().density;
+        final float scale = Resources.getSystem().getDisplayMetrics().density;
         return (int) (dpValue * scale + 0.5f);
     }
 
@@ -52,7 +53,7 @@ public abstract class BaseTitleBarStyle implements ITitleBarStyle {
      * sp转px
      */
     protected int sp2px(float spValue) {
-        final float fontScale = getContext().getResources().getDisplayMetrics().scaledDensity;
+        final float fontScale = Resources.getSystem().getDisplayMetrics().scaledDensity;
         return (int) (spValue * fontScale + 0.5f);
     }
 
