@@ -15,7 +15,7 @@
 #### 集成步骤
 
     dependencies {
-        implementation 'com.hjq:titlebar:5.0'
+        implementation 'com.hjq:titlebar:6.0'
     }
 
 #### 属性大全，[如何适配旧版本的属性？](Adaptive.md)
