@@ -93,7 +93,6 @@ background_right| rightBackground
   3.5 版本   |    5.0 版本 
   -------    |  ------------- 
 bar_style    |   barStyle   
-icon_back    |   backButton
 line_visible |   lineVisible
 line_color   |   lineColor
 line_size    |   lineSize

@@ -92,13 +92,15 @@
 	    }
 	}
 
+#### 混淆规则
+
+    -keep class com.hjq.bar.** {*;}
+
 #### 框架亮点
 
 * 性能最佳：不使用LayoutInflater，而使用代码创建View的形式
 
 * 体验最优：TitleBar默认样式效果已经非常好，可下载Demo测试
-
-* 支持夜间模式：可以直接引用框架中的TitleBarNightStyle样式
 
 * 支持操控子控件：可以在代码中获取TitleBar的子控件进行调用相关的API
 
@@ -110,18 +112,26 @@
 
 * 支持全局配置样式：可以在Application中初始化TitleBar样式，达到一劳永逸的效果
 
+#### 作者的其他开源项目
+
+* 架构工程：[AndroidProject](https://github.com/getActivity/AndroidProject)
+
+* 权限框架：[XXPermissions](https://github.com/getActivity/XXPermissions)
+
+* 吐司框架：[ToastUtils](https://github.com/getActivity/ToastUtils)
+
+* 悬浮窗框架：[XToast](https://github.com/getActivity/XToast)
+
 #### Android技术讨论Q群：78797078
 
 #### 如果您觉得我的开源库帮你节省了大量的开发时间，请扫描下方的二维码随意打赏，要是能打赏个 10.24 :monkey_face:就太:thumbsup:了。您的支持将鼓励我继续创作:octocat:
 
 ![](pay_ali.png) ![](pay_wechat.png)
 
-![](pay_bonus.png)
-
 ## License
 
 ```text
-Copyright 2018 Huang Jinqun
+Copyright 2018 Huang JinQun
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

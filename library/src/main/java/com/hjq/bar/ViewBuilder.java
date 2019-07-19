@@ -1,11 +1,9 @@
 package com.hjq.bar;
 
-import android.app.Activity;
+import android.annotation.DrawableRes;
 import android.content.Context;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
-import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.View;
@@ -22,139 +20,93 @@ import android.widget.TextView;
  */
 final class ViewBuilder {
 
-    private final LinearLayout mMainLayout;
-
-    private final TextView mLeftView;
-    private final TextView mTitleView;
-    private final TextView mRightView;
-
-    private final View mLineView;
-
-    ViewBuilder(Context context) {
-        mMainLayout = new LinearLayout(context);
-        mMainLayout.setId(R.id.bar_id_main_layout);
-        mMainLayout.setOrientation(LinearLayout.HORIZONTAL);
-        mMainLayout.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-
-        mLeftView = new TextView(context);
-        mLeftView.setId(R.id.bar_id_left_view);
-        mLeftView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT));
-        mLeftView.setPadding(dp2px(context, 12), 0, dp2px(context, 12), 0);
-        mLeftView.setCompoundDrawablePadding(dp2px(context, 2));
-        mLeftView.setGravity(Gravity.CENTER_VERTICAL);
-        mLeftView.setSingleLine();
-        mLeftView.setEllipsize(TextUtils.TruncateAt.END);
-
-        mTitleView = new TextView(context);
-        mTitleView.setId(R.id.bar_id_title_view);
-        LinearLayout.LayoutParams titleParams = new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.MATCH_PARENT);
-        titleParams.weight = 1;
-        titleParams.leftMargin = dp2px(context, 10);
-        titleParams.rightMargin = dp2px(context, 10);
-        mTitleView.setLayoutParams(titleParams);
-        mTitleView.setGravity(Gravity.CENTER);
-        mTitleView.setSingleLine();
-        mTitleView.setEllipsize(TextUtils.TruncateAt.END);
-
-        mRightView = new TextView(context);
-        mRightView.setId(R.id.bar_id_right_view);
-        mRightView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT));
-        mRightView.setPadding(dp2px(context, 12), 0, dp2px(context, 12), 0);
-        mRightView.setCompoundDrawablePadding(dp2px(context, 2));
-        mRightView.setGravity(Gravity.CENTER_VERTICAL);
-        mRightView.setSingleLine();
-        mRightView.setEllipsize(TextUtils.TruncateAt.END);
-
-        mLineView = new View(context);
-        mLineView.setId(R.id.bar_id_line_view);
-        FrameLayout.LayoutParams lineParams = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 1);
-        lineParams.gravity = Gravity.BOTTOM;
-        mLineView.setLayoutParams(lineParams);
+    static LinearLayout newMainLayout(Context context) {
+        LinearLayout mainLayout = new LinearLayout(context);
+        mainLayout.setOrientation(LinearLayout.HORIZONTAL);
+        mainLayout.setLayoutParams(new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT));
+        return mainLayout;
     }
 
-    LinearLayout getMainLayout() {
-        return mMainLayout;
+    static View newLineView(Context context) {
+        View lineView = new View(context);
+        lineView.setLayoutParams(new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 1, Gravity.BOTTOM));
+        return lineView;
     }
 
-    View getLineView() {
-        return mLineView;
+    static TextView newLeftView(Context context) {
+        TextView leftView = new TextView(context);
+        leftView.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT));
+        leftView.setGravity(Gravity.CENTER_VERTICAL);
+        leftView.setFocusable(true);
+        leftView.setClickable(true);
+        leftView.setSingleLine();
+        leftView.setEllipsize(TextUtils.TruncateAt.END);
+        return leftView;
     }
 
-    TextView getLeftView() {
-        return mLeftView;
-    }
-
-    TextView getTitleView() {
-        return mTitleView;
-    }
-
-    TextView getRightView() {
-        return mRightView;
-    }
-
-    /**
-     * 获取ActionBar的高度
-     */
-    static int getActionBarHeight(Context context) {
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.HONEYCOMB) {
-            TypedArray ta = context.obtainStyledAttributes(new int[]{android.R.attr.actionBarSize});
-            int actionBarSize = (int) ta.getDimension(0, 0);
-            ta.recycle();
-            if (actionBarSize > 0) return actionBarSize;
+    static TextView newTitleView(Context context) {
+        TextView titleView = new TextView(context);
+        titleView.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, 1));
+        titleView.setGravity(Gravity.CENTER);
+        titleView.setFocusable(true);
+        titleView.setSingleLine();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.BASE_1_1) {
+            // 给标题设置跑马灯效果（仅在标题过长的时候才会显示）
+            titleView.setEllipsize(TextUtils.TruncateAt.MARQUEE);
+            // 设置跑马灯之后需要设置选中才能有效果
+            titleView.setSelected(true);
+        } else {
+            titleView.setEllipsize(TextUtils.TruncateAt.END);
         }
-        return ViewBuilder.dp2px(context, 100);
+        return titleView;
+    }
+
+    static TextView newRightView(Context context) {
+        TextView rightView = new TextView(context);
+        rightView.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT));
+        rightView.setGravity(Gravity.CENTER_VERTICAL);
+        rightView.setFocusable(true);
+        rightView.setClickable(true);
+        rightView.setSingleLine();
+        rightView.setEllipsize(TextUtils.TruncateAt.END);
+        return rightView;
     }
 
     /**
-     * 获取 Activity 的Label属性值
+     * 检查 TextView 的内容是否为空
      */
-    static CharSequence getActivityLabel(Activity activity) {
-        //获取清单文件中的label属性值
-        CharSequence label = activity.getTitle();
-        //如果Activity没有设置label属性，则默认会返回APP名称，需要过滤掉
-        if (label != null && !label.toString().equals("")) {
-
-            try {
-                PackageManager packageManager = activity.getPackageManager();
-                PackageInfo packageInfo = packageManager.getPackageInfo(activity.getPackageName(), 0);
-
-                if (!label.toString().equals(packageInfo.applicationInfo.loadLabel(packageManager).toString())) {
-                    return label;
-                }
-            } catch (PackageManager.NameNotFoundException ignored) {}
+    static boolean hasTextViewContent(TextView view) {
+        if (!"".equals(view.getText().toString())) {
+            return true;
         }
-        return null;
-    }
-
-    /**
-     * dp转px
-     */
-    static int dp2px(Context context, float dpValue) {
-        final float scale = context.getResources().getDisplayMetrics().density;
-        return (int) (dpValue * scale + 0.5f);
-    }
-
-    /**
-     * sp转px
-     */
-    static int sp2px(Context context, float spValue) {
-        final float fontScale = context.getResources().getDisplayMetrics().scaledDensity;
-        return (int) (spValue * fontScale + 0.5f);
-    }
-
-
-    /**
-     * 检查TextView的任意方向图标是否有不为空的
-     */
-    static boolean hasCompoundDrawables(TextView view) {
         Drawable[] drawables = view.getCompoundDrawables();
-        if (drawables != null) {
-            for (Drawable drawable : drawables) {
-                if (drawable != null) {
-                    return true;
-                }
+        for (Drawable drawable : drawables) {
+            if (drawable != null) {
+                return true;
             }
         }
         return false;
+    }
+
+    /**
+     * 获取 Drawable 对象
+     */
+    static Drawable getDrawable(Context context, @DrawableRes int id)  {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            return context.getDrawable(id);
+        } else {
+            return context.getResources().getDrawable(id);
+        }
+    }
+
+    /**
+     * 设置 View 的背景
+     */
+    static void setBackground(View view, Drawable background) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+            view.setBackground(background);
+        }else {
+            view.setBackgroundDrawable(background);
+        }
     }
 }

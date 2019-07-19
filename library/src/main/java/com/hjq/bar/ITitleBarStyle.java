@@ -10,6 +10,9 @@ import android.graphics.drawable.Drawable;
  */
 public interface ITitleBarStyle {
 
+    int getTitleGravity(); // 获取标题重心
+    int getDrawablePadding(); // 文字和图标的间距
+    int getChildPadding();// 子 View 内间距
     int getTitleBarHeight(); // 标题栏高度（默认为ActionBar的高度）
     Drawable getBackground(); // 背景颜色
     Drawable getBackIcon(); // 返回按钮图标

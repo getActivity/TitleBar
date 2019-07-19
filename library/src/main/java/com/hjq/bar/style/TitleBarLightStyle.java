@@ -5,12 +5,13 @@ import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 
 import com.hjq.bar.R;
+import com.hjq.bar.SelectorDrawable;
 
 /**
  *    author : Android 轮子哥
  *    github : https://github.com/getActivity/TitleBar
  *    time   : 2018/08/20
- *    desc   : 默认日间主题样式实现（布局属性：app:bar_style="light"）
+ *    desc   : 默认日间主题样式实现（布局属性：app:barStyle="light"）
  */
 public class TitleBarLightStyle extends BaseTitleBarStyle {
 
@@ -54,17 +55,16 @@ public class TitleBarLightStyle extends BaseTitleBarStyle {
     }
 
     @Override
-    public int getLineSize() {
-        return 1;
-    }
-
-    @Override
     public Drawable getLeftBackground() {
-        return getDrawable(R.drawable.bar_selector_selectable_white);
+        return new SelectorDrawable.Builder()
+                .setDefault(new ColorDrawable(0x00000000))
+                .setFocused(new ColorDrawable(0x0C000000))
+                .setPressed(new ColorDrawable(0x0C000000))
+                .builder();
     }
 
     @Override
     public Drawable getRightBackground() {
-        return getDrawable(R.drawable.bar_selector_selectable_white);
+        return getLeftBackground();
     }
 }

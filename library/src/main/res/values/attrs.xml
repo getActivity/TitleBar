@@ -7,6 +7,7 @@
             <enum name="light" value="0x10" />
             <enum name="night" value="0x20" />
             <enum name="transparent" value="0x30" />
+            <enum name="ripple" value="0x40" />
         </attr>
         <!-- 中间 -->
         <attr name="title" format="string" />
@@ -30,5 +31,4 @@
         <attr name="lineColor" format="reference|color" />
         <attr name="lineSize" format="dimension" />
     </declare-styleable>
-
 </resources>
