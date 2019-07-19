@@ -239,13 +239,6 @@ public final class TitleBar extends FrameLayout
         mMainLayout.addView(mTitleView);
         mMainLayout.addView(mRightView);
 
-        /*
-        ViewGroup.LayoutParams layoutParams = mMainLayout.getLayoutParams();
-        layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT;
-        layoutParams.height = sDefaultStyle.getTitleBarHeight();
-        mMainLayout.setLayoutParams(layoutParams);
-        */
-
         addView(mMainLayout, 0);
         addView(mLineView, 1);
 
