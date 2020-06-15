@@ -64,7 +64,7 @@ public final class SelectorDrawable extends StateListDrawable {
             return this;
         }
 
-        public SelectorDrawable builder() {
+        public SelectorDrawable build() {
             SelectorDrawable selector = new SelectorDrawable();
             if (mPressed != null) {
                 selector.addState(new int[]{android.R.attr.state_pressed}, mPressed);

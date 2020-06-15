@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mTitleBar = (TitleBar) findViewById(R.id.tb_main_title_bar);
+        mTitleBar = findViewById(R.id.tb_main_bar);
         mTitleBar.setOnTitleBarListener(new OnTitleBarListener() {
 
             @Override

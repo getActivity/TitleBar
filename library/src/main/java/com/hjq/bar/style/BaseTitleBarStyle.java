@@ -83,14 +83,6 @@ public abstract class BaseTitleBarStyle implements ITitleBarStyle {
         }
     }
 
-    protected int getColor(int id) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            return getContext().getResources().getColor(id, getContext().getTheme());
-        } else {
-            return getContext().getResources().getColor(id);
-        }
-    }
-
     /**
      * dp转px
      */

@@ -1,8 +1,10 @@
 # 标题栏
 
+> 码云地址：[Gitee](https://gitee.com/getActivity/TitleBar)
+
 > 博客地址：[Android标题栏（TitleBar）绝佳解决方案](https://www.jianshu.com/p/617be02dc265)
 
-> 已投入公司项目多时，没有任何毛病，可胜任任何需求，[点击此处下载Demo](https://raw.githubusercontent.com/getActivity/TitleBar/master/TitleBar.apk)
+> 已投入公司项目多时，没有任何毛病，可胜任任何需求，[点击此处下载Demo](TitleBar.apk)
 
 > 想了解实现原理的可以参考文章：[纯手工打造一个通用的标题栏TitleBar](https://www.jianshu.com/p/ccf6506335e7)
 
@@ -15,22 +17,34 @@
 #### 集成步骤
 
     dependencies {
-        implementation 'com.hjq:titlebar:6.0'
+        implementation 'com.hjq:titlebar:6.5'
     }
 
 #### 属性大全，[如何适配旧版本的属性？](Adaptive.md)
 
-    <declare-styleable name="TitleBar" >
+    <declare-styleable name="TitleBar">
         <!-- 整体样式 -->
         <attr name="barStyle">
             <enum name="light" value="0x10" />
             <enum name="night" value="0x20" />
             <enum name="transparent" value="0x30" />
+            <enum name="ripple" value="0x40" />
         </attr>
         <!-- 中间 -->
         <attr name="title" format="string" />
         <attr name="titleColor" format="color" />
         <attr name="titleSize" format="dimension" />
+        <attr name="titleGravity">
+            <flag name="top" value="0x30" />
+            <flag name="bottom" value="0x50" />
+            <flag name="left" value="0x03" />
+            <flag name="right" value="0x05" />
+            <flag name="center_vertical" value="0x10" />
+            <flag name="center_horizontal" value="0x01" />
+            <flag name="center" value="0x11" />
+            <flag name="start" value="0x00800003" />
+            <flag name="end" value="0x00800005" />
+        </attr>
         <!-- 左边 -->
         <attr name="leftTitle" format="string"/>
         <attr name="leftIcon" format="reference" /><!-- leftIcon 优先于 backButton -->
@@ -48,6 +62,8 @@
         <attr name="lineVisible" format="boolean" />
         <attr name="lineColor" format="reference|color" />
         <attr name="lineSize" format="dimension" />
+        <!-- 图标和文字的间距 -->
+        <attr name="android:drawablePadding" />
     </declare-styleable>
 
 #### XML示例
@@ -116,9 +132,15 @@
 
 * 架构工程：[AndroidProject](https://github.com/getActivity/AndroidProject)
 
+* 网络框架：[EasyHttp](https://github.com/getActivity/EasyHttp)
+
+* 日志框架：[Logcat](https://github.com/getActivity/Logcat)
+
 * 权限框架：[XXPermissions](https://github.com/getActivity/XXPermissions)
 
 * 吐司框架：[ToastUtils](https://github.com/getActivity/ToastUtils)
+
+* 国际化框架：[MultiLanguages](https://github.com/getActivity/MultiLanguages)
 
 * 悬浮窗框架：[XToast](https://github.com/getActivity/XToast)
 
@@ -126,7 +148,9 @@
 
 #### 如果您觉得我的开源库帮你节省了大量的开发时间，请扫描下方的二维码随意打赏，要是能打赏个 10.24 :monkey_face:就太:thumbsup:了。您的支持将鼓励我继续创作:octocat:
 
-![](pay_ali.png) ![](pay_wechat.png)
+![](https://raw.githubusercontent.com/getActivity/Donate/master/picture/pay_ali.png) ![](https://raw.githubusercontent.com/getActivity/Donate/master/picture/pay_wechat.png)
+
+#### [点击查看捐赠列表](https://github.com/getActivity/Donate)
 
 ## License
 

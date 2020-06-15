@@ -26,7 +26,7 @@ public class TitleBarTransparentStyle extends BaseTitleBarStyle {
 
     @Override
     public Drawable getBackIcon() {
-        return getDrawable(R.mipmap.bar_icon_back_white);
+        return getDrawable(R.drawable.bar_icon_back_white);
     }
 
     @Override
@@ -65,7 +65,7 @@ public class TitleBarTransparentStyle extends BaseTitleBarStyle {
                 .setDefault(new ColorDrawable(0x00000000))
                 .setFocused(new ColorDrawable(0x22000000))
                 .setPressed(new ColorDrawable(0x22000000))
-                .builder();
+                .build();
     }
 
     @Override

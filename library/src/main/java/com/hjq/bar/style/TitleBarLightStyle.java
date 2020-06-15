@@ -26,7 +26,7 @@ public class TitleBarLightStyle extends BaseTitleBarStyle {
 
     @Override
     public Drawable getBackIcon() {
-        return getDrawable(R.mipmap.bar_icon_back_black);
+        return getDrawable(R.drawable.bar_icon_back_black);
     }
 
     @Override
@@ -60,7 +60,7 @@ public class TitleBarLightStyle extends BaseTitleBarStyle {
                 .setDefault(new ColorDrawable(0x00000000))
                 .setFocused(new ColorDrawable(0x0C000000))
                 .setPressed(new ColorDrawable(0x0C000000))
-                .builder();
+                .build();
     }
 
     @Override

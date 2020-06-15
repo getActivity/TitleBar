@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
 
-    <declare-styleable name="TitleBar"  tools:ignore="ResourceName">
+    <declare-styleable name="TitleBar">
         <!-- 整体样式 -->
         <attr name="barStyle">
             <enum name="light" value="0x10" />
@@ -13,6 +13,17 @@
         <attr name="title" format="string" />
         <attr name="titleColor" format="color" />
         <attr name="titleSize" format="dimension" />
+        <attr name="titleGravity">
+            <flag name="top" value="0x30" />
+            <flag name="bottom" value="0x50" />
+            <flag name="left" value="0x03" />
+            <flag name="right" value="0x05" />
+            <flag name="center_vertical" value="0x10" />
+            <flag name="center_horizontal" value="0x01" />
+            <flag name="center" value="0x11" />
+            <flag name="start" value="0x00800003" />
+            <flag name="end" value="0x00800005" />
+        </attr>
         <!-- 左边 -->
         <attr name="leftTitle" format="string"/>
         <attr name="leftIcon" format="reference" /><!-- leftIcon 优先于 backButton -->
@@ -30,5 +41,7 @@
         <attr name="lineVisible" format="boolean" />
         <attr name="lineColor" format="reference|color" />
         <attr name="lineSize" format="dimension" />
+        <!-- 图标和文字的间距 -->
+        <attr name="android:drawablePadding" />
     </declare-styleable>
 </resources>

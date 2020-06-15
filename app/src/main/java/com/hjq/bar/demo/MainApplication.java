@@ -6,11 +6,12 @@ import com.hjq.bar.TitleBar;
 import com.hjq.bar.style.TitleBarLightStyle;
 import com.hjq.toast.ToastUtils;
 
-public class TitleBarApplication extends Application {
+public class MainApplication extends Application {
 
     @Override
     public void onCreate() {
         super.onCreate();
+
         // 初始化 Toast
         ToastUtils.init(this);
 

@@ -80,7 +80,7 @@
             <com.hjq.bar.TitleBar
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="460dp"
+                android:layout_marginTop="300dp"
                 app:title="默认的标题栏" />
 
             <com.hjq.bar.TitleBar
@@ -135,7 +135,7 @@
                 app:titleSize="20sp" />
 
             <com.hjq.bar.TitleBar
-                android:id="@+id/tb_main_title_bar"
+                android:id="@+id/tb_main_bar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
@@ -177,11 +177,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:background="@mipmap/title_bar_head"
-                app:barStyle="ripple"
                 app:title="自定义TitleBar">
 
                 <LinearLayout
+                    android:layout_marginTop="50dp"
+                    android:layout_marginBottom="30dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -198,7 +198,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="20dp"
                         android:text="TitleBar可以当做FrameLayout使用\n也可以在这里也可以添加自定义布局"
-                        android:textColor="#FFFFFF" />
+                        android:textColor="#000000" />
                 </LinearLayout>
 
             </com.hjq.bar.TitleBar>
