@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources xmlns:tools="http://schemas.android.com/tools">
-
+<resources>
     <declare-styleable name="TitleBar">
         <!-- 整体样式 -->
         <attr name="barStyle">
@@ -24,6 +23,11 @@
             <flag name="start" value="0x00800003" />
             <flag name="end" value="0x00800005" />
         </attr>
+        <attr name="titleStyle">
+            <flag name="normal" value="0" />
+            <flag name="bold" value="1" />
+            <flag name="italic" value="2" />
+        </attr>
         <!-- 左边 -->
         <attr name="leftTitle" format="string"/>
         <attr name="leftIcon" format="reference" /><!-- leftIcon 优先于 backButton -->
@@ -41,7 +45,13 @@
         <attr name="lineVisible" format="boolean" />
         <attr name="lineColor" format="reference|color" />
         <attr name="lineSize" format="dimension" />
+        <!-- 图标显示大小 -->
+        <attr name="drawableSize" format="dimension" />
         <!-- 图标和文字的间距 -->
         <attr name="android:drawablePadding" />
+        <!-- 控件水平内间距 -->
+        <attr name="android:paddingVertical" />
+        <!-- 控件垂直内间距（可用于调整标题栏自适应的高度） -->
+        <attr name="android:paddingHorizontal" />
     </declare-styleable>
 </resources>
