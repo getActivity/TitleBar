@@ -16,7 +16,8 @@
 
 ```groovy
 dependencies {
-    implementation 'com.hjq:titlebar:8.0'
+    // 标题栏框架：https://github.com/getActivity/TitleBar
+    implementation 'com.hjq:titlebar:8.2'
 }
 ```
 
@@ -53,14 +54,18 @@ dependencies {
     </attr>
     <!-- 左边 -->
     <attr name="leftTitle" format="string"/>
-    <attr name="leftIcon" format="reference" /><!-- leftIcon 优先于 backButton -->
-    <attr name="backButton" format="boolean" /><!-- 返回按钮（默认开） -->
+    <!-- leftIcon 优先于 backButton -->
+    <attr name="leftIcon" format="reference" />
+    <attr name="leftTint" format="color" />
+    <!-- 返回按钮（默认开） -->
+    <attr name="backButton" format="boolean" />
     <attr name="leftColor" format="color" />
     <attr name="leftSize" format="dimension" />
     <attr name="leftBackground" format="reference|color" />
     <!-- 右边 -->
     <attr name="rightTitle" format="string" />
     <attr name="rightIcon" format="reference" />
+    <attr name="rightTint" format="color" />
     <attr name="rightColor" format="color" />
     <attr name="rightSize" format="dimension" />
     <attr name="rightBackground" format="reference|color" />
@@ -185,7 +190,7 @@ public class XXApplication extends Application {
 
 #### 作者的其他开源项目
 
-* 安卓架构：[AndroidProject](https://github.com/getActivity/AndroidProject)
+* 安卓技术中台：[AndroidProject](https://github.com/getActivity/AndroidProject)
 
 * 网络框架：[EasyHttp](https://github.com/getActivity/EasyHttp)
 

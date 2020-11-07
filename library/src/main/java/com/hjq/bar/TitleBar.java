@@ -1,10 +1,12 @@
 package com.hjq.bar;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.res.TypedArray;
+import android.graphics.PorterDuff;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
@@ -42,7 +44,7 @@ public class TitleBar extends FrameLayout
     /** 监听器对象 */
     private OnTitleBarListener mListener;
 
-    /** 标题栏子 View */
+    /** 标题栏子控件 */
     private final TextView mLeftView, mTitleView, mRightView;
     private final View mLineView;
 
@@ -147,6 +149,15 @@ public class TitleBar extends FrameLayout
             setRightIcon(BaseBarInitializer.getDrawableResources(getContext(), array.getResourceId(R.styleable.TitleBar_rightIcon, 0)));
         }
 
+        // 图标颜色设置
+        if (array.hasValue(R.styleable.TitleBar_leftTint)) {
+            setLeftTint(array.getColor(R.styleable.TitleBar_leftTint, 0));
+        }
+
+        if (array.hasValue(R.styleable.TitleBar_rightTint)) {
+            setRightTint(array.getColor(R.styleable.TitleBar_rightTint, 0));
+        }
+
         // 文字颜色设置
         if (array.hasValue(R.styleable.TitleBar_leftColor)) {
             setLeftColor(array.getColor(R.styleable.TitleBar_leftColor, 0));
@@ -230,14 +241,32 @@ public class TitleBar extends FrameLayout
         addOnLayoutChangeListener(this);
     }
 
+    /**
+     * {@link View.OnLayoutChangeListener}
+     */
+
     @Override
     public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
-        // 先移除当前的监听，因为 setMaxWidth 会重新触发监听
+        // 先移除当前的监听，因为 TextView.setMaxWidth 方法会重新触发监听
         removeOnLayoutChangeListener(this);
+
+        if (mLeftView.getMaxWidth() != Integer.MAX_VALUE &&
+                mTitleView.getMaxWidth() != Integer.MAX_VALUE &&
+                mRightView.getMaxWidth() != Integer.MAX_VALUE) {
+            // 不限制子 View 的宽度
+            mLeftView.setMaxWidth(Integer.MAX_VALUE);
+            mTitleView.setMaxWidth(Integer.MAX_VALUE);
+            mRightView.setMaxWidth(Integer.MAX_VALUE);
+            // 对子 View 重新进行测量
+            mLeftView.measure(MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED), MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED));
+            mTitleView.measure(MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED), MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED));
+            mRightView.measure(MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED), MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED));
+        }
+
         // 标题栏子 View 最大宽度限制算法
         int barWidth = right - left;
-        int sideWidth = Math.max(mLeftView.getWidth(), mRightView.getWidth());
-        int maxWidth = sideWidth * 2 + mTitleView.getWidth();
+        int sideWidth = Math.max(mLeftView.getMeasuredWidth(), mRightView.getMeasuredWidth());
+        int maxWidth = sideWidth * 2 + mTitleView.getMeasuredWidth();
         // 算出来子 View 的宽大于标题栏的宽度
         if (maxWidth >= barWidth) {
             // 判断是左右项太长还是标题项太长
@@ -253,10 +282,14 @@ public class TitleBar extends FrameLayout
                 mRightView.setMaxWidth(sideWidth);
             }
         } else {
-            // 不限制子 View 的最大宽度
-            mLeftView.setMaxWidth(Integer.MAX_VALUE);
-            mTitleView.setMaxWidth(Integer.MAX_VALUE);
-            mRightView.setMaxWidth(Integer.MAX_VALUE);
+            if (mLeftView.getMaxWidth() != Integer.MAX_VALUE &&
+                    mTitleView.getMaxWidth() != Integer.MAX_VALUE &&
+                    mRightView.getMaxWidth() != Integer.MAX_VALUE) {
+                // 不限制子 View 的最大宽度
+                mLeftView.setMaxWidth(Integer.MAX_VALUE);
+                mTitleView.setMaxWidth(Integer.MAX_VALUE);
+                mRightView.setMaxWidth(Integer.MAX_VALUE);
+            }
         }
 
         // TextView 里面必须有东西才能被点击
@@ -271,6 +304,25 @@ public class TitleBar extends FrameLayout
                 addOnLayoutChangeListener(TitleBar.this);
             }
         });
+    }
+
+    /**
+     * {@link View.OnClickListener}
+     */
+
+    @Override
+    public void onClick(View v) {
+        if (mListener == null) {
+            return;
+        }
+
+        if (v == mLeftView) {
+            mListener.onLeftClick(v);
+        } else if (v == mRightView) {
+            mListener.onRightClick(v);
+        } else if (v == mTitleView) {
+            mListener.onTitleClick(v);
+        }
     }
 
     @Override
@@ -297,25 +349,7 @@ public class TitleBar extends FrameLayout
     }
 
     /**
-     * {@link View.OnClickListener}
-     */
-    @Override
-    public void onClick(View v) {
-        if (mListener == null) {
-            return;
-        }
-
-        if (v == mLeftView) {
-            mListener.onLeftClick(v);
-        } else if (v == mRightView) {
-            mListener.onRightClick(v);
-        } else if (v == mTitleView) {
-            mListener.onTitleClick(v);
-        }
-    }
-
-    /**
-     * 设置点击监听器
+     * 设置监听器
      */
     public TitleBar setOnTitleBarListener(OnTitleBarListener l) {
         mListener = l;
@@ -327,7 +361,7 @@ public class TitleBar extends FrameLayout
     }
 
     /**
-     * 标题
+     * 设置标题
      */
     public TitleBar setTitle(int id) {
         return setTitle(getResources().getString(id));
@@ -338,12 +372,15 @@ public class TitleBar extends FrameLayout
         return this;
     }
 
+    /**
+     * 获取标题
+     */
     public CharSequence getTitle() {
         return mTitleView.getText();
     }
 
     /**
-     * 左边的标题
+     * 设置左标题
      */
     public TitleBar setLeftTitle(int id) {
         return setLeftTitle(getResources().getString(id));
@@ -354,12 +391,15 @@ public class TitleBar extends FrameLayout
         return this;
     }
 
+    /**
+     * 获取左标题
+     */
     public CharSequence getLeftTitle() {
         return mLeftView.getText();
     }
 
     /**
-     * 右边的标题
+     * 设置右标题
      */
     public TitleBar setRightTitle(int id) {
         return setRightTitle(getResources().getString(id));
@@ -370,12 +410,15 @@ public class TitleBar extends FrameLayout
         return this;
     }
 
+    /**
+     * 获取右标题
+     */
     public CharSequence getRightTitle() {
         return mRightView.getText();
     }
 
     /**
-     * 设置左边的图标
+     * 设置左图标
      */
     public TitleBar setLeftIcon(int id) {
         return setLeftIcon(BaseBarInitializer.getDrawableResources(getContext(), id));
@@ -393,12 +436,27 @@ public class TitleBar extends FrameLayout
         return this;
     }
 
+    /**
+     * 设置左图标色彩
+     */
+    public TitleBar setLeftTint(int color) {
+        Drawable drawable = getLeftIcon();
+        if (drawable != null) {
+            drawable.mutate();
+            drawable.setColorFilter(color, PorterDuff.Mode.SRC_IN);
+        }
+        return this;
+    }
+
+    /**
+     * 获取左图标
+     */
     public Drawable getLeftIcon() {
         return mLeftView.getCompoundDrawables()[0];
     }
 
     /**
-     * 设置右边的图标
+     * 设置右图标
      */
     public TitleBar setRightIcon(int id) {
         return setRightIcon(BaseBarInitializer.getDrawableResources(getContext(), id));
@@ -416,16 +474,23 @@ public class TitleBar extends FrameLayout
         return this;
     }
 
-    public Drawable getRightIcon() {
-        return mRightView.getCompoundDrawables()[2];
+    /**
+     * 设置右图标色彩
+     */
+    public TitleBar setRightTint(int color) {
+        Drawable drawable = getRightIcon();
+        if (drawable != null) {
+            drawable.mutate();
+            drawable.setColorFilter(color, PorterDuff.Mode.SRC_IN);
+        }
+        return this;
     }
 
     /**
-     * 设置左标题颜色
+     * 获取右图标
      */
-    public TitleBar setLeftColor(int color) {
-        mLeftView.setTextColor(color);
-        return this;
+    public Drawable getRightIcon() {
+        return mRightView.getCompoundDrawables()[2];
     }
 
     /**
@@ -433,6 +498,14 @@ public class TitleBar extends FrameLayout
      */
     public TitleBar setTitleColor(int color) {
         mTitleView.setTextColor(color);
+        return this;
+    }
+
+    /**
+     * 设置左标题颜色
+     */
+    public TitleBar setLeftColor(int color) {
+        mLeftView.setTextColor(color);
         return this;
     }
 
@@ -469,15 +542,7 @@ public class TitleBar extends FrameLayout
     }
 
     /**
-     * 设置左标题的文本大小
-     */
-    public TitleBar setLeftSize(int unit, float size) {
-        mLeftView.setTextSize(unit, size);
-        return this;
-    }
-
-    /**
-     * 设置标题的文本大小
+     * 设置标题文字大小
      */
     public TitleBar setTitleSize(int unit, float size) {
         mTitleView.setTextSize(unit, size);
@@ -485,7 +550,15 @@ public class TitleBar extends FrameLayout
     }
 
     /**
-     * 设置右标题的文本大小
+     * 设置左标题文字大小
+     */
+    public TitleBar setLeftSize(int unit, float size) {
+        mLeftView.setTextSize(unit, size);
+        return this;
+    }
+
+    /**
+     * 设置右标题文字大小
      */
     public TitleBar setRightSize(int unit, float size) {
         mRightView.setTextSize(unit, size);
@@ -506,6 +579,7 @@ public class TitleBar extends FrameLayout
     public TitleBar setLineColor(int color) {
         return setLineDrawable(new ColorDrawable(color));
     }
+
     public TitleBar setLineDrawable(Drawable drawable) {
         BaseBarInitializer.setViewBackground(mLineView, drawable);
         return this;
@@ -524,12 +598,21 @@ public class TitleBar extends FrameLayout
     /**
      * 设置标题重心
      */
+    @SuppressLint("RtlHardcoded")
     public TitleBar setTitleGravity(int gravity) {
-        // 适配 Android 4.2 新特性，布局反方向（开发者选项 - 强制使用从右到左的布局方向）
+        // 适配布局反方向
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
             gravity = Gravity.getAbsoluteGravity(gravity, getResources().getConfiguration().getLayoutDirection());
         }
-        mTitleView.setGravity(gravity);
+        // 如果标题的重心为左，那么左边就不能有内容
+        // 如果标题的重心为右，那么右边就不能有内容
+        if (((gravity & Gravity.LEFT) != 0 && BaseBarInitializer.checkContainContent(mLeftView)) ||
+                ((gravity & Gravity.RIGHT) != 0) && BaseBarInitializer.checkContainContent(mRightView)) {
+            throw new IllegalArgumentException("are you ok?");
+        }
+        LayoutParams params = (LayoutParams) mTitleView.getLayoutParams();
+        params.gravity = gravity;
+        mTitleView.setLayoutParams(params);
         return this;
     }
 

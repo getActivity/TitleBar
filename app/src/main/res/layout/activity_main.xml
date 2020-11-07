@@ -81,7 +81,7 @@
             <com.hjq.bar.TitleBar
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="120dp"
+                android:layout_marginTop="200dp"
                 app:title="默认的标题栏" />
 
             <com.hjq.bar.TitleBar
@@ -89,7 +89,17 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 app:backButton="false"
-                app:title="不带返回按钮并标题加粗"
+                app:title="不带返回按钮并标题加粗" />
+
+            <com.hjq.bar.TitleBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:paddingHorizontal="25dp"
+                android:paddingVertical="15dp"
+                app:backButton="false"
+                app:title="标题向左对齐并且加粗"
+                app:titleGravity="start"
                 app:titleStyle="bold" />
 
             <com.hjq.bar.TitleBar
@@ -118,7 +128,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 app:leftIcon="@mipmap/ic_launcher"
+                app:leftTint="#ff00ff"
                 app:rightIcon="@mipmap/ic_launcher"
+                app:rightTint="#00ff00"
                 app:title="带图标的标题栏" />
 
             <com.hjq.bar.TitleBar

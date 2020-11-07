@@ -31,7 +31,7 @@ public abstract class BaseBarInitializer implements ITitleBarInitializer {
         leftView.setSingleLine();
         leftView.setEllipsize(TextUtils.TruncateAt.END);
         leftView.setCompoundDrawablePadding((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 2, leftView.getResources().getDisplayMetrics()));
-        leftView.setTextSize(14);
+        leftView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
         return leftView;
     }
 
@@ -49,7 +49,7 @@ public abstract class BaseBarInitializer implements ITitleBarInitializer {
         // 设置跑马灯之后需要设置选中才能有效果
         titleView.setSelected(true);
         titleView.setCompoundDrawablePadding((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 2, titleView.getResources().getDisplayMetrics()));
-        titleView.setTextSize(16);
+        titleView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
         return titleView;
     }
 
@@ -62,7 +62,7 @@ public abstract class BaseBarInitializer implements ITitleBarInitializer {
         rightView.setSingleLine();
         rightView.setEllipsize(TextUtils.TruncateAt.END);
         rightView.setCompoundDrawablePadding((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 2, rightView.getResources().getDisplayMetrics()));
-        rightView.setTextSize(14);
+        rightView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
         return rightView;
     }
 
@@ -80,7 +80,7 @@ public abstract class BaseBarInitializer implements ITitleBarInitializer {
 
     @Override
     public int getVerticalPadding(Context context) {
-        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 14, context.getResources().getDisplayMetrics());
+        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 15, context.getResources().getDisplayMetrics());
     }
 
     public abstract Drawable getBackIcon(Context context);
