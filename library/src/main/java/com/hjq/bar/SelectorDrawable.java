@@ -2,7 +2,6 @@ package com.hjq.bar;
 
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.StateListDrawable;
-import android.os.Build;
 
 /**
  *    author : Android 轮子哥
@@ -82,9 +81,7 @@ public final class SelectorDrawable extends StateListDrawable {
                 selector.addState(new int[]{android.R.attr.state_selected}, mSelected);
             }
             if (mHovered != null) {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
-                    selector.addState(new int[]{android.R.attr.state_hovered}, mHovered);
-                }
+                selector.addState(new int[]{android.R.attr.state_hovered}, mHovered);
             }
             if (mDefault != null) {
                 selector.addState(new int[]{}, mDefault);

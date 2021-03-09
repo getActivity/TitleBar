@@ -19,7 +19,7 @@ import com.hjq.bar.ITitleBarInitializer;
  *    time   : 2020/09/19
  *    desc   : 默认初始化器基类
  */
-public abstract class BaseBarInitializer implements ITitleBarInitializer {
+public abstract class CommonBarInitializer implements ITitleBarInitializer {
 
     @Override
     public TextView getLeftView(Context context) {

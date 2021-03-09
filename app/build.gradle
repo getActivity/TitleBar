@@ -7,8 +7,8 @@ android {
         applicationId "com.hjq.bar.demo"
         minSdkVersion 16
         targetSdkVersion 28
-        versionCode 82
-        versionName "8.2"
+        versionCode 85
+        versionName "8.5"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {

@@ -20,7 +20,7 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
-import com.hjq.bar.initializer.BaseBarInitializer;
+import com.hjq.bar.initializer.CommonBarInitializer;
 import com.hjq.bar.initializer.LightBarInitializer;
 import com.hjq.bar.initializer.NightBarInitializer;
 import com.hjq.bar.initializer.RippleBarInitializer;
@@ -30,7 +30,7 @@ import com.hjq.bar.initializer.TransparentBarInitializer;
  *    author : Android 轮子哥
  *    github : https://github.com/getActivity/TitleBar
  *    time   : 2018/08/17
- *    desc   : Android 通用标题栏
+ *    desc   : 标题栏框架
  */
 public class TitleBar extends FrameLayout
         implements View.OnClickListener,
@@ -137,7 +137,7 @@ public class TitleBar extends FrameLayout
 
         // 图标设置
         if (array.hasValue(R.styleable.TitleBar_leftIcon)) {
-            setLeftIcon(BaseBarInitializer.getDrawableResources(getContext(), array.getResourceId(R.styleable.TitleBar_leftIcon, 0)));
+            setLeftIcon(CommonBarInitializer.getDrawableResources(getContext(), array.getResourceId(R.styleable.TitleBar_leftIcon, 0)));
         } else {
             if (!array.getBoolean(R.styleable.TitleBar_backButton, true)) {
                 // 不显示返回图标
@@ -146,7 +146,7 @@ public class TitleBar extends FrameLayout
         }
 
         if (array.hasValue(R.styleable.TitleBar_rightIcon)) {
-            setRightIcon(BaseBarInitializer.getDrawableResources(getContext(), array.getResourceId(R.styleable.TitleBar_rightIcon, 0)));
+            setRightIcon(CommonBarInitializer.getDrawableResources(getContext(), array.getResourceId(R.styleable.TitleBar_rightIcon, 0)));
         }
 
         // 图标颜色设置
@@ -230,7 +230,7 @@ public class TitleBar extends FrameLayout
 
         // 设置默认背景
         if (getBackground() == null) {
-            BaseBarInitializer.setViewBackground(this, mCurrentInitializer.getBackgroundDrawable(context));
+            CommonBarInitializer.setViewBackground(this, mCurrentInitializer.getBackgroundDrawable(context));
         }
 
         addView(mTitleView, 0);
@@ -293,9 +293,9 @@ public class TitleBar extends FrameLayout
         }
 
         // TextView 里面必须有东西才能被点击
-        mLeftView.setEnabled(BaseBarInitializer.checkContainContent(mLeftView));
-        mTitleView.setEnabled(BaseBarInitializer.checkContainContent(mTitleView));
-        mRightView.setEnabled(BaseBarInitializer.checkContainContent(mRightView));
+        mLeftView.setEnabled(CommonBarInitializer.checkContainContent(mLeftView));
+        mTitleView.setEnabled(CommonBarInitializer.checkContainContent(mTitleView));
+        mRightView.setEnabled(CommonBarInitializer.checkContainContent(mRightView));
 
         post(new Runnable() {
             @Override
@@ -311,17 +311,17 @@ public class TitleBar extends FrameLayout
      */
 
     @Override
-    public void onClick(View v) {
+    public void onClick(View view) {
         if (mListener == null) {
             return;
         }
 
-        if (v == mLeftView) {
-            mListener.onLeftClick(v);
-        } else if (v == mRightView) {
-            mListener.onRightClick(v);
-        } else if (v == mTitleView) {
-            mListener.onTitleClick(v);
+        if (view == mLeftView) {
+            mListener.onLeftClick(view);
+        } else if (view == mRightView) {
+            mListener.onRightClick(view);
+        } else if (view == mTitleView) {
+            mListener.onTitleClick(view);
         }
     }
 
@@ -351,8 +351,8 @@ public class TitleBar extends FrameLayout
     /**
      * 设置监听器
      */
-    public TitleBar setOnTitleBarListener(OnTitleBarListener l) {
-        mListener = l;
+    public TitleBar setOnTitleBarListener(OnTitleBarListener listener) {
+        mListener = listener;
         // 设置监听
         mTitleView.setOnClickListener(this);
         mLeftView.setOnClickListener(this);
@@ -421,7 +421,7 @@ public class TitleBar extends FrameLayout
      * 设置左图标
      */
     public TitleBar setLeftIcon(int id) {
-        return setLeftIcon(BaseBarInitializer.getDrawableResources(getContext(), id));
+        return setLeftIcon(CommonBarInitializer.getDrawableResources(getContext(), id));
     }
 
     public TitleBar setLeftIcon(Drawable drawable) {
@@ -459,7 +459,7 @@ public class TitleBar extends FrameLayout
      * 设置右图标
      */
     public TitleBar setRightIcon(int id) {
-        return setRightIcon(BaseBarInitializer.getDrawableResources(getContext(), id));
+        return setRightIcon(CommonBarInitializer.getDrawableResources(getContext(), id));
     }
 
     public TitleBar setRightIcon(Drawable drawable) {
@@ -521,11 +521,11 @@ public class TitleBar extends FrameLayout
      * 设置左标题状态选择器
      */
     public TitleBar setLeftBackground(int id) {
-        return setLeftBackground(BaseBarInitializer.getDrawableResources(getContext(), id));
+        return setLeftBackground(CommonBarInitializer.getDrawableResources(getContext(), id));
     }
 
     public TitleBar setLeftBackground(Drawable drawable) {
-        BaseBarInitializer.setViewBackground(mLeftView, drawable);
+        CommonBarInitializer.setViewBackground(mLeftView, drawable);
         return this;
     }
 
@@ -533,11 +533,11 @@ public class TitleBar extends FrameLayout
      * 设置右标题状态选择器
      */
     public TitleBar setRightBackground(int id) {
-        return setRightBackground(BaseBarInitializer.getDrawableResources(getContext(), id));
+        return setRightBackground(CommonBarInitializer.getDrawableResources(getContext(), id));
     }
 
     public TitleBar setRightBackground(Drawable drawable) {
-        BaseBarInitializer.setViewBackground(mRightView, drawable);
+        CommonBarInitializer.setViewBackground(mRightView, drawable);
         return this;
     }
 
@@ -581,7 +581,7 @@ public class TitleBar extends FrameLayout
     }
 
     public TitleBar setLineDrawable(Drawable drawable) {
-        BaseBarInitializer.setViewBackground(mLineView, drawable);
+        CommonBarInitializer.setViewBackground(mLineView, drawable);
         return this;
     }
 
@@ -606,8 +606,8 @@ public class TitleBar extends FrameLayout
         }
         // 如果标题的重心为左，那么左边就不能有内容
         // 如果标题的重心为右，那么右边就不能有内容
-        if (((gravity & Gravity.LEFT) != 0 && BaseBarInitializer.checkContainContent(mLeftView)) ||
-                ((gravity & Gravity.RIGHT) != 0) && BaseBarInitializer.checkContainContent(mRightView)) {
+        if (((gravity & Gravity.LEFT) != 0 && CommonBarInitializer.checkContainContent(mLeftView)) ||
+                ((gravity & Gravity.RIGHT) != 0) && CommonBarInitializer.checkContainContent(mRightView)) {
             throw new IllegalArgumentException("are you ok?");
         }
         LayoutParams params = (LayoutParams) mTitleView.getLayoutParams();
@@ -637,20 +637,24 @@ public class TitleBar extends FrameLayout
     /**
      * 设置文字和图标的间距
      */
-    public TitleBar setDrawablePadding(int px) {
-        mLeftView.setCompoundDrawablePadding(px);
-        mTitleView.setCompoundDrawablePadding(px);
-        mRightView.setCompoundDrawablePadding(px);
+    public TitleBar setDrawablePadding(int padding) {
+        mHorizontalPadding = padding;
+        mVerticalPadding = padding;
+        mLeftView.setCompoundDrawablePadding(padding);
+        mTitleView.setCompoundDrawablePadding(padding);
+        mRightView.setCompoundDrawablePadding(padding);
         return this;
     }
 
     /**
      * 设置子 View 内间距
      */
-    public TitleBar setChildPadding(int horizontal, int vertical) {
-        mLeftView.setPadding(horizontal, vertical, horizontal, vertical);
-        mTitleView.setPadding(horizontal, vertical, horizontal, vertical);
-        mRightView.setPadding(horizontal, vertical, horizontal, vertical);
+    public TitleBar setChildPadding(int horizontalPadding, int verticalPadding) {
+        mHorizontalPadding = horizontalPadding;
+        mVerticalPadding = verticalPadding;
+        mLeftView.setPadding(horizontalPadding, verticalPadding, horizontalPadding, verticalPadding);
+        mTitleView.setPadding(horizontalPadding, verticalPadding, horizontalPadding, verticalPadding);
+        mRightView.setPadding(horizontalPadding, verticalPadding, horizontalPadding, verticalPadding);
         return this;
     }
 
@@ -693,6 +697,6 @@ public class TitleBar extends FrameLayout
      * 设置默认初始化器
      */
     public static void setDefaultInitializer(ITitleBarInitializer initializer) {
-        TitleBar.sGlobalInitializer = initializer;
+        sGlobalInitializer = initializer;
     }
 }

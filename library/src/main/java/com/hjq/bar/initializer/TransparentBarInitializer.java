@@ -15,7 +15,7 @@ import com.hjq.bar.SelectorDrawable;
  *    time   : 2020/09/19
  *    desc   : 透明主题样式实现（布局属性：app:barStyle="transparent"）
  */
-public class TransparentBarInitializer extends BaseBarInitializer {
+public class TransparentBarInitializer extends CommonBarInitializer {
 
     @Override
     public TextView getLeftView(Context context) {

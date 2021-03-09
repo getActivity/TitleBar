@@ -6,9 +6,8 @@ android {
 
     defaultConfig {
         minSdkVersion 16
-        targetSdkVersion 26
-        versionCode 82
-        versionName "8.2"
+        versionCode 85
+        versionName "8.5"
     }
 }
 
@@ -16,8 +15,8 @@ publish {
     userOrg = 'getactivity'
     groupId = 'com.hjq'
     artifactId = 'titlebar'
-    version = '8.2'
-    description = 'A simple generic title bar'
+    publishVersion = '8.5'
+    desc = 'A simple generic title bar'
     website = "https://github.com/getActivity/TitleBar"
 }
 

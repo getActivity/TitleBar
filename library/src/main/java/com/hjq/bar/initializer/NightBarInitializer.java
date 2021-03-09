@@ -15,7 +15,7 @@ import com.hjq.bar.SelectorDrawable;
  *    time   : 2020/09/19
  *    desc   : 夜间主题样式实现（布局属性：app:barStyle="night"）
  */
-public class NightBarInitializer extends BaseBarInitializer {
+public class NightBarInitializer extends CommonBarInitializer {
 
     @Override
     public TextView getLeftView(Context context) {

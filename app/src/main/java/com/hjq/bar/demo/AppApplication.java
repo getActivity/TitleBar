@@ -9,7 +9,7 @@ import com.hjq.bar.TitleBar;
 import com.hjq.bar.initializer.LightBarInitializer;
 import com.hjq.toast.ToastUtils;
 
-public class MainApplication extends Application {
+public final class AppApplication extends Application {
 
     @Override
     public void onCreate() {

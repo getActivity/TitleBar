@@ -14,7 +14,7 @@ import com.hjq.toast.ToastUtils;
  *    time   : 2018/08/17
  *    desc   : TitleBar 使用案例
  */
-public class MainActivity extends AppCompatActivity {
+public final class MainActivity extends AppCompatActivity {
 
     private TitleBar mTitleBar;
 
@@ -27,17 +27,17 @@ public class MainActivity extends AppCompatActivity {
         mTitleBar.setOnTitleBarListener(new OnTitleBarListener() {
 
             @Override
-            public void onLeftClick(View v) {
+            public void onLeftClick(View view) {
                 ToastUtils.show("左项 View 被点击");
             }
 
             @Override
-            public void onTitleClick(View v) {
+            public void onTitleClick(View view) {
                 ToastUtils.show("中间 View 被点击");
             }
 
             @Override
-            public void onRightClick(View v) {
+            public void onRightClick(View view) {
                 ToastUtils.show("右项 View 被点击");
             }
         });

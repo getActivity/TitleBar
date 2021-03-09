@@ -1,12 +1,12 @@
-# 标题栏
+# 标题栏框架
 
-> 码云地址：[Gitee](https://gitee.com/getActivity/TitleBar)
+* 码云地址：[Gitee](https://gitee.com/getActivity/TitleBar)
 
-> 博客地址：[Android标题栏（TitleBar）绝佳解决方案](https://www.jianshu.com/p/617be02dc265)
+* 博客地址：[Android标题栏（TitleBar）绝佳解决方案](https://www.jianshu.com/p/617be02dc265)
 
-> 已投入公司项目多时，没有任何毛病，可胜任任何需求，[点击此处下载Demo](TitleBar.apk)
+* 已投入公司项目多时，没有任何毛病，可胜任任何需求，[点击此处下载Demo](TitleBar.apk)
 
-> 想了解实现原理的可以参考文章：[纯手工打造一个通用的标题栏 TitleBar](https://www.jianshu.com/p/ccf6506335e7)
+* 想了解实现原理的可以参考文章：[纯手工打造一个通用的标题栏 TitleBar](https://www.jianshu.com/p/ccf6506335e7)
 
 ![](TitleBar.gif)
 
@@ -17,7 +17,7 @@
 ```groovy
 dependencies {
     // 标题栏框架：https://github.com/getActivity/TitleBar
-    implementation 'com.hjq:titlebar:8.2'
+    implementation 'com.hjq:titlebar:8.5'
 }
 ```
 
@@ -37,12 +37,8 @@ dependencies {
     <attr name="titleColor" format="color" />
     <attr name="titleSize" format="dimension" />
     <attr name="titleGravity">
-        <flag name="top" value="0x30" />
-        <flag name="bottom" value="0x50" />
         <flag name="left" value="0x03" />
         <flag name="right" value="0x05" />
-        <flag name="center_vertical" value="0x10" />
-        <flag name="center_horizontal" value="0x01" />
         <flag name="center" value="0x11" />
         <flag name="start" value="0x00800003" />
         <flag name="end" value="0x00800005" />
@@ -101,17 +97,17 @@ dependencies {
 mTitleBar.setOnTitleBarListener(new OnTitleBarListener() {
 
     @Override
-    public void onLeftClick(View v) {
+    public void onLeftClick(View view) {
         ToastUtils.show("左项View被点击");
     }
 
     @Override
-    public void onTitleClick(View v) {
+    public void onTitleClick(View view) {
         ToastUtils.show("中间View被点击");
     }
 
     @Override
-    public void onRightClick(View v) {
+    public void onRightClick(View view) {
         ToastUtils.show("右项View被点击");
     }
 });
@@ -130,6 +126,12 @@ public class XXApplication extends Application {
 
         // 初始化 TitleBar
         TitleBar.setDefaultInitializer(new LightBarInitializer() {
+
+            @Override
+            protected TextView createTextView(Context context) {
+                return new AppCompatTextView(context);
+            }
+
             @Override
             public TextView getLeftView(Context context) {
                 return super.getLeftView(context);
@@ -194,8 +196,6 @@ public class XXApplication extends Application {
 
 * 网络框架：[EasyHttp](https://github.com/getActivity/EasyHttp)
 
-* 日志框架：[Logcat](https://github.com/getActivity/Logcat)
-
 * 权限框架：[XXPermissions](https://github.com/getActivity/XXPermissions)
 
 * 吐司框架：[ToastUtils](https://github.com/getActivity/ToastUtils)
@@ -204,7 +204,15 @@ public class XXApplication extends Application {
 
 * 悬浮窗框架：[XToast](https://github.com/getActivity/XToast)
 
-#### Android技术讨论Q群：78797078
+* Gson 解析容错：[GsonFactory](https://github.com/getActivity/GsonFactory)
+
+* 日志查看框架：[Logcat](https://github.com/getActivity/Logcat)
+
+#### 微信公众号：Android轮子哥
+
+![](https://raw.githubusercontent.com/getActivity/Donate/master/picture/official_ccount.png)
+
+#### Android 技术分享 QQ 群：78797078
 
 #### 如果您觉得我的开源库帮你节省了大量的开发时间，请扫描下方的二维码随意打赏，要是能打赏个 10.24 :monkey_face:就太:thumbsup:了。您的支持将鼓励我继续创作:octocat:
 
