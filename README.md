@@ -8,16 +8,32 @@
 
 * 想了解实现原理的可以参考文章：[纯手工打造一个通用的标题栏 TitleBar](https://www.jianshu.com/p/ccf6506335e7)
 
-![](TitleBar.gif)
+![](TitleBar.jpg)
 
-## 5.0 版本、5.0 版本、5.0 版本 XML 属性已经改头换面了，请尽快进行[适配](Adaptive.md)
+#### 5.0 版本 XML 属性已经改头换面了，请尽快进行[适配](Adaptive.md)
 
 #### 集成步骤
+
+* 在项目根目录下的 `build.gradle` 文件中加入
+
+```groovy
+buildscript {
+    ......
+}
+allprojects {
+    repositories {
+        // JitPack 远程仓库：https://jitpack.io
+        maven { url 'https://jitpack.io' }
+    }
+}
+```
+
+* 在项目 app 模块下的 `build.gradle` 文件中加入
 
 ```groovy
 dependencies {
     // 标题栏框架：https://github.com/getActivity/TitleBar
-    implementation 'com.hjq:titlebar:8.5'
+    implementation 'com.github.getActivity:TitleBar:8.6'
 }
 ```
 
@@ -82,7 +98,7 @@ dependencies {
 
 #### XML示例
 
-> [点我查看完整的Demo示例](app/src/main/res/layout/activity_main.xml)
+* [点我查看完整的 Demo 示例](app/src/main/res/layout/activity_main.xml)
 
 ```xml
 <com.hjq.bar.TitleBar
@@ -115,63 +131,17 @@ mTitleBar.setOnTitleBarListener(new OnTitleBarListener() {
 
 #### 统一 TitleBar 样式
 
-> 如果对 TitleBar 的默认样式或者属性不满意，可以在 Application 初始化的地方进行拦截并修改
+* 如果对 TitleBar 的默认样式或者属性不满意，可以在 Application 初始化的地方进行拦截并修改
 
 ```java
-public class XXApplication extends Application {
+public class XxxApplication extends Application {
 
     @Override
     public void onCreate() {
         super.onCreate();
 
-        // 初始化 TitleBar
-        TitleBar.setDefaultInitializer(new LightBarInitializer() {
-
-            @Override
-            protected TextView createTextView(Context context) {
-                return new AppCompatTextView(context);
-            }
-
-            @Override
-            public TextView getLeftView(Context context) {
-                return super.getLeftView(context);
-            }
-
-            @Override
-            public TextView getTitleView(Context context) {
-                return super.getTitleView(context);
-            }
-
-            @Override
-            public TextView getRightView(Context context) {
-                return super.getRightView(context);
-            }
-
-            @Override
-            public View getLineView(Context context) {
-                return super.getLineView(context);
-            }
-
-            @Override
-            public Drawable getBackgroundDrawable(Context context) {
-                return super.getBackgroundDrawable(context);
-            }
-
-            @Override
-            public Drawable getBackIcon(Context context) {
-                return super.getBackIcon(context);
-            }
-
-            @Override
-            public int getHorizontalPadding(Context context) {
-                return super.getHorizontalPadding(context);
-            }
-
-            @Override
-            public int getVerticalPadding(Context context) {
-                return super.getVerticalPadding(context);
-            }
-        });
+        // 初始化 TitleBar 默认样式
+        TitleBar.setDefaultStyle(new ITitleBarStyle());
     }
 }
 ```

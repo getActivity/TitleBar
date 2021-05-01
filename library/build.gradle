@@ -1,23 +1,13 @@
 apply plugin: 'com.android.library'
-apply plugin: 'com.novoda.bintray-release'
 
 android {
     compileSdkVersion 26
 
     defaultConfig {
         minSdkVersion 16
-        versionCode 85
-        versionName "8.5"
+        versionCode 86
+        versionName "8.6"
     }
-}
-
-publish {
-    userOrg = 'getactivity'
-    groupId = 'com.hjq'
-    artifactId = 'titlebar'
-    publishVersion = '8.5'
-    desc = 'A simple generic title bar'
-    website = "https://github.com/getActivity/TitleBar"
 }
 
 tasks.withType(Javadoc) {

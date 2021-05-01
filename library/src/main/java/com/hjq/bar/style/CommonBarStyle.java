@@ -1,4 +1,4 @@
-package com.hjq.bar.initializer;
+package com.hjq.bar.style;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
-import com.hjq.bar.ITitleBarInitializer;
+import com.hjq.bar.ITitleBarStyle;
 
 /**
  *    author : Android 轮子哥
@@ -19,12 +19,12 @@ import com.hjq.bar.ITitleBarInitializer;
  *    time   : 2020/09/19
  *    desc   : 默认初始化器基类
  */
-public abstract class CommonBarInitializer implements ITitleBarInitializer {
+public abstract class CommonBarStyle implements ITitleBarStyle {
 
     @Override
-    public TextView getLeftView(Context context) {
+    public TextView createLeftView(Context context) {
         TextView leftView = createTextView(context);
-        leftView.setCompoundDrawablesWithIntrinsicBounds(getBackIcon(context), null, null, null);
+        leftView.setCompoundDrawablesWithIntrinsicBounds(createBackIcon(context), null, null, null);
         leftView.setLayoutParams(new FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT, Gravity.START));
         leftView.setGravity(Gravity.CENTER_VERTICAL);
         leftView.setFocusable(true);
@@ -36,7 +36,7 @@ public abstract class CommonBarInitializer implements ITitleBarInitializer {
     }
 
     @Override
-    public TextView getTitleView(Context context) {
+    public TextView createTitleView(Context context) {
         TextView titleView = createTextView(context);
         titleView.setLayoutParams(new FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT, Gravity.CENTER_HORIZONTAL));
         titleView.setGravity(Gravity.CENTER);
@@ -54,7 +54,7 @@ public abstract class CommonBarInitializer implements ITitleBarInitializer {
     }
 
     @Override
-    public TextView getRightView(Context context) {
+    public TextView createRightView(Context context) {
         TextView rightView = createTextView(context);
         rightView.setLayoutParams(new FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT, Gravity.END));
         rightView.setGravity(Gravity.CENTER_VERTICAL);
@@ -67,24 +67,30 @@ public abstract class CommonBarInitializer implements ITitleBarInitializer {
     }
 
     @Override
-    public View getLineView(Context context) {
+    public View createLineView(Context context) {
         View lineView = new View(context);
         lineView.setLayoutParams(new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 1, Gravity.BOTTOM));
         return lineView;
     }
 
     @Override
-    public int getHorizontalPadding(Context context) {
+    public int createHorizontalPadding(Context context) {
         return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 12, context.getResources().getDisplayMetrics());
     }
 
     @Override
-    public int getVerticalPadding(Context context) {
+    public int createVerticalPadding(Context context) {
         return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 15, context.getResources().getDisplayMetrics());
     }
 
-    public abstract Drawable getBackIcon(Context context);
+    /**
+     * 创建返回图标
+     */
+    public abstract Drawable createBackIcon(Context context);
 
+    /**
+     * 创建 TextView
+     */
     protected TextView createTextView(Context context) {
         return new TextView(context);
     }
