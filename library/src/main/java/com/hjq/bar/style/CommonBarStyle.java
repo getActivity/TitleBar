@@ -1,14 +1,10 @@
 package com.hjq.bar.style;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.text.TextUtils;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.hjq.bar.ITitleBarStyle;
@@ -24,21 +20,16 @@ public abstract class CommonBarStyle implements ITitleBarStyle {
     @Override
     public TextView createLeftView(Context context) {
         TextView leftView = createTextView(context);
-        leftView.setCompoundDrawablesWithIntrinsicBounds(createBackIcon(context), null, null, null);
-        leftView.setLayoutParams(new FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT, Gravity.START));
         leftView.setGravity(Gravity.CENTER_VERTICAL);
         leftView.setFocusable(true);
         leftView.setSingleLine();
         leftView.setEllipsize(TextUtils.TruncateAt.END);
-        leftView.setCompoundDrawablePadding((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 2, leftView.getResources().getDisplayMetrics()));
-        leftView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
         return leftView;
     }
 
     @Override
     public TextView createTitleView(Context context) {
         TextView titleView = createTextView(context);
-        titleView.setLayoutParams(new FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT, Gravity.CENTER_HORIZONTAL));
         titleView.setGravity(Gravity.CENTER);
         titleView.setFocusable(true);
         titleView.setSingleLine();
@@ -48,89 +39,118 @@ public abstract class CommonBarStyle implements ITitleBarStyle {
         titleView.setMarqueeRepeatLimit(-1);
         // 设置跑马灯之后需要设置选中才能有效果
         titleView.setSelected(true);
-        titleView.setCompoundDrawablePadding((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 2, titleView.getResources().getDisplayMetrics()));
-        titleView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
         return titleView;
     }
 
     @Override
     public TextView createRightView(Context context) {
         TextView rightView = createTextView(context);
-        rightView.setLayoutParams(new FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT, Gravity.END));
         rightView.setGravity(Gravity.CENTER_VERTICAL);
         rightView.setFocusable(true);
         rightView.setSingleLine();
         rightView.setEllipsize(TextUtils.TruncateAt.END);
-        rightView.setCompoundDrawablePadding((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 2, rightView.getResources().getDisplayMetrics()));
-        rightView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
         return rightView;
     }
 
     @Override
     public View createLineView(Context context) {
-        View lineView = new View(context);
-        lineView.setLayoutParams(new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 1, Gravity.BOTTOM));
-        return lineView;
+        return new View(context);
     }
 
     @Override
-    public int createHorizontalPadding(Context context) {
+    public int getChildHorizontalPadding(Context context) {
         return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 12, context.getResources().getDisplayMetrics());
     }
 
     @Override
-    public int createVerticalPadding(Context context) {
+    public int getChildVerticalPadding(Context context) {
         return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 15, context.getResources().getDisplayMetrics());
     }
 
-    /**
-     * 创建返回图标
-     */
-    public abstract Drawable createBackIcon(Context context);
+    @Override
+    public int getLeftTitleSize(Context context) {
+        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 14, context.getResources().getDisplayMetrics());
+    }
+
+    @Override
+    public int getTitleTitleSize(Context context) {
+        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 16, context.getResources().getDisplayMetrics());
+    }
+
+    @Override
+    public int getRightTitleSize(Context context) {
+        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 14, context.getResources().getDisplayMetrics());
+    }
+
+    @Override
+    public int getLeftIconGravity(Context context) {
+        return Gravity.START;
+    }
+
+    @Override
+    public int getTitleIconGravity(Context context) {
+        return Gravity.END;
+    }
+
+    @Override
+    public int getRightIconGravity(Context context) {
+        return Gravity.END;
+    }
+
+    @Override
+    public int getLeftIconPadding(Context context) {
+        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 2, context.getResources().getDisplayMetrics());
+    }
+
+    @Override
+    public int getTitleIconPadding(Context context) {
+        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 2, context.getResources().getDisplayMetrics());
+    }
+
+    @Override
+    public int getRightIconPadding(Context context) {
+        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 2, context.getResources().getDisplayMetrics());
+    }
+
+    @Override
+    public int getLeftIconWidth(Context context) {
+        return 0;
+    }
+
+    @Override
+    public int getTitleIconWidth(Context context) {
+        return 0;
+    }
+
+    @Override
+    public int getRightIconWidth(Context context) {
+        return 0;
+    }
+
+    @Override
+    public int getLeftIconHeight(Context context) {
+        return 0;
+    }
+
+    @Override
+    public int getTitleIconHeight(Context context) {
+        return 0;
+    }
+
+    @Override
+    public int getRightIconHeight(Context context) {
+        return 0;
+    }
+
+    @Override
+    public int getLineSize(Context context) {
+        return 1;
+    }
 
     /**
      * 创建 TextView
      */
     protected TextView createTextView(Context context) {
         return new TextView(context);
-    }
-
-    /**
-     * 获取图片资源
-     */
-    public static Drawable getDrawableResources(Context context, int id) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            return context.getResources().getDrawable(id, context.getTheme());
-        } else {
-            return context.getResources().getDrawable(id);
-        }
-    }
-
-    /**
-     * 设置 View 背景
-     */
-    public static void setViewBackground(View view, Drawable drawable) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-            view.setBackground(drawable);
-        } else {
-            view.setBackgroundDrawable(drawable);
-        }
-    }
-
-    /**
-     * 检查 TextView 是否包含内容
-     */
-    public static boolean checkContainContent(TextView textView) {
-        CharSequence text = textView.getText();
-        if (!TextUtils.isEmpty(text)) {
-            return true;
-        }
-        Drawable[] drawables = textView.getCompoundDrawables();
-        for (Drawable drawable : drawables) {
-            if (drawable != null) {
-                return true;
-            }
-        }
-        return false;
     }
 }

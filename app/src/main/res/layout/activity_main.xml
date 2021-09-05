@@ -88,16 +88,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                app:backButton="false"
-                app:title="不带返回按钮并标题加粗" />
+                app:leftIcon="@null"
+                app:title="不带返回按钮并标题加粗"
+                app:titleStyle="bold" />
 
             <com.hjq.bar.TitleBar
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:paddingHorizontal="25dp"
-                android:paddingVertical="15dp"
-                app:backButton="false"
+                app:childPaddingHorizontal="25dp"
+                app:childPaddingVertical="15dp"
+                app:leftIcon="@null"
                 app:title="标题向左对齐并且加粗"
                 app:titleGravity="start"
                 app:titleStyle="bold" />
@@ -120,7 +121,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:paddingVertical="10dp"
+                app:childPaddingVertical="10dp"
                 app:title="通过垂直内间距来调整标题栏的高度" />
 
             <com.hjq.bar.TitleBar
@@ -128,32 +129,60 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 app:leftIcon="@mipmap/ic_launcher"
-                app:leftTint="#ff00ff"
-                app:rightIcon="@mipmap/ic_launcher"
-                app:rightTint="#00ff00"
-                app:title="带图标的标题栏" />
-
-            <com.hjq.bar.TitleBar
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                app:drawableSize="30dp"
-                app:leftIcon="@mipmap/ic_launcher"
-                app:rightIcon="@mipmap/ic_launcher"
-                app:title="限制左右图标的大小" />
-
-            <com.hjq.bar.TitleBar
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                app:backButton="false"
-                app:leftColor="#FF3300"
-                app:leftSize="18sp"
+                app:leftIconHeight="20dp"
+                app:leftIconTint="#ff00ff"
+                app:leftIconWidth="20dp"
                 app:leftTitle="左边"
-                app:rightColor="#0033FF"
-                app:rightSize="18sp"
+                app:rightIcon="@mipmap/ic_launcher"
+                app:rightIconHeight="20dp"
+                app:rightIconTint="#00ff00"
+                app:rightIconWidth="20dp"
                 app:rightTitle="右边"
+                app:title="设置图标重色器"
+                app:titleIcon="@mipmap/ic_launcher"
+                app:titleIconHeight="20dp"
+                app:titleIconTint="#0000ff"
+                app:titleIconWidth="20dp" />
+
+            <com.hjq.bar.TitleBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                app:childPaddingVertical="8dp"
+                app:leftIcon="@drawable/qr_code_ic"
+                app:leftIconGravity="top"
+                app:leftIconHeight="20dp"
+                app:leftIconPadding="5dp"
+                app:leftIconWidth="20dp"
+                app:leftTitle="扫一扫"
+                app:leftTitleColor="#666666"
+                app:leftTitleSize="12sp"
+                app:rightIcon="@drawable/message_ic"
+                app:rightIconGravity="top"
+                app:rightIconHeight="20dp"
+                app:rightIconWidth="20dp"
+                app:rightTitle="消息"
+                app:rightTitleColor="#666666"
+                app:rightTitleSize="12sp"
+                app:title="控制图标的位置和大小"
+                app:titleIcon="@mipmap/ic_launcher"
+                app:titleIconGravity="bottom"
+                app:titleIconHeight="10dp"
+                app:titleIconWidth="10dp" />
+
+            <com.hjq.bar.TitleBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                app:leftIcon="@null"
+                app:leftTitle="左边"
+                app:leftTitleColor="#FF3300"
+                app:leftTitleSize="18sp"
+                app:rightTitle="右边"
+                app:rightTitleColor="#0033FF"
+                app:rightTitleSize="18sp"
                 app:title="自定义文字大小和颜色"
+                app:titleColor="#33FF00"
                 app:titleSize="20sp" />
 
             <com.hjq.bar.TitleBar

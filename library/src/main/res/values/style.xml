@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="TitleBarStyle">
+        <item name="android:background">@drawable/bar_drawable_placeholder</item>
+        <item name="leftIcon">@drawable/bar_drawable_placeholder</item>
+        <item name="leftBackground">@drawable/bar_drawable_placeholder</item>
+        <item name="rightBackground">@drawable/bar_drawable_placeholder</item>
+    </style>
+
+</resources>

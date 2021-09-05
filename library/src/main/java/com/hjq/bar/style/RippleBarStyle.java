@@ -3,7 +3,8 @@ package com.hjq.bar.style;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.util.TypedValue;
-import android.widget.TextView;
+
+import com.hjq.bar.TitleBarSupport;
 
 /**
  *    author : Android 轮子哥
@@ -14,23 +15,21 @@ import android.widget.TextView;
 public class RippleBarStyle extends TransparentBarStyle {
 
     @Override
-    public TextView createLeftView(Context context) {
-        TextView leftView = super.createLeftView(context);
+    public Drawable getLeftTitleBackground(Context context) {
         Drawable drawable = getRippleDrawable(context);
         if (drawable != null) {
-            setViewBackground(leftView, drawable);
+            return drawable;
         }
-        return leftView;
+        return super.getLeftTitleBackground(context);
     }
 
     @Override
-    public TextView createRightView(Context context) {
-        TextView rightView = super.createRightView(context);
+    public Drawable getRightTitleBackground(Context context) {
         Drawable drawable = getRippleDrawable(context);
         if (drawable != null) {
-            setViewBackground(rightView, drawable);
+            return drawable;
         }
-        return rightView;
+        return super.getRightTitleBackground(context);
     }
 
     /**
@@ -39,7 +38,7 @@ public class RippleBarStyle extends TransparentBarStyle {
     public Drawable getRippleDrawable(Context context) {
         TypedValue typedValue = new TypedValue();
         if (context.getTheme().resolveAttribute(android.R.attr.selectableItemBackground, typedValue, true)) {
-            return getDrawableResources(context, typedValue.resourceId);
+            return TitleBarSupport.getDrawable(context, typedValue.resourceId);
         }
         return null;
     }

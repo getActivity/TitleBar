@@ -5,9 +5,22 @@ android {
 
     defaultConfig {
         minSdkVersion 16
-        versionCode 86
-        versionName "8.6"
+        versionCode 90
+        versionName "9.0"
     }
+
+    android.libraryVariants.all { variant ->
+        // aar 输出文件名配置
+        variant.outputs.all { output ->
+            outputFileName = "${rootProject.name}-${android.defaultConfig.versionName}.aar"
+        }
+    }
+}
+
+afterEvaluate {
+    // 排除 BuildConfig.class
+    generateReleaseBuildConfig.enabled = false
+    generateDebugBuildConfig.enabled = false
 }
 
 tasks.withType(Javadoc) {

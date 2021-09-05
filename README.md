@@ -1,6 +1,6 @@
 # 标题栏框架
 
-* 码云地址：[Gitee](https://gitee.com/getActivity/TitleBar)
+* 项目地址：[Github](https://github.com/getActivity/TitleBar)、[码云](https://gitee.com/getActivity/TitleBar)
 
 * 博客地址：[Android标题栏（TitleBar）绝佳解决方案](https://www.jianshu.com/p/617be02dc265)
 
@@ -10,7 +10,7 @@
 
 ![](TitleBar.jpg)
 
-#### 5.0 版本 XML 属性已经改头换面了，请尽快进行[适配](Adaptive.md)
+## 9.0 版本 XML 属性已经改头换面了，请尽快进行[适配](Adaptive.md)
 
 #### 集成步骤
 
@@ -18,11 +18,12 @@
 
 ```groovy
 buildscript {
-    ......
+    repositories {
+        maven { url 'https://jitpack.io' }
+    }
 }
 allprojects {
     repositories {
-        // JitPack 远程仓库：https://jitpack.io
         maven { url 'https://jitpack.io' }
     }
 }
@@ -33,7 +34,7 @@ allprojects {
 ```groovy
 dependencies {
     // 标题栏框架：https://github.com/getActivity/TitleBar
-    implementation 'com.github.getActivity:TitleBar:8.6'
+    implementation 'com.github.getActivity:TitleBar:9.0'
 }
 ```
 
@@ -41,14 +42,24 @@ dependencies {
 
 ```xml
 <declare-styleable name="TitleBar">
-    <!-- 整体样式 -->
+
+    <!-- 标题栏背景 -->
+    <attr name="android:background" />
+
+    <!-- 标题栏样式 -->
     <attr name="barStyle">
         <enum name="light" value="0x10" />
         <enum name="night" value="0x20" />
         <enum name="transparent" value="0x30" />
         <enum name="ripple" value="0x40" />
     </attr>
-    <!-- 中间 -->
+
+    <!-- 控件水平内间距 -->
+    <attr name="childPaddingHorizontal" format="dimension" />
+    <!-- 控件垂直内间距（可用于调整标题栏自适应的高度） -->
+    <attr name="childPaddingVertical" format="dimension" />
+
+    <!-- 中间标题 -->
     <attr name="title" format="string" />
     <attr name="titleColor" format="color" />
     <attr name="titleSize" format="dimension" />
@@ -64,35 +75,74 @@ dependencies {
         <flag name="bold" value="1" />
         <flag name="italic" value="2" />
     </attr>
-    <!-- 左边 -->
+    <attr name="titleIcon" format="reference" />
+    <attr name="titleIconWidth" format="dimension" />
+    <attr name="titleIconHeight" format="dimension" />
+    <attr name="titleIconPadding" format="dimension" />
+    <attr name="titleIconTint" format="color" />
+    <attr name="titleIconGravity">
+        <flag name="top" value="0x30" />
+        <flag name="bottom" value="0x50" />
+        <flag name="left" value="0x03" />
+        <flag name="right" value="0x05" />
+        <flag name="start" value="0x00800003" />
+        <flag name="end" value="0x00800005" />
+    </attr>
+
+    <!-- 左边标题 -->
     <attr name="leftTitle" format="string"/>
+    <attr name="leftTitleColor" format="color" />
+    <attr name="leftTitleSize" format="dimension" />
+    <attr name="leftTitleStyle">
+        <flag name="normal" value="0" />
+        <flag name="bold" value="1" />
+        <flag name="italic" value="2" />
+    </attr>
     <!-- leftIcon 优先于 backButton -->
     <attr name="leftIcon" format="reference" />
-    <attr name="leftTint" format="color" />
-    <!-- 返回按钮（默认开） -->
-    <attr name="backButton" format="boolean" />
-    <attr name="leftColor" format="color" />
-    <attr name="leftSize" format="dimension" />
+    <attr name="leftIconWidth" format="dimension" />
+    <attr name="leftIconHeight" format="dimension" />
+    <attr name="leftIconPadding" format="dimension" />
+    <attr name="leftIconTint" format="color" />
+    <attr name="leftIconGravity">
+        <flag name="top" value="0x30" />
+        <flag name="bottom" value="0x50" />
+        <flag name="left" value="0x03" />
+        <flag name="right" value="0x05" />
+        <flag name="start" value="0x00800003" />
+        <flag name="end" value="0x00800005" />
+    </attr>
     <attr name="leftBackground" format="reference|color" />
-    <!-- 右边 -->
+
+    <!-- 右边标题 -->
     <attr name="rightTitle" format="string" />
+    <attr name="rightTitleColor" format="color" />
+    <attr name="rightTitleSize" format="dimension" />
+    <attr name="rightTitleStyle">
+        <flag name="normal" value="0" />
+        <flag name="bold" value="1" />
+        <flag name="italic" value="2" />
+    </attr>
     <attr name="rightIcon" format="reference" />
-    <attr name="rightTint" format="color" />
-    <attr name="rightColor" format="color" />
-    <attr name="rightSize" format="dimension" />
+    <attr name="rightIconWidth" format="dimension" />
+    <attr name="rightIconHeight" format="dimension" />
+    <attr name="rightIconPadding" format="dimension" />
+    <attr name="rightIconTint" format="color" />
+    <attr name="rightIconGravity">
+        <flag name="top" value="0x30" />
+        <flag name="bottom" value="0x50" />
+        <flag name="left" value="0x03" />
+        <flag name="right" value="0x05" />
+        <flag name="start" value="0x00800003" />
+        <flag name="end" value="0x00800005" />
+    </attr>
     <attr name="rightBackground" format="reference|color" />
+
     <!-- 分割线 -->
     <attr name="lineVisible" format="boolean" />
-    <attr name="lineColor" format="reference|color" />
+    <attr name="lineDrawable" format="reference|color" />
     <attr name="lineSize" format="dimension" />
-    <!-- 图标显示大小 -->
-    <attr name="drawableSize" format="dimension" />
-    <!-- 图标和文字的间距 -->
-    <attr name="android:drawablePadding" />
-    <!-- 控件水平内间距 -->
-    <attr name="android:paddingVertical" />
-    <!-- 控件垂直内间距（可用于调整标题栏自适应的高度） -->
-    <attr name="android:paddingHorizontal" />
+
 </declare-styleable>
 ```
 
@@ -173,6 +223,8 @@ public class XxxApplication extends Application {
 * 国际化框架：[MultiLanguages](https://github.com/getActivity/MultiLanguages)
 
 * 悬浮窗框架：[XToast](https://github.com/getActivity/XToast)
+
+* Shape 框架：[ShapeView](https://github.com/getActivity/ShapeView)
 
 * Gson 解析容错：[GsonFactory](https://github.com/getActivity/GsonFactory)
 

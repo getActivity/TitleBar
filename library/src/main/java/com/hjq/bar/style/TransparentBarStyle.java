@@ -3,11 +3,10 @@ package com.hjq.bar.style;
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
-import android.view.View;
-import android.widget.TextView;
 
 import com.hjq.bar.R;
 import com.hjq.bar.SelectorDrawable;
+import com.hjq.bar.TitleBarSupport;
 
 /**
  *    author : Android 轮子哥
@@ -18,51 +17,50 @@ import com.hjq.bar.SelectorDrawable;
 public class TransparentBarStyle extends CommonBarStyle {
 
     @Override
-    public TextView createLeftView(Context context) {
-        TextView leftView = super.createLeftView(context);
-        leftView.setTextColor(0xFFFFFFFF);
-        setViewBackground(leftView, new SelectorDrawable.Builder()
+    public Drawable getBackButtonDrawable(Context context) {
+        return TitleBarSupport.getDrawable(context, R.drawable.bar_arrows_left_white);
+    }
+
+    @Override
+    public Drawable getLeftTitleBackground(Context context) {
+        return new SelectorDrawable.Builder()
                 .setDefault(new ColorDrawable(0x00000000))
                 .setFocused(new ColorDrawable(0x22000000))
                 .setPressed(new ColorDrawable(0x22000000))
-                .build());
-        return leftView;
+                .build();
     }
 
     @Override
-    public TextView createTitleView(Context context) {
-        TextView titleView = super.createTitleView(context);
-        titleView.setTextColor(0xFFFFFFFF);
-        return titleView;
-    }
-
-    @Override
-    public TextView createRightView(Context context) {
-        TextView rightView = super.createRightView(context);
-        rightView.setTextColor(0xFFFFFFFF);
-        setViewBackground(rightView, new SelectorDrawable.Builder()
+    public Drawable getRightTitleBackground(Context context) {
+        return new SelectorDrawable.Builder()
                 .setDefault(new ColorDrawable(0x00000000))
                 .setFocused(new ColorDrawable(0x22000000))
                 .setPressed(new ColorDrawable(0x22000000))
-                .build());
-        return rightView;
+                .build();
     }
 
     @Override
-    public View createLineView(Context context) {
-        View lineView = super.createLineView(context);
-        setViewBackground(lineView, new ColorDrawable(0xFFECECEC));
-        lineView.setVisibility(View.INVISIBLE);
-        return lineView;
+    public Drawable getTitleBarBackground(Context context) {
+        return new ColorDrawable(0x00000000);
     }
 
     @Override
-    public Drawable createBackIcon(Context context) {
-        return getDrawableResources(context, R.drawable.bar_arrows_left_white);
+    public int getLeftTitleColor(Context context) {
+        return 0xFFFFFFFF;
     }
 
     @Override
-    public Drawable createBackgroundDrawable(Context context) {
+    public int getTitleTitleColor(Context context) {
+        return 0xFFFFFFFF;
+    }
+
+    @Override
+    public int getRightTitleColor(Context context) {
+        return 0xFFFFFFFF;
+    }
+
+    @Override
+    public Drawable getLineDrawable(Context context) {
         return new ColorDrawable(0x00000000);
     }
 }
