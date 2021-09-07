@@ -36,7 +36,7 @@ app:rightIconWidth
 app:rightIconHeight
 ```
 
-* 属性改名一览，只是简单改名，没有做太多修改：
+* 属性改名一览，只是简单改名，没有做太多修改，大家可以使用全局替换：
 
 |       5.0 版本     |       9.0 版本     |
 | :------------: | :-------------: |
@@ -47,6 +47,11 @@ app:rightIconHeight
 |    `app:leftTint`   |    `app:leftIconTint`   |
 |    `app:rightTint`   |    `app:rightIconTint`   |
 |    `app:lineColor`   |    `app:lineDrawable`   |
+
+* 命名空间和属性都修改（之前用的是系统属性），在这里不推荐大家使用全局替换，而是在代码中一一检查：
+
+|       5.0 版本     |       9.0 版本     |
+| :------------: | :-------------: |
 |    `android:paddingVertical`   |    `app:childPaddingVertical`   |
 |    `android:paddingHorizontal`   |    `app:childPaddingHorizontal`   |
 
@@ -246,7 +251,6 @@ app:rightIconGravity
         <flag name="bold" value="1" />
         <flag name="italic" value="2" />
     </attr>
-    <!-- leftIcon 优先于 backButton -->
     <attr name="leftIcon" format="reference" />
     <attr name="leftIconWidth" format="dimension" />
     <attr name="leftIconHeight" format="dimension" />

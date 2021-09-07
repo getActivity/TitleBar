@@ -10,7 +10,7 @@
 
 ![](TitleBar.jpg)
 
-## 9.0 版本 XML 属性已经改头换面了，请尽快进行[适配](Adaptive.md)
+### 9.0 版本 XML 属性已经改头换面了，请尽快进行[适配](Adaptive.md)
 
 #### 集成步骤
 
@@ -98,7 +98,6 @@ dependencies {
         <flag name="bold" value="1" />
         <flag name="italic" value="2" />
     </attr>
-    <!-- leftIcon 优先于 backButton -->
     <attr name="leftIcon" format="reference" />
     <attr name="leftIconWidth" format="dimension" />
     <attr name="leftIconHeight" format="dimension" />
