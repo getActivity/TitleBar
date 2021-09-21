@@ -14,7 +14,7 @@
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             app:collapsedTitleGravity="center"
             app:expandedTitleGravity="center"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
@@ -69,7 +69,6 @@
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scrollbars="none"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <LinearLayout
@@ -81,7 +80,7 @@
             <com.hjq.bar.TitleBar
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="280dp"
+                android:layout_marginTop="300dp"
                 app:title="默认的标题栏" />
 
             <com.hjq.bar.TitleBar
@@ -89,8 +88,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 app:leftIcon="@null"
-                app:title="不带返回按钮并标题加粗"
-                app:titleStyle="bold" />
+                app:title="不带返回按钮并标题斜体"
+                app:titleStyle="italic" />
 
             <com.hjq.bar.TitleBar
                 android:layout_width="wrap_content"
@@ -121,7 +120,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                app:childPaddingVertical="10dp"
+                app:childPaddingVertical="20dp"
                 app:title="通过垂直内间距来调整标题栏的高度" />
 
             <com.hjq.bar.TitleBar
@@ -237,11 +236,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
+                android:layout_marginBottom="40dp"
                 android:background="@drawable/shape_gradient"
                 app:barStyle="transparent"
-                app:leftBackground="@null"
                 app:leftTitle="返回"
-                app:rightBackground="@null"
                 app:rightTitle="设置"
                 app:title="仿QQ渐变样式" />
 

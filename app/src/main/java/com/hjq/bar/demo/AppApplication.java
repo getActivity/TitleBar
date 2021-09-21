@@ -23,7 +23,17 @@ public final class AppApplication extends Application {
         TitleBar.setDefaultStyle(new LightBarStyle() {
 
             @Override
-            protected TextView createTextView(Context context) {
+            public TextView newTitleView(Context context) {
+                return new AppCompatTextView(context);
+            }
+
+            @Override
+            public TextView newLeftView(Context context) {
+                return new AppCompatTextView(context);
+            }
+
+            @Override
+            public TextView newRightView(Context context) {
                 return new AppCompatTextView(context);
             }
         });

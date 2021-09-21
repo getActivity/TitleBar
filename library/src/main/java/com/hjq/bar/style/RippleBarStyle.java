@@ -16,7 +16,7 @@ public class RippleBarStyle extends TransparentBarStyle {
 
     @Override
     public Drawable getLeftTitleBackground(Context context) {
-        Drawable drawable = getRippleDrawable(context);
+        Drawable drawable = createRippleDrawable(context);
         if (drawable != null) {
             return drawable;
         }
@@ -25,7 +25,7 @@ public class RippleBarStyle extends TransparentBarStyle {
 
     @Override
     public Drawable getRightTitleBackground(Context context) {
-        Drawable drawable = getRippleDrawable(context);
+        Drawable drawable = createRippleDrawable(context);
         if (drawable != null) {
             return drawable;
         }
@@ -35,9 +35,9 @@ public class RippleBarStyle extends TransparentBarStyle {
     /**
      * 获取水波纹的点击效果
      */
-    public Drawable getRippleDrawable(Context context) {
+    public Drawable createRippleDrawable(Context context) {
         TypedValue typedValue = new TypedValue();
-        if (context.getTheme().resolveAttribute(android.R.attr.selectableItemBackground, typedValue, true)) {
+        if (context.getTheme().resolveAttribute(android.R.attr.selectableItemBackgroundBorderless, typedValue, true)) {
             return TitleBarSupport.getDrawable(context, typedValue.resourceId);
         }
         return null;

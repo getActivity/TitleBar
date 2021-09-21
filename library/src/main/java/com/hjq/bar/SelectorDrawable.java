@@ -9,6 +9,7 @@ import android.graphics.drawable.StateListDrawable;
  *    time   : 2019/03/10
  *    desc   : 状态选择器构建器
  */
+@SuppressWarnings("unused")
 public final class SelectorDrawable extends StateListDrawable {
 
     public final static class Builder {

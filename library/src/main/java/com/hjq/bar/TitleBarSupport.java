@@ -1,7 +1,9 @@
 package com.hjq.bar;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.PorterDuff;
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.text.TextUtils;
@@ -16,6 +18,9 @@ import android.widget.TextView;
  *    desc   : 标题栏支持类
  */
 public final class TitleBarSupport {
+
+    /** 无色值 */
+    public static final int NO_COLOR = Color.TRANSPARENT;
 
     /**
      * 获取图片资源
@@ -85,8 +90,22 @@ public final class TitleBarSupport {
         if (drawable == null) {
             return;
         }
+        if (color == NO_COLOR) {
+            return;
+        }
         drawable.mutate();
         drawable.setColorFilter(color, PorterDuff.Mode.SRC_IN);
+    }
+
+    /**
+     * 清除图片设置着色器
+     */
+    public static void clearDrawableTint(Drawable drawable) {
+        if (drawable == null) {
+            return;
+        }
+        drawable.mutate();
+        drawable.clearColorFilter();
     }
 
     /**
@@ -162,6 +181,26 @@ public final class TitleBarSupport {
                 break;
             default:
                 textView.setCompoundDrawables(null, null, null, null);
+                break;
+        }
+    }
+
+    /**
+     * 设置 TextView 字体样式
+     */
+    public static void setTextTypeface(TextView textView, int style) {
+        switch (style) {
+            case Typeface.NORMAL:
+                textView.setTypeface(Typeface.DEFAULT, style);
+                break;
+            case Typeface.BOLD:
+                textView.setTypeface(Typeface.DEFAULT_BOLD, style);
+                break;
+            case Typeface.ITALIC:
+            case Typeface.BOLD_ITALIC:
+                textView.setTypeface(Typeface.MONOSPACE, style);
+                break;
+            default:
                 break;
         }
     }

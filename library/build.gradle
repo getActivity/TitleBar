@@ -1,12 +1,12 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 26
+    compileSdkVersion 30
 
     defaultConfig {
         minSdkVersion 16
-        versionCode 90
-        versionName "9.0"
+        versionCode 92
+        versionName "9.2"
     }
 
     android.libraryVariants.all { variant ->

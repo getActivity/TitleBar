@@ -1,6 +1,7 @@
 package com.hjq.bar.style;
 
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 
@@ -45,18 +46,18 @@ public class TransparentBarStyle extends CommonBarStyle {
     }
 
     @Override
-    public int getLeftTitleColor(Context context) {
-        return 0xFFFFFFFF;
+    public ColorStateList getTitleColor(Context context) {
+        return ColorStateList.valueOf(0xFFFFFFFF);
     }
 
     @Override
-    public int getTitleTitleColor(Context context) {
-        return 0xFFFFFFFF;
+    public ColorStateList getLeftTitleColor(Context context) {
+        return ColorStateList.valueOf(0xFFFFFFFF);
     }
 
     @Override
-    public int getRightTitleColor(Context context) {
-        return 0xFFFFFFFF;
+    public ColorStateList getRightTitleColor(Context context) {
+        return ColorStateList.valueOf(0xFFFFFFFF);
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.hjq.bar.style;
 
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 
@@ -45,18 +46,18 @@ public class LightBarStyle extends CommonBarStyle {
     }
 
     @Override
-    public int getLeftTitleColor(Context context) {
-        return 0xFF666666;
+    public ColorStateList getTitleColor(Context context) {
+        return ColorStateList.valueOf(0xFF222222);
     }
 
     @Override
-    public int getTitleTitleColor(Context context) {
-        return 0xFF222222;
+    public ColorStateList getLeftTitleColor(Context context) {
+        return ColorStateList.valueOf(0xFF666666);
     }
 
     @Override
-    public int getRightTitleColor(Context context) {
-        return 0xFFA4A4A4;
+    public ColorStateList getRightTitleColor(Context context) {
+        return ColorStateList.valueOf(0xFFA4A4A4);
     }
 
     @Override

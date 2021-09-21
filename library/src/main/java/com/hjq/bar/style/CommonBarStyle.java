@@ -1,6 +1,10 @@
 package com.hjq.bar.style;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.graphics.Typeface;
 import android.text.TextUtils;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -18,19 +22,9 @@ import com.hjq.bar.ITitleBarStyle;
 public abstract class CommonBarStyle implements ITitleBarStyle {
 
     @Override
-    public TextView createLeftView(Context context) {
-        TextView leftView = createTextView(context);
-        leftView.setGravity(Gravity.CENTER_VERTICAL);
-        leftView.setFocusable(true);
-        leftView.setSingleLine();
-        leftView.setEllipsize(TextUtils.TruncateAt.END);
-        return leftView;
-    }
-
-    @Override
     public TextView createTitleView(Context context) {
-        TextView titleView = createTextView(context);
-        titleView.setGravity(Gravity.CENTER);
+        TextView titleView = newTitleView(context);
+        titleView.setGravity(Gravity.CENTER_VERTICAL);
         titleView.setFocusable(true);
         titleView.setSingleLine();
         // 给标题设置跑马灯效果（仅在标题过长的时候才会显示）
@@ -42,14 +36,36 @@ public abstract class CommonBarStyle implements ITitleBarStyle {
         return titleView;
     }
 
+    public TextView newTitleView(Context context) {
+        return new TextView(context);
+    }
+
+    @Override
+    public TextView createLeftView(Context context) {
+        TextView leftView = newLeftView(context);
+        leftView.setGravity(Gravity.CENTER_VERTICAL);
+        leftView.setFocusable(true);
+        leftView.setSingleLine();
+        leftView.setEllipsize(TextUtils.TruncateAt.END);
+        return leftView;
+    }
+
+    public TextView newLeftView(Context context) {
+        return new TextView(context);
+    }
+
     @Override
     public TextView createRightView(Context context) {
-        TextView rightView = createTextView(context);
+        TextView rightView = newRightView(context);
         rightView.setGravity(Gravity.CENTER_VERTICAL);
         rightView.setFocusable(true);
         rightView.setSingleLine();
         rightView.setEllipsize(TextUtils.TruncateAt.END);
         return rightView;
+    }
+
+    public TextView newRightView(Context context) {
+        return new TextView(context);
     }
 
     @Override
@@ -68,23 +84,64 @@ public abstract class CommonBarStyle implements ITitleBarStyle {
     }
 
     @Override
-    public int getLeftTitleSize(Context context) {
-        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 14, context.getResources().getDisplayMetrics());
+    public CharSequence getTitle(Context context) {
+        // 如果当前上下文对象是 Activity，就获取 Activity 的 label 属性作为标题栏的标题
+        if (context instanceof Activity) {
+            // 获取清单文件中的 android:label 属性值
+            CharSequence label = ((Activity) context).getTitle();
+            if (!TextUtils.isEmpty(label)) {
+                try {
+                    PackageManager packageManager = context.getPackageManager();
+                    PackageInfo packageInfo = packageManager.getPackageInfo(context.getPackageName(), 0);
+                    // 如果当前 Activity 没有设置 android:label 属性，则默认会返回 App 名称，则需要过滤掉
+                    if (!label.toString().equals(packageInfo.applicationInfo.loadLabel(packageManager).toString())) {
+                        // 设置标题
+                        return label;
+                    }
+                } catch (PackageManager.NameNotFoundException ignored) {}
+            }
+        }
+        return "";
     }
 
     @Override
-    public int getTitleTitleSize(Context context) {
-        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 16, context.getResources().getDisplayMetrics());
+    public CharSequence getLeftTitle(Context context) {
+        return "";
     }
 
     @Override
-    public int getRightTitleSize(Context context) {
-        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 14, context.getResources().getDisplayMetrics());
+    public CharSequence getRightTitle(Context context) {
+        return "";
     }
 
     @Override
-    public int getLeftIconGravity(Context context) {
-        return Gravity.START;
+    public float getTitleSize(Context context) {
+        return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 16, context.getResources().getDisplayMetrics());
+    }
+
+    @Override
+    public float getLeftTitleSize(Context context) {
+        return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 14, context.getResources().getDisplayMetrics());
+    }
+
+    @Override
+    public float getRightTitleSize(Context context) {
+        return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 14, context.getResources().getDisplayMetrics());
+    }
+
+    @Override
+    public int getTitleStyle(Context context) {
+        return Typeface.NORMAL;
+    }
+
+    @Override
+    public int getLeftTitleStyle(Context context) {
+        return Typeface.NORMAL;
+    }
+
+    @Override
+    public int getRightTitleStyle(Context context) {
+        return Typeface.NORMAL;
     }
 
     @Override
@@ -93,17 +150,22 @@ public abstract class CommonBarStyle implements ITitleBarStyle {
     }
 
     @Override
+    public int getLeftIconGravity(Context context) {
+        return Gravity.START;
+    }
+
+    @Override
     public int getRightIconGravity(Context context) {
         return Gravity.END;
     }
 
     @Override
-    public int getLeftIconPadding(Context context) {
+    public int getTitleIconPadding(Context context) {
         return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 2, context.getResources().getDisplayMetrics());
     }
 
     @Override
-    public int getTitleIconPadding(Context context) {
+    public int getLeftIconPadding(Context context) {
         return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 2, context.getResources().getDisplayMetrics());
     }
 
@@ -113,12 +175,12 @@ public abstract class CommonBarStyle implements ITitleBarStyle {
     }
 
     @Override
-    public int getLeftIconWidth(Context context) {
+    public int getTitleIconWidth(Context context) {
         return 0;
     }
 
     @Override
-    public int getTitleIconWidth(Context context) {
+    public int getLeftIconWidth(Context context) {
         return 0;
     }
 
@@ -128,12 +190,12 @@ public abstract class CommonBarStyle implements ITitleBarStyle {
     }
 
     @Override
-    public int getLeftIconHeight(Context context) {
+    public int getTitleIconHeight(Context context) {
         return 0;
     }
 
     @Override
-    public int getTitleIconHeight(Context context) {
+    public int getLeftIconHeight(Context context) {
         return 0;
     }
 
@@ -143,14 +205,12 @@ public abstract class CommonBarStyle implements ITitleBarStyle {
     }
 
     @Override
-    public int getLineSize(Context context) {
-        return 1;
+    public boolean isLineVisible(Context context) {
+        return true;
     }
 
-    /**
-     * 创建 TextView
-     */
-    protected TextView createTextView(Context context) {
-        return new TextView(context);
+    @Override
+    public int getLineSize(Context context) {
+        return 1;
     }
 }

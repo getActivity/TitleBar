@@ -8,7 +8,7 @@
 
 * 想了解实现原理的可以参考文章：[纯手工打造一个通用的标题栏 TitleBar](https://www.jianshu.com/p/ccf6506335e7)
 
-![](TitleBar.jpg)
+![](TitleBar.gif)
 
 ### 9.0 版本 XML 属性已经改头换面了，请尽快进行[适配](Adaptive.md)
 
@@ -34,7 +34,7 @@ allprojects {
 ```groovy
 dependencies {
     // 标题栏框架：https://github.com/getActivity/TitleBar
-    implementation 'com.github.getActivity:TitleBar:9.0'
+    implementation 'com.github.getActivity:TitleBar:9.2'
 }
 ```
 
@@ -54,14 +54,14 @@ dependencies {
         <enum name="ripple" value="0x40" />
     </attr>
 
-    <!-- 控件水平内间距 -->
+    <!-- 子控件水平内间距 -->
     <attr name="childPaddingHorizontal" format="dimension" />
-    <!-- 控件垂直内间距（可用于调整标题栏自适应的高度） -->
+    <!-- 子控件垂直内间距（可用于调整标题栏自适应的高度） -->
     <attr name="childPaddingVertical" format="dimension" />
 
-    <!-- 中间标题 -->
+    <!-- 标题 -->
     <attr name="title" format="string" />
-    <attr name="titleColor" format="color" />
+    <attr name="titleColor" format="reference|color" />
     <attr name="titleSize" format="dimension" />
     <attr name="titleGravity">
         <flag name="left" value="0x03" />
@@ -89,9 +89,9 @@ dependencies {
         <flag name="end" value="0x00800005" />
     </attr>
 
-    <!-- 左边标题 -->
+    <!-- 左标题 -->
     <attr name="leftTitle" format="string"/>
-    <attr name="leftTitleColor" format="color" />
+    <attr name="leftTitleColor" format="reference|color" />
     <attr name="leftTitleSize" format="dimension" />
     <attr name="leftTitleStyle">
         <flag name="normal" value="0" />
@@ -113,9 +113,9 @@ dependencies {
     </attr>
     <attr name="leftBackground" format="reference|color" />
 
-    <!-- 右边标题 -->
+    <!-- 右标题 -->
     <attr name="rightTitle" format="string" />
-    <attr name="rightTitleColor" format="color" />
+    <attr name="rightTitleColor" format="reference|color" />
     <attr name="rightTitleSize" format="dimension" />
     <attr name="rightTitleStyle">
         <flag name="normal" value="0" />
@@ -149,12 +149,7 @@ dependencies {
 
 * [点我查看完整的 Demo 示例](app/src/main/res/layout/activity_main.xml)
 
-```xml
-<com.hjq.bar.TitleBar
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    app:title="默认的标题栏" />
-```
+![](Demo.jpg)
 
 #### 设置监听事件
 

@@ -1,6 +1,7 @@
 package com.hjq.bar;
 
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.widget.TextView;
@@ -14,14 +15,14 @@ import android.widget.TextView;
 public interface ITitleBarStyle {
 
     /**
+     * 创建标题 View
+     */
+    TextView createTitleView(Context context);
+
+    /**
      * 创建左标题 View
      */
     TextView createLeftView(Context context);
-
-    /**
-     * 创建中间标题 View
-     */
-    TextView createTitleView(Context context);
 
     /**
      * 获取右标题 View
@@ -39,12 +40,12 @@ public interface ITitleBarStyle {
     Drawable getTitleBarBackground(Context context);
 
     /**
-     * 获取左边标题的按钮背景
+     * 获取左标题的按钮背景
      */
     Drawable getLeftTitleBackground(Context context);
 
     /**
-     * 获取右边标题的按钮背景
+     * 获取右标题的按钮背景
      */
     Drawable getRightTitleBackground(Context context);
 
@@ -64,94 +65,129 @@ public interface ITitleBarStyle {
     int getChildVerticalPadding(Context context);
 
     /**
-     * 获取左边标题的默认字体颜色
+     * 获取标题的默认文本
      */
-    int getLeftTitleColor(Context context);
+    CharSequence getTitle(Context context);
 
     /**
-     * 获取中间标题的默认字体颜色
+     * 获取左标题的默认文本
      */
-    int getTitleTitleColor(Context context);
+    CharSequence getLeftTitle(Context context);
+
+    /**
+     * 获取右边标题的默认文本
+     */
+    CharSequence getRightTitle(Context context);
+
+    /**
+     * 获取标题的默认字体颜色
+     */
+    ColorStateList getTitleColor(Context context);
+
+    /**
+     * 获取左标题的默认字体颜色
+     */
+    ColorStateList getLeftTitleColor(Context context);
 
     /**
      * 获取右边标题的默认字体颜色
      */
-    int getRightTitleColor(Context context);
-
-    /**
-     * 获取左边标题的默认字体大小
-     */
-    int getLeftTitleSize(Context context);
+    ColorStateList getRightTitleColor(Context context);
 
     /**
      * 获取中间标题的默认字体大小
      */
-    int getTitleTitleSize(Context context);
+    float getTitleSize(Context context);
 
     /**
-     * 获取右边标题的默认字体大小
+     * 获取左标题的默认字体大小
      */
-    int getRightTitleSize(Context context);
+    float getLeftTitleSize(Context context);
 
     /**
-     * 获取左边标题的图标默认重心
+     * 获取右标题的默认字体大小
      */
-    int getLeftIconGravity(Context context);
+    float getRightTitleSize(Context context);
 
     /**
-     * 获取中间标题的图标默认重心
+     * 获取标题的默认样式
+     */
+    int getTitleStyle(Context context);
+
+    /**
+     * 获取左标题的默认样式
+     */
+    int getLeftTitleStyle(Context context);
+
+    /**
+     * 获取右标题的默认样式
+     */
+    int getRightTitleStyle(Context context);
+
+    /**
+     * 获取标题的图标默认重心
      */
     int getTitleIconGravity(Context context);
 
     /**
-     * 获取右边标题的图标默认重心
+     * 获取左标题的图标默认重心
+     */
+    int getLeftIconGravity(Context context);
+
+    /**
+     * 获取右标题的图标默认重心
      */
     int getRightIconGravity(Context context);
 
     /**
-     * 获取左边标题的图标默认间距
-     */
-    int getLeftIconPadding(Context context);
-
-    /**
-     * 获取中间标题的图标默认间距
+     * 获取标题的图标默认间距
      */
     int getTitleIconPadding(Context context);
 
     /**
-     * 获取右边标题的图标默认间距
+     * 获取左标题的图标默认间距
+     */
+    int getLeftIconPadding(Context context);
+
+    /**
+     * 获取右标题的图标默认间距
      */
     int getRightIconPadding(Context context);
 
     /**
-     * 获取左边标题的图标默认宽度
-     */
-    int getLeftIconWidth(Context context);
-
-    /**
-     * 获取中间标题的图标默认宽度
+     * 获取标题的图标默认宽度
      */
     int getTitleIconWidth(Context context);
 
     /**
-     * 获取右边标题的图标默认宽度
+     * 获取左标题的图标默认宽度
+     */
+    int getLeftIconWidth(Context context);
+
+    /**
+     * 获取右标题的图标默认宽度
      */
     int getRightIconWidth(Context context);
 
     /**
-     * 获取左边标题的图标默认高度
-     */
-    int getLeftIconHeight(Context context);
-
-    /**
-     * 获取中间标题的图标默认高度
+     * 获取标题的图标默认高度
      */
     int getTitleIconHeight(Context context);
 
     /**
-     * 获取右边标题的图标默认高度
+     * 获取左标题的图标默认高度
+     */
+    int getLeftIconHeight(Context context);
+
+    /**
+     * 获取右标题的图标默认高度
      */
     int getRightIconHeight(Context context);
+
+    /**
+     * 分割线是否显示
+     */
+    boolean isLineVisible(Context context);
 
     /**
      * 获取分割线默认大小
