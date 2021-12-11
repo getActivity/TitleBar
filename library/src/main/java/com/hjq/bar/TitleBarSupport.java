@@ -186,22 +186,18 @@ public final class TitleBarSupport {
     }
 
     /**
-     * 设置 TextView 字体样式
+     * 根据文字样式返回不同的字体样式
      */
-    public static void setTextTypeface(TextView textView, int style) {
+    public static Typeface getTextTypeface(int style) {
         switch (style) {
-            case Typeface.NORMAL:
-                textView.setTypeface(Typeface.DEFAULT, style);
-                break;
             case Typeface.BOLD:
-                textView.setTypeface(Typeface.DEFAULT_BOLD, style);
-                break;
+                return Typeface.DEFAULT_BOLD;
             case Typeface.ITALIC:
             case Typeface.BOLD_ITALIC:
-                textView.setTypeface(Typeface.MONOSPACE, style);
-                break;
+                return Typeface.MONOSPACE;
+            case Typeface.NORMAL:
             default:
-                break;
+                return Typeface.DEFAULT;
         }
     }
 }

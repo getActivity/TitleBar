@@ -17,28 +17,26 @@ import com.hjq.toast.ToastUtils;
  */
 public final class MainActivity extends AppCompatActivity {
 
-    private TitleBar mTitleBar;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mTitleBar = findViewById(R.id.tb_main_bar);
-        mTitleBar.setOnTitleBarListener(new OnTitleBarListener() {
+        TitleBar titleBar = findViewById(R.id.tb_main_bar);
+        titleBar.setOnTitleBarListener(new OnTitleBarListener() {
 
             @Override
-            public void onLeftClick(View view) {
+            public void onLeftClick(TitleBar titleBar) {
                 ToastUtils.show("左项 View 被点击");
             }
 
             @Override
-            public void onTitleClick(View view) {
+            public void onTitleClick(TitleBar titleBar) {
                 ToastUtils.show("中间 View 被点击");
             }
 
             @Override
-            public void onRightClick(View view) {
+            public void onRightClick(TitleBar titleBar) {
                 ToastUtils.show("右项 View 被点击");
             }
         });

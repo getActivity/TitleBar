@@ -191,15 +191,20 @@ public class TitleBar extends FrameLayout
                 mCurrentStyle.getRightTitleSize(context));
 
         // 文字样式设置
-        setTitleStyle(array.hasValue(R.styleable.TitleBar_titleStyle) ?
+        int titleStyle = array.hasValue(R.styleable.TitleBar_titleStyle) ?
                 array.getInt(R.styleable.TitleBar_titleStyle, Typeface.NORMAL) :
-                mCurrentStyle.getTitleStyle(context));
-        setLeftTitleStyle(array.hasValue(R.styleable.TitleBar_leftTitleStyle) ?
+                mCurrentStyle.getTitleStyle(context);
+        setTitleStyle(mCurrentStyle.getTitleTypeface(context, titleStyle), titleStyle);
+
+        int leftTitleStyle = array.hasValue(R.styleable.TitleBar_leftTitleStyle) ?
                 array.getInt(R.styleable.TitleBar_leftTitleStyle, Typeface.NORMAL) :
-                mCurrentStyle.getLeftTitleStyle(context));
-        setRightTitleStyle(array.hasValue(R.styleable.TitleBar_rightTitleStyle) ?
+                mCurrentStyle.getLeftTitleStyle(context);
+        setLeftTitleStyle(mCurrentStyle.getLeftTitleTypeface(context, leftTitleStyle), leftTitleStyle);
+
+        int rightTitleStyle = array.hasValue(R.styleable.TitleBar_rightTitleStyle) ?
                 array.getInt(R.styleable.TitleBar_rightTitleStyle, Typeface.NORMAL) :
-                mCurrentStyle.getRightTitleStyle(context));
+                mCurrentStyle.getRightTitleStyle(context);
+        setRightTitleStyle(mCurrentStyle.getRightTitleTypeface(context, rightTitleStyle), rightTitleStyle);
 
         // 标题重心设置
         if (array.hasValue(R.styleable.TitleBar_titleGravity)) {
@@ -343,11 +348,11 @@ public class TitleBar extends FrameLayout
         }
 
         if (view == mLeftView) {
-            mListener.onLeftClick(view);
+            mListener.onLeftClick(this);
         } else if (view == mRightView) {
-            mListener.onRightClick(view);
+            mListener.onRightClick(this);
         } else if (view == mTitleView) {
-            mListener.onTitleClick(view);
+            mListener.onTitleClick(this);
         }
     }
 
@@ -434,42 +439,48 @@ public class TitleBar extends FrameLayout
         return mRightView.getText();
     }
 
-    /**
-     * 设置标题的文字样式
-     */
     public TitleBar setTitleStyle(int style) {
-        TitleBarSupport.setTextTypeface(mTitleView, style);
-        return this;
+        return setTitleStyle(TitleBarSupport.getTextTypeface(style), style);
     }
 
+    /**
+     * 设置标题样式
+     *
+     * @param typeface              字体样式
+     * @param style                 文字样式
+     */
     public TitleBar setTitleStyle(Typeface typeface, int style) {
         mTitleView.setTypeface(typeface, style);
         return this;
     }
 
-    /**
-     * 设置左标题的文字样式
-     */
     public TitleBar setLeftTitleStyle(int style) {
-        TitleBarSupport.setTextTypeface(mLeftView, style);
-        return this;
-    }
-
-    public TitleBar setLeftTitleStyle(Typeface typeface, int style) {
-        mLeftView.setTypeface(typeface);
-        return this;
+        return setLeftTitleStyle(TitleBarSupport.getTextTypeface(style), style);
     }
 
     /**
-     * 设置右边标题的文字样式
+     * 设置左标题样式
+     *
+     * @param typeface              字体样式
+     * @param style                 文字样式
      */
-    public TitleBar setRightTitleStyle(int style) {
-        TitleBarSupport.setTextTypeface(mRightView, style);
+    public TitleBar setLeftTitleStyle(Typeface typeface, int style) {
+        mLeftView.setTypeface(typeface, style);
         return this;
     }
 
+    public TitleBar setRightTitleStyle(int style) {
+        return setRightTitleStyle(TitleBarSupport.getTextTypeface(style), style);
+    }
+
+    /**
+     * 设置右边标题样式
+     *
+     * @param typeface              字体样式
+     * @param style                 文字样式
+     */
     public TitleBar setRightTitleStyle(Typeface typeface, int style) {
-        mRightView.setTypeface(typeface);
+        mRightView.setTypeface(typeface, style);
         return this;
     }
 

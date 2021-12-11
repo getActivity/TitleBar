@@ -12,22 +12,16 @@ public interface OnTitleBarListener {
 
     /**
      * 左项被点击
-     *
-     * @param view     被点击的左项View
      */
-    void onLeftClick(View view);
+    default void onLeftClick(TitleBar titleBar) {}
 
     /**
      * 标题被点击
-     *
-     * @param view     被点击的标题View
      */
-    void onTitleClick(View view);
+    default void onTitleClick(TitleBar titleBar) {}
 
     /**
      * 右项被点击
-     *
-     * @param view     被点击的右项View
      */
-    void onRightClick(View view);
+    default void onRightClick(TitleBar titleBar) {}
 }

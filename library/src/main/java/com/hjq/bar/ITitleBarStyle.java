@@ -2,6 +2,7 @@ package com.hjq.bar;
 
 import android.content.Context;
 import android.content.res.ColorStateList;
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.widget.TextView;
@@ -108,6 +109,39 @@ public interface ITitleBarStyle {
      * 获取右标题的默认字体大小
      */
     float getRightTitleSize(Context context);
+
+    /**
+     * 获取标题的字体样式
+     *
+     * @param style         文字样式
+     *                      常规：{@link Typeface#NORMAL}
+     *                      粗体：{@link Typeface#BOLD}
+     *                      斜体：{@link Typeface#ITALIC}
+     *                      粗斜体：{@link Typeface#BOLD_ITALIC}
+     */
+    Typeface getTitleTypeface(Context context, int style);
+
+    /**
+     * 获取左标题的的字体样式
+     *
+     * @param style         文字样式
+     *                      常规：{@link Typeface#NORMAL}
+     *                      粗体：{@link Typeface#BOLD}
+     *                      斜体：{@link Typeface#ITALIC}
+     *                      粗斜体：{@link Typeface#BOLD_ITALIC}
+     */
+    Typeface getLeftTitleTypeface(Context context, int style);
+
+    /**
+     * 获取右标题的的字体样式
+     *
+     * @param style         文字样式
+     *                      常规：{@link Typeface#NORMAL}
+     *                      粗体：{@link Typeface#BOLD}
+     *                      斜体：{@link Typeface#ITALIC}
+     *                      粗斜体：{@link Typeface#BOLD_ITALIC}
+     */
+    Typeface getRightTitleTypeface(Context context, int style);
 
     /**
      * 获取标题的默认样式

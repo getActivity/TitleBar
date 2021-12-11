@@ -1,12 +1,18 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 30
+    compileSdkVersion 31
 
     defaultConfig {
         minSdkVersion 16
-        versionCode 92
-        versionName "9.2"
+        versionCode 93
+        versionName "9.3"
+    }
+
+    // 支持 JDK 1.8
+    compileOptions {
+        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_1_8
     }
 
     android.libraryVariants.all { variant ->

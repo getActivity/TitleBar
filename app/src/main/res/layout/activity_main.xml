@@ -71,179 +71,248 @@
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <LinearLayout
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:orientation="vertical">
+            android:layout_height="match_parent" >
 
-            <com.hjq.bar.TitleBar
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="300dp"
-                app:title="默认的标题栏" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:orientation="vertical"
+                android:paddingTop="20dp"
+                android:paddingBottom="20dp">
 
-            <com.hjq.bar.TitleBar
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                app:leftIcon="@null"
-                app:title="不带返回按钮并标题斜体"
-                app:titleStyle="italic" />
-
-            <com.hjq.bar.TitleBar
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                app:childPaddingHorizontal="25dp"
-                app:childPaddingVertical="15dp"
-                app:leftIcon="@null"
-                app:title="标题向左对齐并且加粗"
-                app:titleGravity="start"
-                app:titleStyle="bold" />
-
-            <com.hjq.bar.TitleBar
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                app:lineVisible="false"
-                app:title="不带分割线的标题栏" />
-
-            <com.hjq.bar.TitleBar
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                app:lineVisible="false"
-                app:title="标题文字过多会自动开启自带跑马灯效果，就问你溜不溜" />
-
-            <com.hjq.bar.TitleBar
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                app:childPaddingVertical="20dp"
-                app:title="通过垂直内间距来调整标题栏的高度" />
-
-            <com.hjq.bar.TitleBar
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                app:leftIcon="@mipmap/ic_launcher"
-                app:leftIconHeight="20dp"
-                app:leftIconTint="#ff00ff"
-                app:leftIconWidth="20dp"
-                app:leftTitle="左边"
-                app:rightIcon="@mipmap/ic_launcher"
-                app:rightIconHeight="20dp"
-                app:rightIconTint="#00ff00"
-                app:rightIconWidth="20dp"
-                app:rightTitle="右边"
-                app:title="设置图标重色器"
-                app:titleIcon="@mipmap/ic_launcher"
-                app:titleIconHeight="20dp"
-                app:titleIconTint="#0000ff"
-                app:titleIconWidth="20dp" />
-
-            <com.hjq.bar.TitleBar
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                app:childPaddingVertical="8dp"
-                app:leftIcon="@drawable/qr_code_ic"
-                app:leftIconGravity="top"
-                app:leftIconHeight="20dp"
-                app:leftIconPadding="5dp"
-                app:leftIconWidth="20dp"
-                app:leftTitle="扫一扫"
-                app:leftTitleColor="#666666"
-                app:leftTitleSize="12sp"
-                app:rightIcon="@drawable/message_ic"
-                app:rightIconGravity="top"
-                app:rightIconHeight="20dp"
-                app:rightIconWidth="20dp"
-                app:rightTitle="消息"
-                app:rightTitleColor="#666666"
-                app:rightTitleSize="12sp"
-                app:title="控制图标的位置和大小"
-                app:titleIcon="@mipmap/ic_launcher"
-                app:titleIconGravity="bottom"
-                app:titleIconHeight="10dp"
-                app:titleIconWidth="10dp" />
-
-            <com.hjq.bar.TitleBar
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                app:leftIcon="@null"
-                app:leftTitle="左边"
-                app:leftTitleColor="#FF3300"
-                app:leftTitleSize="18sp"
-                app:rightTitle="右边"
-                app:rightTitleColor="#0033FF"
-                app:rightTitleSize="18sp"
-                app:title="自定义文字大小和颜色"
-                app:titleColor="#33FF00"
-                app:titleSize="20sp" />
-
-            <com.hjq.bar.TitleBar
-                android:id="@+id/tb_main_bar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                app:leftIcon="@mipmap/ic_launcher"
-                app:leftTitle="左边"
-                app:rightIcon="@mipmap/ic_launcher"
-                app:rightTitle="右边"
-                app:title="监听标题栏点击事件" />
-
-            <com.hjq.bar.TitleBar
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                app:title="自定义标题栏" >
-
-                <LinearLayout
+                <com.hjq.bar.TitleBar
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="end|center_vertical"
-                    android:orientation="horizontal" >
+                    app:title="默认的标题栏" />
 
-                    <ImageView
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:src="@mipmap/ic_launcher" />
+                <com.hjq.bar.TitleBar
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    app:leftIcon="@null"
+                    app:title="不带返回按钮并标题斜体"
+                    app:titleStyle="italic" />
 
-                    <ImageView
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:layout_marginStart="5dp"
-                        android:layout_marginEnd="10dp"
-                        android:src="@mipmap/ic_launcher" />
+                <com.hjq.bar.TitleBar
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    app:childPaddingHorizontal="25dp"
+                    app:childPaddingVertical="15dp"
+                    app:leftIcon="@null"
+                    app:title="标题向左对齐并且加粗"
+                    app:titleGravity="start"
+                    app:titleStyle="bold" />
 
-                </LinearLayout>
+                <com.hjq.bar.TitleBar
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    app:lineVisible="false"
+                    app:title="不带分割线的标题栏" />
 
-            </com.hjq.bar.TitleBar>
+                <com.hjq.bar.TitleBar
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    app:lineVisible="false"
+                    app:title="标题文字过多会自动开启自带跑马灯效果，就问你溜不溜" />
 
-            <com.hjq.bar.TitleBar
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                app:barStyle="night"
-                app:leftTitle="返回"
-                app:rightTitle="设置"
-                app:title="夜间模式的标题栏" />
+                <com.hjq.bar.TitleBar
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    app:childPaddingVertical="20dp"
+                    app:title="通过垂直内间距来调整标题栏的高度" />
 
-            <com.hjq.bar.TitleBar
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="40dp"
-                android:background="@drawable/shape_gradient"
-                app:barStyle="transparent"
-                app:leftTitle="返回"
-                app:rightTitle="设置"
-                app:title="仿QQ渐变样式" />
+                <com.hjq.bar.TitleBar
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    app:leftIcon="@mipmap/ic_launcher"
+                    app:leftIconHeight="20dp"
+                    app:leftIconTint="#ff00ff"
+                    app:leftIconWidth="20dp"
+                    app:leftTitle="左边"
+                    app:rightIcon="@mipmap/ic_launcher"
+                    app:rightIconHeight="20dp"
+                    app:rightIconTint="#00ff00"
+                    app:rightIconWidth="20dp"
+                    app:rightTitle="右边"
+                    app:title="设置图标重色器"
+                    app:titleIcon="@mipmap/ic_launcher"
+                    app:titleIconHeight="20dp"
+                    app:titleIconTint="#0000ff"
+                    app:titleIconWidth="20dp" />
 
-        </LinearLayout>
+                <com.hjq.bar.TitleBar
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    app:childPaddingVertical="8dp"
+                    app:leftIcon="@drawable/qr_code_ic"
+                    app:leftIconGravity="top"
+                    app:leftIconHeight="20dp"
+                    app:leftIconPadding="5dp"
+                    app:leftIconWidth="20dp"
+                    app:leftTitle="扫一扫"
+                    app:leftTitleColor="#666666"
+                    app:leftTitleSize="12sp"
+                    app:rightIcon="@drawable/message_ic"
+                    app:rightIconGravity="top"
+                    app:rightIconHeight="20dp"
+                    app:rightIconWidth="20dp"
+                    app:rightTitle="消息"
+                    app:rightTitleColor="#666666"
+                    app:rightTitleSize="12sp"
+                    app:title="控制图标的位置和大小"
+                    app:titleIcon="@mipmap/ic_launcher"
+                    app:titleIconGravity="bottom"
+                    app:titleIconHeight="10dp"
+                    app:titleIconWidth="10dp" />
+
+                <com.hjq.bar.TitleBar
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    app:leftIcon="@null"
+                    app:leftTitle="左边"
+                    app:leftTitleColor="#FF3300"
+                    app:leftTitleSize="18sp"
+                    app:rightTitle="右边"
+                    app:rightTitleColor="#0033FF"
+                    app:rightTitleSize="18sp"
+                    app:title="自定义文字大小和颜色"
+                    app:titleColor="#33FF00"
+                    app:titleSize="20sp" />
+
+                <com.hjq.bar.TitleBar
+                    android:id="@+id/tb_main_bar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    app:leftIcon="@mipmap/ic_launcher"
+                    app:leftTitle="左边"
+                    app:rightIcon="@mipmap/ic_launcher"
+                    app:rightTitle="右边"
+                    app:title="监听标题栏点击事件" />
+
+                <com.hjq.bar.TitleBar
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    app:barStyle="night"
+                    app:leftTitle="返回"
+                    app:rightTitle="设置"
+                    app:title="夜间模式的标题栏" />
+
+                <com.hjq.bar.TitleBar
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/shape_gradient"
+                    app:barStyle="transparent"
+                    app:leftTitle="返回"
+                    app:rightTitle="设置"
+                    app:title="仿QQ渐变样式" />
+
+                <com.hjq.bar.TitleBar
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    app:leftIcon="@null"
+                    app:title="左边两个按钮效果" >
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:orientation="horizontal" >
+
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_marginStart="10dp"
+                            android:src="@mipmap/ic_launcher" />
+
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_marginStart="5dp"
+                            android:src="@mipmap/ic_launcher" />
+
+                    </LinearLayout>
+
+                </com.hjq.bar.TitleBar>
+
+                <com.hjq.bar.TitleBar
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    app:leftIcon="@null"
+                    app:title="右边两个按钮效果" >
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end|center_vertical"
+                        android:orientation="horizontal" >
+
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:src="@mipmap/ic_launcher" />
+
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_marginStart="5dp"
+                            android:layout_marginEnd="10dp"
+                            android:src="@mipmap/ic_launcher" />
+
+                    </LinearLayout>
+
+                </com.hjq.bar.TitleBar>
+
+                <com.hjq.bar.TitleBar
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:gravity="center_horizontal"
+                        android:orientation="vertical"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp" >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="我是主标题"
+                            android:textColor="#333333"
+                            android:textSize="15sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="3dp"
+                            android:text="我是副标题"
+                            android:textColor="#666666"
+                            android:textSize="14sp" />
+
+                    </LinearLayout>
+
+                </com.hjq.bar.TitleBar>
+
+            </LinearLayout>
+
+        </FrameLayout>
 
     </androidx.core.widget.NestedScrollView>
 

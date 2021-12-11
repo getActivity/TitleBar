@@ -1,14 +1,14 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 30
+    compileSdkVersion 31
 
     defaultConfig {
         applicationId "com.hjq.bar.demo"
         minSdkVersion 17
-        targetSdkVersion 30
-        versionCode 92
-        versionName "9.2"
+        targetSdkVersion 31
+        versionCode 93
+        versionName "9.3"
     }
 
     // 支持 JDK 1.8
@@ -59,7 +59,7 @@ dependencies {
     implementation 'com.google.android.material:material:1.4.0'
 
     // 吐司工具类：https://github.com/getActivity/ToastUtils
-    implementation 'com.github.getActivity:ToastUtils:9.5'
+    implementation 'com.github.getActivity:ToastUtils:10.0'
 
     // 内存泄漏捕捉：https://github.com/square/leakcanary
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.7'

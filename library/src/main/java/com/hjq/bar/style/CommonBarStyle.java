@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.hjq.bar.ITitleBarStyle;
+import com.hjq.bar.TitleBarSupport;
 
 /**
  *    author : Android 轮子哥
@@ -127,6 +128,21 @@ public abstract class CommonBarStyle implements ITitleBarStyle {
     @Override
     public float getRightTitleSize(Context context) {
         return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 14, context.getResources().getDisplayMetrics());
+    }
+
+    @Override
+    public Typeface getTitleTypeface(Context context, int style) {
+        return TitleBarSupport.getTextTypeface(style);
+    }
+
+    @Override
+    public Typeface getLeftTitleTypeface(Context context, int style) {
+        return TitleBarSupport.getTextTypeface(style);
+    }
+
+    @Override
+    public Typeface getRightTitleTypeface(Context context, int style) {
+        return TitleBarSupport.getTextTypeface(style);
     }
 
     @Override
