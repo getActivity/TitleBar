@@ -4,7 +4,7 @@
 
 * 博客地址：[Android标题栏（TitleBar）绝佳解决方案](https://www.jianshu.com/p/617be02dc265)
 
-* 可以扫码下载 Demo 进行演示或者测试，如果扫码下载不了的，[点击此处可直接下载](https://github.com/getActivity/TitleBar/releases/download/9.3/TitleBar.apk)
+* 可以扫码下载 Demo 进行演示或者测试，如果扫码下载不了的，[点击此处可直接下载](https://github.com/getActivity/TitleBar/releases/download/9.5/TitleBar.apk)
 
 ![](picture/demo_code.png)
 
@@ -51,14 +51,14 @@ android {
 
 dependencies {
     // 标题栏框架：https://github.com/getActivity/TitleBar
-    implementation 'com.github.getActivity:TitleBar:9.3'
+    implementation 'com.github.getActivity:TitleBar:9.5'
 }
 ```
 
 #### 布局属性大全
 
 ```xml
-<declare-styleable name="TitleBar">
+    <declare-styleable name="TitleBar">
 
     <!-- 标题栏背景 -->
     <attr name="android:background" />
@@ -71,10 +71,8 @@ dependencies {
         <enum name="ripple" value="0x40" />
     </attr>
 
-    <!-- 子控件水平内间距 -->
-    <attr name="childPaddingHorizontal" format="dimension" />
     <!-- 子控件垂直内间距（可用于调整标题栏自适应的高度） -->
-    <attr name="childPaddingVertical" format="dimension" />
+    <attr name="childVerticalPadding" format="dimension" />
 
     <!-- 标题 -->
     <attr name="title" format="string" />
@@ -105,6 +103,7 @@ dependencies {
         <flag name="start" value="0x00800003" />
         <flag name="end" value="0x00800005" />
     </attr>
+    <attr name="titleHorizontalPadding" format="dimension" />
 
     <!-- 左标题 -->
     <attr name="leftTitle" format="string"/>
@@ -129,6 +128,8 @@ dependencies {
         <flag name="end" value="0x00800005" />
     </attr>
     <attr name="leftBackground" format="reference|color" />
+    <attr name="leftForeground" format="reference|color" />
+    <attr name="leftHorizontalPadding" format="dimension" />
 
     <!-- 右标题 -->
     <attr name="rightTitle" format="string" />
@@ -153,6 +154,8 @@ dependencies {
         <flag name="end" value="0x00800005" />
     </attr>
     <attr name="rightBackground" format="reference|color" />
+    <attr name="rightForeground" format="reference|color" />
+    <attr name="rightHorizontalPadding" format="dimension" />
 
     <!-- 分割线 -->
     <attr name="lineVisible" format="boolean" />
@@ -247,6 +250,8 @@ public class XxxApplication extends Application {
 
 * Android 代码规范：[AndroidCodeStandard](https://github.com/getActivity/AndroidCodeStandard) ![](https://img.shields.io/github/stars/getActivity/AndroidCodeStandard.svg) ![](https://img.shields.io/github/forks/getActivity/AndroidCodeStandard.svg)
 
+* Android 开源排行榜：[AndroidGithubBoss](https://github.com/getActivity/AndroidGithubBoss) ![](https://img.shields.io/github/stars/getActivity/AndroidGithubBoss.svg) ![](https://img.shields.io/github/forks/getActivity/AndroidGithubBoss.svg)
+
 * Studio 精品插件：[StudioPlugins](https://github.com/getActivity/StudioPlugins) ![](https://img.shields.io/github/stars/getActivity/StudioPlugins.svg) ![](https://img.shields.io/github/forks/getActivity/StudioPlugins.svg)
 
 * 表情包大集合：[EmojiPackage](https://github.com/getActivity/EmojiPackage) ![](https://img.shields.io/github/stars/getActivity/EmojiPackage.svg) ![](https://img.shields.io/github/forks/getActivity/EmojiPackage.svg)
@@ -257,7 +262,7 @@ public class XxxApplication extends Application {
 
 ![](https://raw.githubusercontent.com/getActivity/Donate/master/picture/official_ccount.png)
 
-#### Android 技术分享 QQ 群：78797078
+#### Android 技术 Q 群：10047167
 
 #### 如果您觉得我的开源库帮你节省了大量的开发时间，请扫描下方的二维码随意打赏，要是能打赏个 10.24 :monkey_face:就太:thumbsup:了。您的支持将鼓励我继续创作:octocat:
 

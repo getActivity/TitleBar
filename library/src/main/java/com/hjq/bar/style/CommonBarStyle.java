@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.text.TextUtils;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -75,8 +76,28 @@ public abstract class CommonBarStyle implements ITitleBarStyle {
     }
 
     @Override
-    public int getChildHorizontalPadding(Context context) {
-        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 12, context.getResources().getDisplayMetrics());
+    public Drawable getLeftTitleForeground(Context context) {
+        return null;
+    }
+
+    @Override
+    public Drawable getRightTitleForeground(Context context) {
+        return null;
+    }
+
+    @Override
+    public int getLeftHorizontalPadding(Context context) {
+        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 10, context.getResources().getDisplayMetrics());
+    }
+
+    @Override
+    public int getTitleHorizontalPadding(Context context) {
+        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 0, context.getResources().getDisplayMetrics());
+    }
+
+    @Override
+    public int getRightHorizontalPadding(Context context) {
+        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 10, context.getResources().getDisplayMetrics());
     }
 
     @Override

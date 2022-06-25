@@ -51,14 +51,34 @@ public interface ITitleBarStyle {
     Drawable getRightTitleBackground(Context context);
 
     /**
+     * 获取左标题的按钮前景
+     */
+    Drawable getLeftTitleForeground(Context context);
+
+    /**
+     * 获取右标题的按钮前景
+     */
+    Drawable getRightTitleForeground(Context context);
+
+    /**
      * 获取默认按钮图片
      */
     Drawable getBackButtonDrawable(Context context);
 
     /**
-     * 获取子控件的水平内间距
+     * 获取左标题子控件的水平内间距
      */
-    int getChildHorizontalPadding(Context context);
+    int getLeftHorizontalPadding(Context context);
+
+    /**
+     * 获取标题子控件的水平内间距
+     */
+    int getTitleHorizontalPadding(Context context);
+
+    /**
+     * 获取右标题子控件的水平内间距
+     */
+    int getRightHorizontalPadding(Context context);
 
     /**
      * 获取子控件的垂直内间距

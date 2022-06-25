@@ -46,8 +46,11 @@ public class TitleBar extends FrameLayout
     private final TextView mLeftView, mTitleView, mRightView;
     private final View mLineView;
 
-    /** 控件内间距 */
-    private int mHorizontalPadding, mVerticalPadding;
+    /** 控件水平间距 */
+    private int mLeftHorizontalPadding, mTitleHorizontalPadding, mRightHorizontalPadding;
+
+    /** 控件垂直间距 */
+    private int mVerticalPadding;
 
     /** 图标显示大小 */
     private int mLeftIconWidth, mLeftIconHeight;
@@ -101,10 +104,14 @@ public class TitleBar extends FrameLayout
         mRightView = mCurrentStyle.createRightView(context);
         mLineView = mCurrentStyle.createLineView(context);
 
-        mTitleView.setLayoutParams(new FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT, Gravity.CENTER_HORIZONTAL));
-        mLeftView.setLayoutParams(new FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT, Gravity.START));
-        mRightView.setLayoutParams(new FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT, Gravity.END));
-        mLineView.setLayoutParams(new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, mCurrentStyle.getLineSize(context), Gravity.BOTTOM));
+        mTitleView.setLayoutParams(new FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
+                ViewGroup.LayoutParams.MATCH_PARENT, Gravity.CENTER_HORIZONTAL));
+        mLeftView.setLayoutParams(new FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
+                ViewGroup.LayoutParams.MATCH_PARENT, Gravity.START));
+        mRightView.setLayoutParams(new FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
+                ViewGroup.LayoutParams.MATCH_PARENT, Gravity.END));
+        mLineView.setLayoutParams(new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                mCurrentStyle.getLineSize(context), Gravity.BOTTOM));
 
         // 设置图标显示的重心
         setTitleIconGravity(array.getInt(R.styleable.TitleBar_titleIconGravity, mCurrentStyle.getTitleIconGravity(context)));
@@ -211,7 +218,7 @@ public class TitleBar extends FrameLayout
             setTitleGravity(array.getInt(R.styleable.TitleBar_titleGravity, Gravity.NO_GRAVITY));
         }
 
-        // 背景设置
+        // 设置背景
         if (array.hasValue(R.styleable.TitleBar_android_background)) {
             if (array.getResourceId(R.styleable.TitleBar_android_background, 0) == R.drawable.bar_drawable_placeholder) {
                 TitleBarSupport.setBackground(this, mCurrentStyle.getTitleBarBackground(context));
@@ -228,6 +235,17 @@ public class TitleBar extends FrameLayout
                     array.getDrawable(R.styleable.TitleBar_rightBackground) : mCurrentStyle.getRightTitleBackground(context));
         }
 
+        // 设置前景
+        if (array.hasValue(R.styleable.TitleBar_leftForeground)) {
+            setLeftForeground(array.getResourceId(R.styleable.TitleBar_leftForeground, 0) != R.drawable.bar_drawable_placeholder ?
+                    array.getDrawable(R.styleable.TitleBar_leftForeground) : mCurrentStyle.getLeftTitleForeground(context));
+        }
+
+        if (array.hasValue(R.styleable.TitleBar_rightForeground)) {
+            setRightForeground(array.getResourceId(R.styleable.TitleBar_rightForeground, 0) != R.drawable.bar_drawable_placeholder ?
+                    array.getDrawable(R.styleable.TitleBar_rightForeground) : mCurrentStyle.getRightTitleForeground(context));
+        }
+
         // 分割线设置
         setLineVisible(array.getBoolean(R.styleable.TitleBar_lineVisible, mCurrentStyle.isLineVisible(context)));
 
@@ -241,11 +259,13 @@ public class TitleBar extends FrameLayout
         }
 
         // 设置子控件的内间距
-        mHorizontalPadding = array.getDimensionPixelSize(R.styleable.TitleBar_childPaddingHorizontal,
-                mCurrentStyle.getChildHorizontalPadding(context));
-        mVerticalPadding = array.getDimensionPixelSize(R.styleable.TitleBar_childPaddingVertical,
-                mCurrentStyle.getChildVerticalPadding(context));
-        setChildPadding(mHorizontalPadding, mVerticalPadding);
+        mLeftHorizontalPadding = array.getDimensionPixelSize(R.styleable.TitleBar_leftHorizontalPadding, mCurrentStyle.getLeftHorizontalPadding(context));
+        mTitleHorizontalPadding = array.getDimensionPixelSize(R.styleable.TitleBar_titleHorizontalPadding, mCurrentStyle.getTitleHorizontalPadding(context));
+        mRightHorizontalPadding = array.getDimensionPixelSize(R.styleable.TitleBar_rightHorizontalPadding, mCurrentStyle.getRightHorizontalPadding(context));
+        setChildHorizontalPadding(mLeftHorizontalPadding, mTitleHorizontalPadding, mRightHorizontalPadding);
+
+        mVerticalPadding = array.getDimensionPixelSize(R.styleable.TitleBar_childVerticalPadding, mCurrentStyle.getChildVerticalPadding(context));
+        setChildVerticalPadding(mVerticalPadding);
 
         // 回收 TypedArray 对象
         array.recycle();
@@ -263,7 +283,9 @@ public class TitleBar extends FrameLayout
             mTitleView.measure(0, 0);
             mLeftView.measure(0, 0);
             mRightView.measure(0, 0);
-            int horizontalMargin = Math.max(mLeftView.getMeasuredWidth(), mRightView.getMeasuredWidth()) + mHorizontalPadding;
+            int horizontalMargin = Math.max(
+                    mLeftView.getMeasuredWidth() + mLeftHorizontalPadding * 2,
+                    mRightView.getMeasuredWidth() + mRightHorizontalPadding * 2);
             MarginLayoutParams layoutParams = (MarginLayoutParams) mTitleView.getLayoutParams();
             layoutParams.setMargins(horizontalMargin, 0, horizontalMargin, 0);
         }
@@ -278,62 +300,44 @@ public class TitleBar extends FrameLayout
         // 先移除当前的监听，因为 TextView.setMaxWidth 方法会重新触发监听
         removeOnLayoutChangeListener(this);
 
-        if (mLeftView.getMaxWidth() != Integer.MAX_VALUE &&
-                mTitleView.getMaxWidth() != Integer.MAX_VALUE &&
-                mRightView.getMaxWidth() != Integer.MAX_VALUE) {
-            // 不限制子 View 的宽度
-            mLeftView.setMaxWidth(Integer.MAX_VALUE);
-            mTitleView.setMaxWidth(Integer.MAX_VALUE);
-            mRightView.setMaxWidth(Integer.MAX_VALUE);
-            // 对子 View 重新进行测量
-            mLeftView.measure(MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED),
-                    MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED));
-            mTitleView.measure(MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED),
-                    MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED));
-            mRightView.measure(MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED),
-                    MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED));
-        }
-
         // 标题栏子 View 最大宽度限制算法
-        int barWidth = right - left;
-        int sideWidth = Math.max(mLeftView.getMeasuredWidth(), mRightView.getMeasuredWidth());
-        int maxWidth = sideWidth * 2 + mTitleView.getMeasuredWidth();
-        // 算出来子 View 的宽大于标题栏的宽度
-        if (maxWidth >= barWidth) {
-            // 判断是左右项太长还是标题项太长
-            if (sideWidth > barWidth / 3) {
-                // 如果是左右项太长，那么按照比例进行划分
-                mLeftView.setMaxWidth(barWidth / 4);
-                mTitleView.setMaxWidth(barWidth / 2);
-                mRightView.setMaxWidth(barWidth / 4);
+        post(() -> {
+            // 这里要延迟执行，否则会导致子 View.getWidth 的时候为零
+            int barWidth = right - left;
+            int sideWidth = Math.max(mLeftView.getWidth(), mRightView.getWidth());
+            int maxWidth = sideWidth * 2 + mTitleView.getWidth();
+            // 算出来子 View 的宽大于标题栏的宽度
+            if (maxWidth >= barWidth) {
+                // 判断是左右项太长还是标题项太长
+                if (sideWidth > barWidth / 3) {
+                    // 如果是左右项太长，那么按照比例进行划分
+                    TitleBarSupport.setMaxWidth(mLeftView, barWidth / 4);
+                    TitleBarSupport.setMaxWidth(mTitleView, barWidth / 2);
+                    TitleBarSupport.setMaxWidth(mRightView, barWidth / 4);
+                } else {
+                    // 如果是标题项太长，那么就进行动态计算
+                    TitleBarSupport.setMaxWidth(mLeftView, sideWidth);
+                    TitleBarSupport.setMaxWidth(mTitleView, barWidth - sideWidth * 2);
+                    TitleBarSupport.setMaxWidth(mRightView, sideWidth);
+                }
             } else {
-                // 如果是标题项太长，那么就进行动态计算
-                mLeftView.setMaxWidth(sideWidth);
-                mTitleView.setMaxWidth(barWidth - sideWidth * 2);
-                mRightView.setMaxWidth(sideWidth);
-            }
-        } else {
-            if (mLeftView.getMaxWidth() != Integer.MAX_VALUE &&
-                    mTitleView.getMaxWidth() != Integer.MAX_VALUE &&
-                    mRightView.getMaxWidth() != Integer.MAX_VALUE) {
                 // 不限制子 View 的最大宽度
-                mLeftView.setMaxWidth(Integer.MAX_VALUE);
-                mTitleView.setMaxWidth(Integer.MAX_VALUE);
-                mRightView.setMaxWidth(Integer.MAX_VALUE);
+                TitleBarSupport.setMaxWidth(mLeftView, Integer.MAX_VALUE);
+                TitleBarSupport.setMaxWidth(mTitleView, Integer.MAX_VALUE);
+                TitleBarSupport.setMaxWidth(mRightView, Integer.MAX_VALUE);
             }
-        }
 
-        // TextView 里面必须有东西才能被点击
-        mLeftView.setEnabled(TitleBarSupport.isContainContent(mLeftView));
-        mTitleView.setEnabled(TitleBarSupport.isContainContent(mTitleView));
-        mRightView.setEnabled(TitleBarSupport.isContainContent(mRightView));
+            // 解决在外部触摸时触发点击效果的问题
+            mLeftView.setClickable(true);
+            mTitleView.setClickable(true);
+            mRightView.setClickable(true);
+            // TextView 里面必须有东西才能被点击
+            mLeftView.setEnabled(TitleBarSupport.isContainContent(mLeftView));
+            mTitleView.setEnabled(TitleBarSupport.isContainContent(mTitleView));
+            mRightView.setEnabled(TitleBarSupport.isContainContent(mRightView));
 
-        post(new Runnable() {
-            @Override
-            public void run() {
-                // 这里再次监听需要延迟，否则会导致递归的情况发生
-                addOnLayoutChangeListener(TitleBar.this);
-            }
+            // 这里再次监听需要延迟，否则会导致递归的情况发生
+            addOnLayoutChangeListener(TitleBar.this);
         });
     }
 
@@ -363,14 +367,13 @@ public class TitleBar extends FrameLayout
             params.width = LayoutParams.MATCH_PARENT;
         }
 
-        int horizontalPadding = mHorizontalPadding;
         int verticalPadding = 0;
         // 如果当前高度是自适应则设置默认的内间距
         if (params.height == ViewGroup.LayoutParams.WRAP_CONTENT) {
             verticalPadding = mVerticalPadding;
         }
 
-        setChildPadding(horizontalPadding, verticalPadding);
+        setChildVerticalPadding(verticalPadding);
         super.setLayoutParams(params);
     }
 
@@ -785,6 +788,30 @@ public class TitleBar extends FrameLayout
     }
 
     /**
+     * 设置左标题的前景状态选择器
+     */
+    public TitleBar setLeftForeground(int id) {
+        return setLeftForeground(TitleBarSupport.getDrawable(getContext(), id));
+    }
+
+    public TitleBar setLeftForeground(Drawable drawable) {
+        TitleBarSupport.setForeground(mLeftView, drawable);
+        return this;
+    }
+
+    /**
+     * 设置右标题的前景状态选择器
+     */
+    public TitleBar setRightForeground(int id) {
+        return setRightForeground(TitleBarSupport.getDrawable(getContext(), id));
+    }
+
+    public TitleBar setRightForeground(Drawable drawable) {
+        TitleBarSupport.setForeground(mRightView, drawable);
+        return this;
+    }
+
+    /**
      * 设置分割线是否显示
      */
     public TitleBar setLineVisible(boolean visible) {
@@ -844,12 +871,21 @@ public class TitleBar extends FrameLayout
     /**
      * 设置子 View 内间距
      */
-    public TitleBar setChildPadding(int horizontalPadding, int verticalPadding) {
-        mHorizontalPadding = horizontalPadding;
+    public TitleBar setChildVerticalPadding(int verticalPadding) {
         mVerticalPadding = verticalPadding;
-        mLeftView.setPadding(horizontalPadding, verticalPadding, horizontalPadding, verticalPadding);
-        mTitleView.setPadding(horizontalPadding, verticalPadding, horizontalPadding, verticalPadding);
-        mRightView.setPadding(horizontalPadding, verticalPadding, horizontalPadding, verticalPadding);
+        mLeftView.setPadding(mLeftHorizontalPadding, mVerticalPadding, mLeftHorizontalPadding, mVerticalPadding);
+        mTitleView.setPadding(mTitleHorizontalPadding, mVerticalPadding, mTitleHorizontalPadding, mVerticalPadding);
+        mRightView.setPadding(mRightHorizontalPadding, mVerticalPadding, mRightHorizontalPadding, mVerticalPadding);
+        return this;
+    }
+
+    public TitleBar setChildHorizontalPadding(int leftHorizontalPadding, int titleHorizontalPadding, int rightHorizontalPadding) {
+        mLeftHorizontalPadding = leftHorizontalPadding;
+        mTitleHorizontalPadding = titleHorizontalPadding;
+        mRightHorizontalPadding = rightHorizontalPadding;
+        mLeftView.setPadding(mLeftHorizontalPadding, mVerticalPadding, mLeftHorizontalPadding, mVerticalPadding);
+        mTitleView.setPadding(mTitleHorizontalPadding, mVerticalPadding, mTitleHorizontalPadding, mVerticalPadding);
+        mRightView.setPadding(mRightHorizontalPadding, mVerticalPadding, mRightHorizontalPadding, mVerticalPadding);
         return this;
     }
 

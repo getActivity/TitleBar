@@ -100,8 +100,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
-                    app:childPaddingHorizontal="25dp"
-                    app:childPaddingVertical="15dp"
+                    app:childVerticalPadding="15dp"
                     app:leftIcon="@null"
                     app:title="标题向左对齐并且加粗"
                     app:titleGravity="start"
@@ -118,14 +117,17 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
+                    app:leftHorizontalPadding="10dp"
                     app:lineVisible="false"
-                    app:title="标题文字过多会自动开启自带跑马灯效果，就问你溜不溜" />
+                    app:rightHorizontalPadding="10dp"
+                    app:title="标题文字过多会自动开启自带跑马灯效果，就问你溜不溜"
+                    app:titleHorizontalPadding="0dp" />
 
                 <com.hjq.bar.TitleBar
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
-                    app:childPaddingVertical="20dp"
+                    app:childVerticalPadding="20dp"
                     app:title="通过垂直内间距来调整标题栏的高度" />
 
                 <com.hjq.bar.TitleBar
@@ -152,7 +154,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
-                    app:childPaddingVertical="8dp"
+                    app:childVerticalPadding="8dp"
                     app:leftIcon="@drawable/qr_code_ic"
                     app:leftIconGravity="top"
                     app:leftIconHeight="20dp"
@@ -194,8 +196,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
+                    app:leftBackground="?attr/selectableItemBackground"
                     app:leftIcon="@mipmap/ic_launcher"
                     app:leftTitle="左边"
+                    app:rightBackground="?attr/selectableItemBackground"
                     app:rightIcon="@mipmap/ic_launcher"
                     app:rightTitle="右边"
                     app:title="监听标题栏点击事件" />
@@ -261,10 +265,11 @@
                         android:layout_gravity="end|center_vertical"
                         android:orientation="horizontal" >
 
-                        <ImageView
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
-                            android:src="@mipmap/ic_launcher" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="我是文本" />
 
                         <ImageView
                             android:layout_width="40dp"

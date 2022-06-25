@@ -13,10 +13,8 @@
             <enum name="ripple" value="0x40" />
         </attr>
 
-        <!-- 子控件水平内间距 -->
-        <attr name="childPaddingHorizontal" format="dimension" />
         <!-- 子控件垂直内间距（可用于调整标题栏自适应的高度） -->
-        <attr name="childPaddingVertical" format="dimension" />
+        <attr name="childVerticalPadding" format="dimension" />
 
         <!-- 标题 -->
         <attr name="title" format="string" />
@@ -47,6 +45,7 @@
             <flag name="start" value="0x00800003" />
             <flag name="end" value="0x00800005" />
         </attr>
+        <attr name="titleHorizontalPadding" format="dimension" />
 
         <!-- 左标题 -->
         <attr name="leftTitle" format="string"/>
@@ -71,6 +70,8 @@
             <flag name="end" value="0x00800005" />
         </attr>
         <attr name="leftBackground" format="reference|color" />
+        <attr name="leftForeground" format="reference|color" />
+        <attr name="leftHorizontalPadding" format="dimension" />
 
         <!-- 右标题 -->
         <attr name="rightTitle" format="string" />
@@ -95,6 +96,8 @@
             <flag name="end" value="0x00800005" />
         </attr>
         <attr name="rightBackground" format="reference|color" />
+        <attr name="rightForeground" format="reference|color" />
+        <attr name="rightHorizontalPadding" format="dimension" />
 
         <!-- 分割线 -->
         <attr name="lineVisible" format="boolean" />

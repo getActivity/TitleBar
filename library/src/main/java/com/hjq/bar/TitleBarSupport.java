@@ -1,6 +1,8 @@
 package com.hjq.bar;
 
 import android.content.Context;
+import android.graphics.BlendMode;
+import android.graphics.BlendModeColorFilter;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.Typeface;
@@ -37,10 +39,15 @@ public final class TitleBarSupport {
      * 设置 View 背景
      */
     public static void setBackground(View view, Drawable drawable) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-            view.setBackground(drawable);
-        } else {
-            view.setBackgroundDrawable(drawable);
+        view.setBackground(drawable);
+    }
+
+    /**
+     * 设置 View 前景
+     */
+    public static void setForeground(View view, Drawable drawable) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            view.setForeground(drawable);
         }
     }
 
@@ -94,7 +101,11 @@ public final class TitleBarSupport {
             return;
         }
         drawable.mutate();
-        drawable.setColorFilter(color, PorterDuff.Mode.SRC_IN);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            drawable.setColorFilter(new BlendModeColorFilter(color, BlendMode.SRC_IN));
+        } else {
+            drawable.setColorFilter(color, PorterDuff.Mode.SRC_IN);
+        }
     }
 
     /**
@@ -199,5 +210,15 @@ public final class TitleBarSupport {
             default:
                 return Typeface.DEFAULT;
         }
+    }
+
+    /**
+     * 设置 TextView 的最大宽度
+     */
+    public static void setMaxWidth(TextView view, int maxPixels) {
+        if (view.getMaxWidth() == maxPixels) {
+            return;
+        }
+        view.setMaxWidth(maxPixels);
     }
 }
