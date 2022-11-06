@@ -1,7 +1,5 @@
 package com.hjq.bar;
 
-import android.view.View;
-
 /**
  *    author : Android 轮子哥
  *    github : https://github.com/getActivity/TitleBar
@@ -11,17 +9,23 @@ import android.view.View;
 public interface OnTitleBarListener {
 
     /**
-     * 左项被点击
+     * 左边的标题被点击
+     *
+     * @param titleBar      标题栏对象（非空）
      */
     default void onLeftClick(TitleBar titleBar) {}
 
     /**
-     * 标题被点击
+     * 中间的标题被点击
+     *
+     * @param titleBar      标题栏对象（非空）
      */
     default void onTitleClick(TitleBar titleBar) {}
 
     /**
-     * 右项被点击
+     * 右边的标题被点击
+     *
+     * @param titleBar      标题栏对象（非空）
      */
     default void onRightClick(TitleBar titleBar) {}
 }

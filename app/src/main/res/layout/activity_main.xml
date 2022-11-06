@@ -315,6 +315,15 @@
 
                 </com.hjq.bar.TitleBar>
 
+                <com.hjq.bar.TitleBar
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    app:leftIcon="@null"
+                    app:leftTitle="我是很长很长的文案"
+                    app:rightTitle="我是很长很长的文案"
+                    app:title="默认的标题栏" />
+
             </LinearLayout>
 
         </FrameLayout>

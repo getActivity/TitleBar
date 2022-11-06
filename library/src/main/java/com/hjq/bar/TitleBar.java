@@ -29,8 +29,7 @@ import com.hjq.bar.style.TransparentBarStyle;
  */
 @SuppressWarnings({"unused", "UnusedReturnValue"})
 public class TitleBar extends FrameLayout
-        implements View.OnClickListener,
-        View.OnLayoutChangeListener {
+        implements View.OnClickListener {
 
     private static final String LOG_TAG = "TitleBar";
 
@@ -275,7 +274,8 @@ public class TitleBar extends FrameLayout
         addView(mRightView, 2);
         addView(mLineView, 3);
 
-        addOnLayoutChangeListener(this);
+        addOnLayoutChangeListener(mConstraintChildViewWidthListener);
+        addOnLayoutChangeListener(mLimitChildViewStatusListener);
 
         // 如果当前是布局预览模式
         if (isInEditMode()) {
@@ -289,56 +289,6 @@ public class TitleBar extends FrameLayout
             MarginLayoutParams layoutParams = (MarginLayoutParams) mTitleView.getLayoutParams();
             layoutParams.setMargins(horizontalMargin, 0, horizontalMargin, 0);
         }
-    }
-
-    /**
-     * {@link View.OnLayoutChangeListener}
-     */
-
-    @Override
-    public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
-        // 先移除当前的监听，因为 TextView.setMaxWidth 方法会重新触发监听
-        removeOnLayoutChangeListener(this);
-
-        // 标题栏子 View 最大宽度限制算法
-        post(() -> {
-            // 这里要延迟执行，否则会导致子 View.getWidth 的时候为零
-            int barWidth = right - left;
-            int sideWidth = Math.max(mLeftView.getWidth(), mRightView.getWidth());
-            int maxWidth = sideWidth * 2 + mTitleView.getWidth();
-            // 算出来子 View 的宽大于标题栏的宽度
-            if (maxWidth >= barWidth) {
-                // 判断是左右项太长还是标题项太长
-                if (sideWidth > barWidth / 3) {
-                    // 如果是左右项太长，那么按照比例进行划分
-                    TitleBarSupport.setMaxWidth(mLeftView, barWidth / 4);
-                    TitleBarSupport.setMaxWidth(mTitleView, barWidth / 2);
-                    TitleBarSupport.setMaxWidth(mRightView, barWidth / 4);
-                } else {
-                    // 如果是标题项太长，那么就进行动态计算
-                    TitleBarSupport.setMaxWidth(mLeftView, sideWidth);
-                    TitleBarSupport.setMaxWidth(mTitleView, barWidth - sideWidth * 2);
-                    TitleBarSupport.setMaxWidth(mRightView, sideWidth);
-                }
-            } else {
-                // 不限制子 View 的最大宽度
-                TitleBarSupport.setMaxWidth(mLeftView, Integer.MAX_VALUE);
-                TitleBarSupport.setMaxWidth(mTitleView, Integer.MAX_VALUE);
-                TitleBarSupport.setMaxWidth(mRightView, Integer.MAX_VALUE);
-            }
-
-            // 解决在外部触摸时触发点击效果的问题
-            mLeftView.setClickable(true);
-            mTitleView.setClickable(true);
-            mRightView.setClickable(true);
-            // TextView 里面必须有东西才能被点击
-            mLeftView.setEnabled(TitleBarSupport.isContainContent(mLeftView));
-            mTitleView.setEnabled(TitleBarSupport.isContainContent(mTitleView));
-            mRightView.setEnabled(TitleBarSupport.isContainContent(mRightView));
-
-            // 这里再次监听需要延迟，否则会导致递归的情况发生
-            addOnLayoutChangeListener(TitleBar.this);
-        });
     }
 
     /**
@@ -701,7 +651,7 @@ public class TitleBar extends FrameLayout
     }
 
     /**
-     * 清楚标题的图标着色器
+     * 清除标题的图标着色器
      */
     public TitleBar clearTitleIconTint() {
         mTitleIconTint = TitleBarSupport.NO_COLOR;
@@ -710,7 +660,7 @@ public class TitleBar extends FrameLayout
     }
 
     /**
-     * 清楚左标题的图标着色器
+     * 清除左标题的图标着色器
      */
     public TitleBar clearLeftIconTint() {
         mLeftIconTint = TitleBarSupport.NO_COLOR;
@@ -719,7 +669,7 @@ public class TitleBar extends FrameLayout
     }
 
     /**
-     * 清楚右标题的图标着色器
+     * 清除右标题的图标着色器
      */
     public TitleBar clearRightIconTint() {
         mRightIconTint = TitleBarSupport.NO_COLOR;
@@ -930,4 +880,80 @@ public class TitleBar extends FrameLayout
     public static void setDefaultStyle(ITitleBarStyle style) {
         sGlobalStyle = style;
     }
+
+    private final View.OnLayoutChangeListener mConstraintChildViewWidthListener = new OnLayoutChangeListener() {
+
+        @Override
+        public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
+            // 暂时先移除当前的监听，因为 TextView.setMaxWidth 方法会重新触发监听
+            removeOnLayoutChangeListener(this);
+
+            // 标题栏子 View 最大宽度限制算法
+            post(() -> {
+                // 这里要延迟执行，否则会导致子 View.getWidth 的时候为零
+                int titleBarWidth = right - left;
+                int leftViewWidth = mLeftView.getWidth();
+                int centerViewWidth = mTitleView.getWidth();
+                int rightViewWidth = mRightView.getWidth();
+
+                int maxEdgeWidth = Math.max(leftViewWidth, rightViewWidth);
+                int calculateTotalWidth = maxEdgeWidth * 2 + centerViewWidth;
+                // 算出来子 View 的宽大于标题栏的宽度
+                if (calculateTotalWidth >= titleBarWidth) {
+                    // 判断是左右项太长还是标题项太长
+                    if (maxEdgeWidth > titleBarWidth / 3) {
+                        // 如果是左右项太长，那么按照比例进行划分
+                        TitleBarSupport.setMaxWidth(mLeftView, titleBarWidth / 4);
+                        TitleBarSupport.setMaxWidth(mTitleView, titleBarWidth / 2);
+                        TitleBarSupport.setMaxWidth(mRightView, titleBarWidth / 4);
+                    } else {
+                        // 如果是标题项太长，那么就进行动态计算
+                        TitleBarSupport.setMaxWidth(mLeftView, maxEdgeWidth);
+                        TitleBarSupport.setMaxWidth(mTitleView, titleBarWidth - maxEdgeWidth * 2);
+                        TitleBarSupport.setMaxWidth(mRightView, maxEdgeWidth);
+                    }
+                } else {
+                    // 不限制子 View 的最大宽度
+                    TitleBarSupport.setMaxWidth(mLeftView, Integer.MAX_VALUE);
+                    TitleBarSupport.setMaxWidth(mTitleView, Integer.MAX_VALUE);
+                    TitleBarSupport.setMaxWidth(mRightView, Integer.MAX_VALUE);
+                }
+
+                removeCallbacks(mAddOnLayoutChangeListenerRunnable);
+                // 这里再次监听需要延迟，否则会导致递归的情况发生
+                post(mAddOnLayoutChangeListenerRunnable);
+            });
+        }
+    };
+
+    @SuppressWarnings("all")
+    private final View.OnLayoutChangeListener mLimitChildViewStatusListener = new OnLayoutChangeListener() {
+
+        @Override
+        public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
+            // 解决在外部触摸时触发点击效果的问题
+            if (!mLeftView.isClickable()) {
+                mLeftView.setClickable(true);
+            }
+            if (!mTitleView.isClickable()) {
+                mTitleView.setClickable(true);
+            }
+            if (!mRightView.isClickable()) {
+                mRightView.setClickable(true);
+            }
+
+            // TextView 里面必须有东西才能被点击
+            if (!mLeftView.isEnabled()) {
+                mLeftView.setEnabled(TitleBarSupport.isContainContent(mLeftView));
+            }
+            if (!mTitleView.isEnabled()) {
+                mTitleView.setEnabled(TitleBarSupport.isContainContent(mTitleView));
+            }
+            if (!mRightView.isEnabled()) {
+                mRightView.setEnabled(TitleBarSupport.isContainContent(mRightView));
+            }
+        }
+    };
+
+    private final Runnable mAddOnLayoutChangeListenerRunnable = () -> addOnLayoutChangeListener(mConstraintChildViewWidthListener);
 }
