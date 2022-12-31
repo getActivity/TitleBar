@@ -4,7 +4,7 @@
 
 * 博客地址：[Android标题栏（TitleBar）绝佳解决方案](https://www.jianshu.com/p/617be02dc265)
 
-* 可以扫码下载 Demo 进行演示或者测试，如果扫码下载不了的，[点击此处可直接下载](https://github.com/getActivity/TitleBar/releases/download/9.6/TitleBar.apk)
+* 可以扫码下载 Demo 进行演示或者测试，如果扫码下载不了的，[点击此处可直接下载](https://github.com/getActivity/TitleBar/releases/download/10.0/TitleBar.apk)
 
 ![](picture/demo_code.png)
 
@@ -51,7 +51,7 @@ android {
 
 dependencies {
     // 标题栏框架：https://github.com/getActivity/TitleBar
-    implementation 'com.github.getActivity:TitleBar:9.6'
+    implementation 'com.github.getActivity:TitleBar:10.0'
 }
 ```
 

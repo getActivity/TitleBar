@@ -100,10 +100,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
-                    app:childVerticalPadding="15dp"
                     app:leftIcon="@null"
                     app:title="标题向左对齐并且加粗"
                     app:titleGravity="start"
+                    app:titleHorizontalPadding="20dp"
                     app:titleStyle="bold" />
 
                 <com.hjq.bar.TitleBar
@@ -192,7 +192,7 @@
                     app:titleSize="20sp" />
 
                 <com.hjq.bar.TitleBar
-                    android:id="@+id/tb_main_bar"
+                    android:id="@+id/tb_main_bar_click"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
@@ -320,9 +320,19 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
                     app:leftIcon="@null"
-                    app:leftTitle="我是很长很长的文案"
-                    app:rightTitle="我是很长很长的文案"
+                    app:leftTitle="我是很长很长很长很长很长的文案"
+                    app:rightTitle="我是很长很长很长很长很长的文案"
                     app:title="默认的标题栏" />
+
+                <com.hjq.bar.TitleBar
+                    android:id="@+id/tb_main_bar_long_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    app:leftIcon="@null"
+                    app:leftTitle="我是测试文案我是测试文案我是测试文案"
+                    app:rightTitle="我是测试文案我是测试文案我是测试文案"
+                    app:title="我是很长很长很长很长很长的标题" />
 
             </LinearLayout>
 

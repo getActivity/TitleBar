@@ -211,14 +211,4 @@ public final class TitleBarSupport {
                 return Typeface.DEFAULT;
         }
     }
-
-    /**
-     * 设置 TextView 的最大宽度
-     */
-    public static void setMaxWidth(TextView view, int maxPixels) {
-        if (view.getMaxWidth() == maxPixels) {
-            return;
-        }
-        view.setMaxWidth(maxPixels);
-    }
 }

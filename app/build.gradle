@@ -7,8 +7,8 @@ android {
         applicationId "com.hjq.bar.demo"
         minSdkVersion 17
         targetSdkVersion 31
-        versionCode 96
-        versionName "9.6"
+        versionCode 1000
+        versionName "10.0"
     }
 
     // 支持 JDK 1.8
@@ -61,8 +61,8 @@ dependencies {
     implementation 'com.google.android.material:material:1.4.0'
 
     // 吐司工具类：https://github.com/getActivity/ToastUtils
-    implementation 'com.github.getActivity:ToastUtils:10.5'
+    implementation 'com.github.getActivity:ToastUtils:11.2'
 
     // 内存泄漏捕捉：https://github.com/square/leakcanary
-    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.9.1'
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.10'
 }
