@@ -60,8 +60,8 @@ dependencies {
     // Material 库：https://github.com/material-components/material-components-android
     implementation 'com.google.android.material:material:1.4.0'
 
-    // 吐司工具类：https://github.com/getActivity/ToastUtils
-    implementation 'com.github.getActivity:ToastUtils:11.2'
+    // 吐司工具类：https://github.com/getActivity/Toaster
+    implementation 'com.github.getActivity:Toaster:12.0'
 
     // 内存泄漏捕捉：https://github.com/square/leakcanary
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.10'

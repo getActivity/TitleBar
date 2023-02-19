@@ -8,7 +8,7 @@ import androidx.appcompat.widget.AppCompatTextView;
 
 import com.hjq.bar.TitleBar;
 import com.hjq.bar.style.LightBarStyle;
-import com.hjq.toast.ToastUtils;
+import com.hjq.toast.Toaster;
 
 public final class AppApplication extends Application {
 
@@ -17,7 +17,7 @@ public final class AppApplication extends Application {
         super.onCreate();
 
         // 初始化 Toast
-        ToastUtils.init(this);
+        Toaster.init(this);
 
         // 初始化 TitleBar 默认样式
         TitleBar.setDefaultStyle(new LightBarStyle() {

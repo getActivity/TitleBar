@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.hjq.bar.OnTitleBarListener;
 import com.hjq.bar.TitleBar;
-import com.hjq.toast.ToastUtils;
+import com.hjq.toast.Toaster;
 
 /**
  *    author : Android 轮子哥
@@ -30,17 +30,17 @@ public final class MainActivity extends AppCompatActivity implements Runnable {
 
             @Override
             public void onLeftClick(TitleBar titleBar) {
-                ToastUtils.show("左项 View 被点击");
+                Toaster.show("左项 View 被点击");
             }
 
             @Override
             public void onTitleClick(TitleBar titleBar) {
-                ToastUtils.show("中间 View 被点击");
+                Toaster.show("中间 View 被点击");
             }
 
             @Override
             public void onRightClick(TitleBar titleBar) {
-                ToastUtils.show("右项 View 被点击");
+                Toaster.show("右项 View 被点击");
             }
         });
 
