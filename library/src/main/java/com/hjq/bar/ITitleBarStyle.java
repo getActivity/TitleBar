@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.ColorStateList;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
 
@@ -237,6 +238,21 @@ public interface ITitleBarStyle {
      * 获取右标题的图标默认高度
      */
     int getRightIconHeight(Context context);
+
+    /**
+     * 获取标题文本溢出的处理方式
+     */
+    TextUtils.TruncateAt getTitleTextEllipsize(Context context);
+
+    /**
+     * 获取左标题文本溢出的处理方式
+     */
+    TextUtils.TruncateAt getLeftTitleTextEllipsize(Context context);
+
+    /**
+     * 获取右标题文本溢出的处理方式
+     */
+    TextUtils.TruncateAt getRightTitleTextEllipsize(Context context);
 
     /**
      * 分割线是否显示

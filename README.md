@@ -4,7 +4,7 @@
 
 * 博客地址：[Android标题栏（TitleBar）绝佳解决方案](https://www.jianshu.com/p/617be02dc265)
 
-* 可以扫码下载 Demo 进行演示或者测试，如果扫码下载不了的，[点击此处可直接下载](https://github.com/getActivity/TitleBar/releases/download/10.0/TitleBar.apk)
+* 可以扫码下载 Demo 进行演示或者测试，如果扫码下载不了的，[点击此处可直接下载](https://github.com/getActivity/TitleBar/releases/download/10.2/TitleBar.apk)
 
 ![](picture/demo_code.png)
 
@@ -51,14 +51,14 @@ android {
 
 dependencies {
     // 标题栏框架：https://github.com/getActivity/TitleBar
-    implementation 'com.github.getActivity:TitleBar:10.0'
+    implementation 'com.github.getActivity:TitleBar:10.2'
 }
 ```
 
 #### 布局属性大全
 
 ```xml
-    <declare-styleable name="TitleBar">
+<declare-styleable name="TitleBar">
 
     <!-- 标题栏背景 -->
     <attr name="android:background" />
@@ -74,7 +74,7 @@ dependencies {
     <!-- 子控件垂直内间距（可用于调整标题栏自适应的高度） -->
     <attr name="childVerticalPadding" format="dimension" />
 
-    <!-- 标题 -->
+    <!-- 中间标题 -->
     <attr name="title" format="string" />
     <attr name="titleColor" format="reference|color" />
     <attr name="titleSize" format="dimension" />
@@ -104,6 +104,14 @@ dependencies {
         <flag name="end" value="0x00800005" />
     </attr>
     <attr name="titleHorizontalPadding" format="dimension" />
+    <!-- 中间标题文本溢出处理模式（默认开启跑马灯） -->
+    <attr name="titleTextEllipsize">
+        <enum name="none" value="0" />
+        <enum name="start" value="1" />
+        <enum name="middle" value="2" />
+        <enum name="end" value="3" />
+        <enum name="marquee" value="4" />
+    </attr>
 
     <!-- 左标题 -->
     <attr name="leftTitle" format="string"/>
@@ -130,6 +138,14 @@ dependencies {
     <attr name="leftBackground" format="reference|color" />
     <attr name="leftForeground" format="reference|color" />
     <attr name="leftHorizontalPadding" format="dimension" />
+    <!-- 左边标题文本溢出处理模式 -->
+    <attr name="leftTitleTextEllipsize">
+        <enum name="none" value="0" />
+        <enum name="start" value="1" />
+        <enum name="middle" value="2" />
+        <enum name="end" value="3" />
+        <enum name="marquee" value="4" />
+    </attr>
 
     <!-- 右标题 -->
     <attr name="rightTitle" format="string" />
@@ -156,6 +172,14 @@ dependencies {
     <attr name="rightBackground" format="reference|color" />
     <attr name="rightForeground" format="reference|color" />
     <attr name="rightHorizontalPadding" format="dimension" />
+    <!-- 右边标题文本溢出处理模式 -->
+    <attr name="rightTitleTextEllipsize">
+        <enum name="none" value="0" />
+        <enum name="start" value="1" />
+        <enum name="middle" value="2" />
+        <enum name="end" value="3" />
+        <enum name="marquee" value="4" />
+    </attr>
 
     <!-- 分割线 -->
     <attr name="lineVisible" format="boolean" />
@@ -257,6 +281,8 @@ public class XxxApplication extends Application {
 * Studio 精品插件：[StudioPlugins](https://github.com/getActivity/StudioPlugins) ![](https://img.shields.io/github/stars/getActivity/StudioPlugins.svg) ![](https://img.shields.io/github/forks/getActivity/StudioPlugins.svg)
 
 * 表情包大集合：[EmojiPackage](https://github.com/getActivity/EmojiPackage) ![](https://img.shields.io/github/stars/getActivity/EmojiPackage.svg) ![](https://img.shields.io/github/forks/getActivity/EmojiPackage.svg)
+
+* AI 资源大汇总：[AiIndex](https://github.com/getActivity/AiIndex) ![](https://img.shields.io/github/stars/getActivity/AiIndex.svg) ![](https://img.shields.io/github/forks/getActivity/AiIndex.svg)
 
 * 省市区 Json 数据：[ProvinceJson](https://github.com/getActivity/ProvinceJson) ![](https://img.shields.io/github/stars/getActivity/ProvinceJson.svg) ![](https://img.shields.io/github/forks/getActivity/ProvinceJson.svg)
 

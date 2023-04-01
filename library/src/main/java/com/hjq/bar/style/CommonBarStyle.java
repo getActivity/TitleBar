@@ -29,12 +29,6 @@ public abstract class CommonBarStyle implements ITitleBarStyle {
         titleView.setGravity(Gravity.CENTER_VERTICAL);
         titleView.setFocusable(true);
         titleView.setSingleLine();
-        // 给标题设置跑马灯效果（仅在标题过长的时候才会显示）
-        titleView.setEllipsize(TextUtils.TruncateAt.MARQUEE);
-        // 设置跑马灯的循环次数
-        titleView.setMarqueeRepeatLimit(-1);
-        // 设置跑马灯之后需要设置选中才能有效果
-        titleView.setSelected(true);
         return titleView;
     }
 
@@ -48,7 +42,6 @@ public abstract class CommonBarStyle implements ITitleBarStyle {
         leftView.setGravity(Gravity.CENTER_VERTICAL);
         leftView.setFocusable(true);
         leftView.setSingleLine();
-        leftView.setEllipsize(TextUtils.TruncateAt.END);
         return leftView;
     }
 
@@ -62,7 +55,6 @@ public abstract class CommonBarStyle implements ITitleBarStyle {
         rightView.setGravity(Gravity.CENTER_VERTICAL);
         rightView.setFocusable(true);
         rightView.setSingleLine();
-        rightView.setEllipsize(TextUtils.TruncateAt.END);
         return rightView;
     }
 
@@ -244,6 +236,21 @@ public abstract class CommonBarStyle implements ITitleBarStyle {
     @Override
     public int getRightIconHeight(Context context) {
         return 0;
+    }
+
+    @Override
+    public TextUtils.TruncateAt getTitleTextEllipsize(Context context) {
+        return TextUtils.TruncateAt.MARQUEE;
+    }
+
+    @Override
+    public TextUtils.TruncateAt getLeftTitleTextEllipsize(Context context) {
+        return null;
+    }
+
+    @Override
+    public TextUtils.TruncateAt getRightTitleTextEllipsize(Context context) {
+        return null;
     }
 
     @Override

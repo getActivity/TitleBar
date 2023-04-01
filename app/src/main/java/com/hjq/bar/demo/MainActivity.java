@@ -16,7 +16,7 @@ import com.hjq.toast.Toaster;
  *    time   : 2018/08/17
  *    desc   : TitleBar 使用案例
  */
-public final class MainActivity extends AppCompatActivity implements Runnable {
+public final class MainActivity extends AppCompatActivity {
 
     private static final Handler HANDLER = new Handler(Looper.getMainLooper());
 
@@ -43,21 +43,5 @@ public final class MainActivity extends AppCompatActivity implements Runnable {
                 Toaster.show("右项 View 被点击");
             }
         });
-
-        HANDLER.postDelayed(this, 2000);
-    }
-
-    @Override
-    public void run() {
-        TitleBar titleBar = findViewById(R.id.tb_main_bar_long_title);
-        titleBar.setLeftTitle("左边");
-        titleBar.setTitle("我是很长很长很长很长很长很长很长很长的标题");
-        titleBar.setRightTitle("右边");
-    }
-
-    @Override
-    protected void onDestroy() {
-        HANDLER.removeCallbacks(this);
-        super.onDestroy();
     }
 }

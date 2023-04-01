@@ -7,6 +7,7 @@ import android.content.res.TypedArray;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.util.TypedValue;
@@ -78,7 +79,7 @@ public class TitleBar extends FrameLayout
             sGlobalStyle = new LightBarStyle();
         }
 
-        final TypedArray array = context.obtainStyledAttributes(attrs, R.styleable.TitleBar, 0, R.style.TitleBarStyle);
+        final TypedArray array = context.obtainStyledAttributes(attrs, R.styleable.TitleBar, 0, R.style.TitleBarDefaultStyle);
 
         // 标题栏样式设置
         switch (array.getInt(R.styleable.TitleBar_barStyle, 0)) {
@@ -105,11 +106,11 @@ public class TitleBar extends FrameLayout
         mLineView = mCurrentStyle.createLineView(context);
 
         mTitleView.setLayoutParams(new FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
-                ViewGroup.LayoutParams.MATCH_PARENT, Gravity.CENTER_HORIZONTAL));
+                ViewGroup.LayoutParams.MATCH_PARENT, Gravity.CENTER));
         mLeftView.setLayoutParams(new FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
-                ViewGroup.LayoutParams.MATCH_PARENT, Gravity.START));
+                ViewGroup.LayoutParams.MATCH_PARENT, Gravity.START | Gravity.CENTER_VERTICAL));
         mRightView.setLayoutParams(new FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
-                ViewGroup.LayoutParams.MATCH_PARENT, Gravity.END));
+                ViewGroup.LayoutParams.MATCH_PARENT, Gravity.END | Gravity.CENTER_VERTICAL));
         mLineView.setLayoutParams(new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                 mCurrentStyle.getLineSize(context), Gravity.BOTTOM));
 
@@ -213,6 +214,21 @@ public class TitleBar extends FrameLayout
                 mCurrentStyle.getRightTitleStyle(context);
         setRightTitleStyle(mCurrentStyle.getRightTitleTypeface(context, rightTitleStyle), rightTitleStyle);
 
+        TextUtils.TruncateAt titleTextEllipsize = array.hasValue(R.styleable.TitleBar_titleTextEllipsize) ?
+                TitleBarSupport.convertIntToEllipsizeEnum(array.getInt(R.styleable.TitleBar_titleTextEllipsize, TitleBarSupport.ELLIPSIZE_NONE)) :
+                mCurrentStyle.getTitleTextEllipsize(context);
+        setTitleTextEllipsize(titleTextEllipsize);
+
+        TextUtils.TruncateAt leftTitleTextEllipsize = array.hasValue(R.styleable.TitleBar_leftTitleTextEllipsize) ?
+                TitleBarSupport.convertIntToEllipsizeEnum(array.getInt(R.styleable.TitleBar_leftTitleTextEllipsize, TitleBarSupport.ELLIPSIZE_NONE)) :
+                mCurrentStyle.getLeftTitleTextEllipsize(context);
+        setLeftTitleTextEllipsize(leftTitleTextEllipsize);
+
+        TextUtils.TruncateAt rightTitleTextEllipsize = array.hasValue(R.styleable.TitleBar_rightTitleTextEllipsize) ?
+                TitleBarSupport.convertIntToEllipsizeEnum(array.getInt(R.styleable.TitleBar_rightTitleTextEllipsize, TitleBarSupport.ELLIPSIZE_NONE)) :
+                mCurrentStyle.getRightTitleTextEllipsize(context);
+        setRightTitleTextEllipsize(rightTitleTextEllipsize);
+
         // 标题重心设置
         if (array.hasValue(R.styleable.TitleBar_titleGravity)) {
             setTitleGravity(array.getInt(R.styleable.TitleBar_titleGravity, Gravity.NO_GRAVITY));
@@ -295,18 +311,35 @@ public class TitleBar extends FrameLayout
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
 
-        // 如果当前是布局预览模式，避免影响布局预览
-        if (isInEditMode()) {
+        int titleBarWidth = this.getMeasuredWidth();
+        int titleBarHeight = this.getMeasuredHeight();
+
+        int leftViewMeasuredWidth = mLeftView.getMeasuredWidth();
+        int leftViewMeasuredHeight = mLeftView.getMeasuredHeight();
+
+        int titleViewMeasuredWidth = mTitleView.getMeasuredWidth();
+        int titleViewMeasuredHeight = mTitleView.getMeasuredHeight();
+
+        int rightViewMeasuredWidth = mRightView.getMeasuredWidth();
+        int rightViewMeasuredHeight = mRightView.getMeasuredHeight();
+
+        if (!TitleBarSupport.containContent(mTitleView)) {
+            if (!TitleBarSupport.containContent(mRightView)) {
+                measureTitleBar(titleBarWidth, 0, 0, heightMeasureSpec);
+                return;
+            }
+
+            if (rightViewMeasuredWidth <= titleBarWidth / 3) {
+                measureTitleBar(titleBarWidth - rightViewMeasuredWidth, 0, rightViewMeasuredWidth, heightMeasureSpec);
+                return;
+            }
+
+            measureTitleBar(titleBarWidth / 4 * 3, titleBarWidth / 4, rightViewMeasuredWidth, heightMeasureSpec);
             return;
         }
 
-        int titleBarWidth = this.getMeasuredWidth();
-        int leftViewWidth = mLeftView.getMeasuredWidth();
-        int centerViewWidth = mTitleView.getMeasuredWidth();
-        int rightViewWidth = mRightView.getMeasuredWidth();
-
-        int maxEdgeWidth = Math.max(leftViewWidth, rightViewWidth);
-        int calculateTotalWidth = maxEdgeWidth * 2 + centerViewWidth;
+        int maxEdgeWidth = Math.max(leftViewMeasuredWidth, rightViewMeasuredWidth);
+        int calculateTotalWidth = maxEdgeWidth * 2 + titleViewMeasuredWidth;
         // 算出来总宽度是否大于标题栏的宽度
         if (calculateTotalWidth <= titleBarWidth) {
             return;
@@ -315,20 +348,43 @@ public class TitleBar extends FrameLayout
         // 判断是左右项太长还是标题项太长
         if (maxEdgeWidth > titleBarWidth / 3) {
             // 如果是左右项太长，那么就进行动态计算
-            measureChildWithMargins(mLeftView, MeasureSpec.makeMeasureSpec(titleBarWidth / 4, MeasureSpec.EXACTLY), 0,
-                    MeasureSpec.makeMeasureSpec(mLeftView.getMeasuredHeight(), MeasureSpec.EXACTLY), 0);
-            measureChildWithMargins(mTitleView, MeasureSpec.makeMeasureSpec(titleBarWidth / 2, MeasureSpec.EXACTLY), 0,
-                    MeasureSpec.makeMeasureSpec(mTitleView.getMeasuredHeight(), MeasureSpec.EXACTLY), 0);
-            measureChildWithMargins(mRightView, MeasureSpec.makeMeasureSpec(titleBarWidth / 4, MeasureSpec.EXACTLY), 0,
-                    MeasureSpec.makeMeasureSpec(mRightView.getMeasuredHeight(), MeasureSpec.EXACTLY), 0);
+            measureTitleBar(titleBarWidth / 4, titleBarWidth / 2, titleBarWidth / 4, heightMeasureSpec);
         } else {
             // 如果是标题项太长，那么就进行动态计算
-            measureChildWithMargins(mLeftView, MeasureSpec.makeMeasureSpec(maxEdgeWidth, MeasureSpec.EXACTLY), 0,
-                    MeasureSpec.makeMeasureSpec(mLeftView.getMeasuredHeight(), MeasureSpec.EXACTLY), 0);
-            measureChildWithMargins(mTitleView, MeasureSpec.makeMeasureSpec(titleBarWidth - maxEdgeWidth * 2, MeasureSpec.EXACTLY), 0,
-                    MeasureSpec.makeMeasureSpec(mTitleView.getMeasuredHeight(), MeasureSpec.EXACTLY), 0);
-            measureChildWithMargins(mRightView, MeasureSpec.makeMeasureSpec(maxEdgeWidth, MeasureSpec.EXACTLY), 0,
-                    MeasureSpec.makeMeasureSpec(mRightView.getMeasuredHeight(), MeasureSpec.EXACTLY), 0);
+            measureTitleBar(maxEdgeWidth, titleBarWidth - maxEdgeWidth * 2, maxEdgeWidth, heightMeasureSpec);
+        }
+    }
+
+    private void measureTitleBar(int leftViewWidth, int titleViewWidth, int rightViewWidth, int titleBarHeightMeasureSpec) {
+        // 这里解释一下这里要为什么要用 TitleBar 的 heightMeasureSpec 作为子 View 测量的 heightMeasureSpec
+        // 而不是直接用子 View 的测量高度 MeasureSpec.makeMeasureSpec(xxxViewHeight, MeasureSpec.EXACTLY)
+        // 这是直接用子 View 的测量高度是理想化的，万一 TitleBar 写死高度了呢？还不是得跟随父 View 的高度来走？
+        // 另外如果那样做还会出现一个 bug，就是当 TitleBar 设置了 padding = 30dp 的，并且中间标题的 View 开启了跑马灯模式
+        // 会导致子 View 的空间会被再一次压缩，具体表现为子 View 的高度会再减去 30 dp，具体原因没有去深究
+        // 但是对比了 FrameLayout，确实人家在 measureChild 子 View 的时候就是直接用的父 View 的 heightMeasureSpec
+        int leftWidthMeasureSpec = MeasureSpec.makeMeasureSpec(leftViewWidth, MeasureSpec.EXACTLY);
+        int titleWidthMeasureSpec = MeasureSpec.makeMeasureSpec(titleViewWidth, MeasureSpec.EXACTLY);
+        int rightWidthMeasureSpec = MeasureSpec.makeMeasureSpec(rightViewWidth, MeasureSpec.EXACTLY);
+        measureChildWithMargins(mLeftView, leftWidthMeasureSpec, 0, titleBarHeightMeasureSpec, 0);
+        measureChildWithMargins(mTitleView, titleWidthMeasureSpec, 0, titleBarHeightMeasureSpec, 0);
+        measureChildWithMargins(mRightView, rightWidthMeasureSpec, 0, titleBarHeightMeasureSpec, 0);
+
+        // 这里解释一下为什么那么做，这是因为不同子 View 测量出来的高度不一样
+        // 由于我们的子 LeftView、TitleView、RightView、都是设置的 match_parent
+        // 如果有子 View 高度有不一致的问题，则必须让它调整到和 TitleBar 布局的高度保持一致才可以
+        // 主要是为了解决在 TitleView 在开启跑马灯的情况下，LeftView 和 RightView 高度没有占满 TitleBar 的问题
+        // 解决方案是我参考了 FrameLayout 源码中，有看到对设置 match_parent 宽度和高度的子 View 大小进行了二次调整
+        int titleBarMeasuredHeight = this.getMeasuredHeight();
+        if (titleBarMeasuredHeight != mLeftView.getMeasuredHeight()) {
+            mLeftView.measure(leftWidthMeasureSpec, MeasureSpec.makeMeasureSpec(titleBarMeasuredHeight, MeasureSpec.EXACTLY));
+        }
+
+        if (titleBarMeasuredHeight != mTitleView.getMeasuredHeight()) {
+            mTitleView.measure(titleWidthMeasureSpec, MeasureSpec.makeMeasureSpec(titleBarMeasuredHeight, MeasureSpec.EXACTLY));
+        }
+
+        if (titleBarMeasuredHeight != mRightView.getMeasuredHeight()) {
+            mRightView.measure(rightWidthMeasureSpec, MeasureSpec.makeMeasureSpec(titleBarMeasuredHeight, MeasureSpec.EXACTLY));
         }
     }
 
@@ -347,13 +403,13 @@ public class TitleBar extends FrameLayout
 
         // TextView 里面必须有东西才能被点击
         if (!mLeftView.isEnabled()) {
-            mLeftView.setEnabled(TitleBarSupport.isContainContent(mLeftView));
+            mLeftView.setEnabled(TitleBarSupport.containContent(mLeftView));
         }
         if (!mTitleView.isEnabled()) {
-            mTitleView.setEnabled(TitleBarSupport.isContainContent(mTitleView));
+            mTitleView.setEnabled(TitleBarSupport.containContent(mTitleView));
         }
         if (!mRightView.isEnabled()) {
-            mRightView.setEnabled(TitleBarSupport.isContainContent(mRightView));
+            mRightView.setEnabled(TitleBarSupport.containContent(mRightView));
         }
     }
 
@@ -500,6 +556,30 @@ public class TitleBar extends FrameLayout
      */
     public TitleBar setRightTitleStyle(Typeface typeface, int style) {
         mRightView.setTypeface(typeface, style);
+        return this;
+    }
+
+    /**
+     * 设置标题的文本溢出处理方式
+     */
+    public TitleBar setTitleTextEllipsize(TextUtils.TruncateAt where) {
+        TitleBarSupport.setTextViewEllipsize(mTitleView, where);
+        return this;
+    }
+
+    /**
+     * 设置左边标题的文本溢出处理方式
+     */
+    public TitleBar setLeftTitleTextEllipsize(TextUtils.TruncateAt where) {
+        TitleBarSupport.setTextViewEllipsize(mLeftView, where);
+        return this;
+    }
+
+    /**
+     * 设置右边标题的文本溢出处理方式
+     */
+    public TitleBar setRightTitleTextEllipsize(TextUtils.TruncateAt where) {
+        TitleBarSupport.setTextViewEllipsize(mRightView, where);
         return this;
     }
 
@@ -866,14 +946,14 @@ public class TitleBar extends FrameLayout
 
         // 如果标题的重心为左，那么左边就不能有内容
         if (gravity == Gravity.LEFT &&
-                TitleBarSupport.isContainContent(TitleBarSupport.isLayoutRtl(getContext()) ? mRightView : mLeftView)) {
+                TitleBarSupport.containContent(TitleBarSupport.isLayoutRtl(getContext()) ? mRightView : mLeftView)) {
             Log.e(LOG_TAG, "Title center of gravity for the left, the left title can not have content");
             return this;
         }
 
         // 如果标题的重心为右，那么右边就不能有内容
         if (gravity == Gravity.RIGHT &&
-                TitleBarSupport.isContainContent(TitleBarSupport.isLayoutRtl(getContext()) ? mLeftView : mRightView)) {
+                TitleBarSupport.containContent(TitleBarSupport.isLayoutRtl(getContext()) ? mLeftView : mRightView)) {
             Log.e(LOG_TAG, "Title center of gravity for the right, the right title can not have content");
             return this;
         }

@@ -22,7 +22,13 @@ import android.widget.TextView;
 public final class TitleBarSupport {
 
     /** 无色值 */
-    public static final int NO_COLOR = Color.TRANSPARENT;
+    static final int NO_COLOR = Color.TRANSPARENT;
+
+    public static final int ELLIPSIZE_NONE = 0;
+    public static final int ELLIPSIZE_START = 1;
+    public static final int ELLIPSIZE_MIDDLE = 2;
+    public static final int ELLIPSIZE_END = 3;
+    public static final int ELLIPSIZE_MARQUEE = 4;
 
     /**
      * 获取图片资源
@@ -76,7 +82,7 @@ public final class TitleBarSupport {
     /**
      * TextView 是否存在内容
      */
-    public static boolean isContainContent(TextView textView) {
+    public static boolean containContent(TextView textView) {
         CharSequence text = textView.getText();
         if (!TextUtils.isEmpty(text)) {
             return true;
@@ -210,5 +216,46 @@ public final class TitleBarSupport {
             default:
                 return Typeface.DEFAULT;
         }
+    }
+
+    /**
+     * int 转 Ellipsize 枚举
+     */
+    public static TextUtils.TruncateAt convertIntToEllipsizeEnum(int ellipsize) {
+        switch (ellipsize) {
+            case ELLIPSIZE_START:
+                return TextUtils.TruncateAt.START;
+            case ELLIPSIZE_MIDDLE:
+                return TextUtils.TruncateAt.MIDDLE;
+            case ELLIPSIZE_END:
+                return TextUtils.TruncateAt.END;
+            case ELLIPSIZE_MARQUEE:
+                return TextUtils.TruncateAt.MARQUEE;
+            default:
+                return null;
+        }
+    }
+
+    /**
+     * 设置 TextView 文本溢出处理方式
+     */
+    public static void setTextViewEllipsize(TextView textView, TextUtils.TruncateAt where) {
+        if (textView.getEllipsize() == where) {
+            return;
+        }
+        textView.setEllipsize(where);
+        if (where != TextUtils.TruncateAt.MARQUEE) {
+            return;
+        }
+        if (!textView.isSelected()) {
+            // 设置跑马灯之后需要设置选中才能有效果
+            textView.setSelected(true);
+        }
+        if (!textView.isFocusable()) {
+            // 设置跑马灯需要先获取焦点
+            textView.setFocusable(true);
+        }
+        // 设置跑马灯的循环次数
+        textView.setMarqueeRepeatLimit(-1);
     }
 }

@@ -16,7 +16,7 @@
         <!-- 子控件垂直内间距（可用于调整标题栏自适应的高度） -->
         <attr name="childVerticalPadding" format="dimension" />
 
-        <!-- 标题 -->
+        <!-- 中间标题 -->
         <attr name="title" format="string" />
         <attr name="titleColor" format="reference|color" />
         <attr name="titleSize" format="dimension" />
@@ -46,6 +46,14 @@
             <flag name="end" value="0x00800005" />
         </attr>
         <attr name="titleHorizontalPadding" format="dimension" />
+        <!-- 中间标题文本溢出处理模式（默认开启跑马灯） -->
+        <attr name="titleTextEllipsize">
+            <enum name="none" value="0" />
+            <enum name="start" value="1" />
+            <enum name="middle" value="2" />
+            <enum name="end" value="3" />
+            <enum name="marquee" value="4" />
+        </attr>
 
         <!-- 左标题 -->
         <attr name="leftTitle" format="string"/>
@@ -72,6 +80,14 @@
         <attr name="leftBackground" format="reference|color" />
         <attr name="leftForeground" format="reference|color" />
         <attr name="leftHorizontalPadding" format="dimension" />
+        <!-- 左边标题文本溢出处理模式 -->
+        <attr name="leftTitleTextEllipsize">
+            <enum name="none" value="0" />
+            <enum name="start" value="1" />
+            <enum name="middle" value="2" />
+            <enum name="end" value="3" />
+            <enum name="marquee" value="4" />
+        </attr>
 
         <!-- 右标题 -->
         <attr name="rightTitle" format="string" />
@@ -98,6 +114,14 @@
         <attr name="rightBackground" format="reference|color" />
         <attr name="rightForeground" format="reference|color" />
         <attr name="rightHorizontalPadding" format="dimension" />
+        <!-- 右边标题文本溢出处理模式 -->
+        <attr name="rightTitleTextEllipsize">
+            <enum name="none" value="0" />
+            <enum name="start" value="1" />
+            <enum name="middle" value="2" />
+            <enum name="end" value="3" />
+            <enum name="marquee" value="4" />
+        </attr>
 
         <!-- 分割线 -->
         <attr name="lineVisible" format="boolean" />
