@@ -5,8 +5,8 @@ android {
 
     defaultConfig {
         minSdkVersion 16
-        versionCode 1020
-        versionName "10.2"
+        versionCode 1030
+        versionName "10.3"
     }
 
     // 支持 JDK 1.8

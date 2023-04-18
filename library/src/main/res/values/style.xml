@@ -10,9 +10,9 @@
         <item name="leftTitle">@string/bar_string_placeholder</item>
         <item name="rightTitle">@string/bar_string_placeholder</item>
         <item name="lineDrawable">@drawable/bar_drawable_placeholder</item>
-        <item name="titleTextEllipsize">marquee</item>
-        <item name="leftTitleTextEllipsize">end</item>
-        <item name="rightTitleTextEllipsize">end</item>
+        <item name="titleOverflowMode">marquee</item>
+        <item name="leftTitleOverflowMode">end</item>
+        <item name="rightTitleOverflowMode">end</item>
     </style>
 
 </resources>

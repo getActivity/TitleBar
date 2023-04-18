@@ -242,17 +242,17 @@ public interface ITitleBarStyle {
     /**
      * 获取标题文本溢出的处理方式
      */
-    TextUtils.TruncateAt getTitleTextEllipsize(Context context);
+    TextUtils.TruncateAt getTitleOverflowMode(Context context);
 
     /**
      * 获取左标题文本溢出的处理方式
      */
-    TextUtils.TruncateAt getLeftTitleTextEllipsize(Context context);
+    TextUtils.TruncateAt getLeftTitleOverflowMode(Context context);
 
     /**
      * 获取右标题文本溢出的处理方式
      */
-    TextUtils.TruncateAt getRightTitleTextEllipsize(Context context);
+    TextUtils.TruncateAt getRightTitleOverflowMode(Context context);
 
     /**
      * 分割线是否显示

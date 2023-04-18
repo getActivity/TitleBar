@@ -47,7 +47,7 @@
         </attr>
         <attr name="titleHorizontalPadding" format="dimension" />
         <!-- 中间标题文本溢出处理模式（默认开启跑马灯） -->
-        <attr name="titleTextEllipsize">
+        <attr name="titleOverflowMode">
             <enum name="none" value="0" />
             <enum name="start" value="1" />
             <enum name="middle" value="2" />
@@ -81,7 +81,7 @@
         <attr name="leftForeground" format="reference|color" />
         <attr name="leftHorizontalPadding" format="dimension" />
         <!-- 左边标题文本溢出处理模式 -->
-        <attr name="leftTitleTextEllipsize">
+        <attr name="leftTitleOverflowMode">
             <enum name="none" value="0" />
             <enum name="start" value="1" />
             <enum name="middle" value="2" />
@@ -115,7 +115,7 @@
         <attr name="rightForeground" format="reference|color" />
         <attr name="rightHorizontalPadding" format="dimension" />
         <!-- 右边标题文本溢出处理模式 -->
-        <attr name="rightTitleTextEllipsize">
+        <attr name="rightTitleOverflowMode">
             <enum name="none" value="0" />
             <enum name="start" value="1" />
             <enum name="middle" value="2" />

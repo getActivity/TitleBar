@@ -239,17 +239,17 @@ public abstract class CommonBarStyle implements ITitleBarStyle {
     }
 
     @Override
-    public TextUtils.TruncateAt getTitleTextEllipsize(Context context) {
+    public TextUtils.TruncateAt getTitleOverflowMode(Context context) {
         return TextUtils.TruncateAt.MARQUEE;
     }
 
     @Override
-    public TextUtils.TruncateAt getLeftTitleTextEllipsize(Context context) {
+    public TextUtils.TruncateAt getLeftTitleOverflowMode(Context context) {
         return null;
     }
 
     @Override
-    public TextUtils.TruncateAt getRightTitleTextEllipsize(Context context) {
+    public TextUtils.TruncateAt getRightTitleOverflowMode(Context context) {
         return null;
     }
 

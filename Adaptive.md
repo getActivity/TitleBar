@@ -2,6 +2,14 @@
 
 * 你好，如果你是刚使用这个库的人可以不必理会，如果你之前使用了 `TitleBar` 这个库，也就是 `9.0` 版本以下的，在升级到 `9.0` 版本后需要进行适配，否则 `Android Studio` 会报错`编译不通过`，对于这个问题我表示十分抱歉，低版本的 `xml` 属性命名得并不是很规范，现在在 `5.0` 和 `9.0` 版本进行优化，尽管这次的代价比较大，但是我会义无反顾去做，如果你使用了 `TitleBar` 但是不想进行适配，请不要`升级`依赖库版本。
 
+#### 从 10.2 以上的版本升级到 10.3 版本适配方案
+
+* 修改 `app:titleTextEllipsize` 属性名，请使用 `app:titleOverflowMode` 代替（高版本的 CollapsingToolbarLayout 占用了 titleTextEllipsize 属性）
+
+* 修改 `app:leftTitleTextEllipsize` 属性名，请使用 `app:leftTitleOverflowMode` 代替
+
+* 修改 `app:rightTitleTextEllipsize` 属性名，请使用 `app:rightTitleOverflowMode` 代替
+
 #### 从 9.3 以上的版本升级到 9.5 版本适配方案
 
 * 修改 `app:childPaddingVertical` 属性名，请使用 `app:childVerticalPadding` 代替

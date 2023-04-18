@@ -18,8 +18,6 @@ import com.hjq.toast.Toaster;
  */
 public final class MainActivity extends AppCompatActivity {
 
-    private static final Handler HANDLER = new Handler(Looper.getMainLooper());
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

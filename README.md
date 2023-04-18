@@ -4,15 +4,13 @@
 
 * 博客地址：[Android标题栏（TitleBar）绝佳解决方案](https://www.jianshu.com/p/617be02dc265)
 
-* 可以扫码下载 Demo 进行演示或者测试，如果扫码下载不了的，[点击此处可直接下载](https://github.com/getActivity/TitleBar/releases/download/10.2/TitleBar.apk)
+* 可以扫码下载 Demo 进行演示或者测试，如果扫码下载不了的，[点击此处可直接下载](https://github.com/getActivity/TitleBar/releases/download/10.3/TitleBar.apk)
 
 ![](picture/demo_code.png)
 
 * 想了解实现原理的可以参考文章：[纯手工打造一个通用的标题栏 TitleBar](https://www.jianshu.com/p/ccf6506335e7)
 
 ![](picture/dynamic_figure.gif)
-
-### 9.0 版本 XML 属性已经改头换面了，请尽快进行[适配](Adaptive.md)
 
 #### 集成步骤
 
@@ -51,11 +49,13 @@ android {
 
 dependencies {
     // 标题栏框架：https://github.com/getActivity/TitleBar
-    implementation 'com.github.getActivity:TitleBar:10.2'
+    implementation 'com.github.getActivity:TitleBar:10.3'
 }
 ```
 
 #### 布局属性大全
+
+* [不同版本的 xml 属性适配请点击这里查看](Adaptive.md)
 
 ```xml
 <declare-styleable name="TitleBar">
@@ -105,7 +105,7 @@ dependencies {
     </attr>
     <attr name="titleHorizontalPadding" format="dimension" />
     <!-- 中间标题文本溢出处理模式（默认开启跑马灯） -->
-    <attr name="titleTextEllipsize">
+    <attr name="titleOverflowMode">
         <enum name="none" value="0" />
         <enum name="start" value="1" />
         <enum name="middle" value="2" />
@@ -139,7 +139,7 @@ dependencies {
     <attr name="leftForeground" format="reference|color" />
     <attr name="leftHorizontalPadding" format="dimension" />
     <!-- 左边标题文本溢出处理模式 -->
-    <attr name="leftTitleTextEllipsize">
+    <attr name="leftTitleOverflowMode">
         <enum name="none" value="0" />
         <enum name="start" value="1" />
         <enum name="middle" value="2" />
@@ -173,7 +173,7 @@ dependencies {
     <attr name="rightForeground" format="reference|color" />
     <attr name="rightHorizontalPadding" format="dimension" />
     <!-- 右边标题文本溢出处理模式 -->
-    <attr name="rightTitleTextEllipsize">
+    <attr name="rightTitleOverflowMode">
         <enum name="none" value="0" />
         <enum name="start" value="1" />
         <enum name="middle" value="2" />

@@ -219,9 +219,9 @@ public final class TitleBarSupport {
     }
 
     /**
-     * int 转 Ellipsize 枚举
+     * int 转 TruncateAt 枚举
      */
-    public static TextUtils.TruncateAt convertIntToEllipsizeEnum(int ellipsize) {
+    public static TextUtils.TruncateAt convertIntToTruncateAtEnum(int ellipsize) {
         switch (ellipsize) {
             case ELLIPSIZE_START:
                 return TextUtils.TruncateAt.START;

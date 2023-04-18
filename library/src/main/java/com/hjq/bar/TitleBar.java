@@ -214,20 +214,20 @@ public class TitleBar extends FrameLayout
                 mCurrentStyle.getRightTitleStyle(context);
         setRightTitleStyle(mCurrentStyle.getRightTitleTypeface(context, rightTitleStyle), rightTitleStyle);
 
-        TextUtils.TruncateAt titleTextEllipsize = array.hasValue(R.styleable.TitleBar_titleTextEllipsize) ?
-                TitleBarSupport.convertIntToEllipsizeEnum(array.getInt(R.styleable.TitleBar_titleTextEllipsize, TitleBarSupport.ELLIPSIZE_NONE)) :
-                mCurrentStyle.getTitleTextEllipsize(context);
-        setTitleTextEllipsize(titleTextEllipsize);
+        TextUtils.TruncateAt titleOverflowMode = array.hasValue(R.styleable.TitleBar_titleOverflowMode) ?
+                TitleBarSupport.convertIntToTruncateAtEnum(array.getInt(R.styleable.TitleBar_titleOverflowMode, TitleBarSupport.ELLIPSIZE_NONE)) :
+                mCurrentStyle.getTitleOverflowMode(context);
+        setTitleOverflowMode(titleOverflowMode);
 
-        TextUtils.TruncateAt leftTitleTextEllipsize = array.hasValue(R.styleable.TitleBar_leftTitleTextEllipsize) ?
-                TitleBarSupport.convertIntToEllipsizeEnum(array.getInt(R.styleable.TitleBar_leftTitleTextEllipsize, TitleBarSupport.ELLIPSIZE_NONE)) :
-                mCurrentStyle.getLeftTitleTextEllipsize(context);
-        setLeftTitleTextEllipsize(leftTitleTextEllipsize);
+        TextUtils.TruncateAt leftTitleOverflowMode = array.hasValue(R.styleable.TitleBar_leftTitleOverflowMode) ?
+                TitleBarSupport.convertIntToTruncateAtEnum(array.getInt(R.styleable.TitleBar_leftTitleOverflowMode, TitleBarSupport.ELLIPSIZE_NONE)) :
+                mCurrentStyle.getLeftTitleOverflowMode(context);
+        setLeftTitleOverflowMode(leftTitleOverflowMode);
 
-        TextUtils.TruncateAt rightTitleTextEllipsize = array.hasValue(R.styleable.TitleBar_rightTitleTextEllipsize) ?
-                TitleBarSupport.convertIntToEllipsizeEnum(array.getInt(R.styleable.TitleBar_rightTitleTextEllipsize, TitleBarSupport.ELLIPSIZE_NONE)) :
-                mCurrentStyle.getRightTitleTextEllipsize(context);
-        setRightTitleTextEllipsize(rightTitleTextEllipsize);
+        TextUtils.TruncateAt rightTitleOverflowMode = array.hasValue(R.styleable.TitleBar_rightTitleOverflowMode) ?
+                TitleBarSupport.convertIntToTruncateAtEnum(array.getInt(R.styleable.TitleBar_rightTitleOverflowMode, TitleBarSupport.ELLIPSIZE_NONE)) :
+                mCurrentStyle.getRightTitleOverflowMode(context);
+        setRightTitleOverflowMode(rightTitleOverflowMode);
 
         // 标题重心设置
         if (array.hasValue(R.styleable.TitleBar_titleGravity)) {
@@ -402,15 +402,9 @@ public class TitleBar extends FrameLayout
         }
 
         // TextView 里面必须有东西才能被点击
-        if (!mLeftView.isEnabled()) {
-            mLeftView.setEnabled(TitleBarSupport.containContent(mLeftView));
-        }
-        if (!mTitleView.isEnabled()) {
-            mTitleView.setEnabled(TitleBarSupport.containContent(mTitleView));
-        }
-        if (!mRightView.isEnabled()) {
-            mRightView.setEnabled(TitleBarSupport.containContent(mRightView));
-        }
+        mLeftView.setEnabled(TitleBarSupport.containContent(mLeftView));
+        mTitleView.setEnabled(TitleBarSupport.containContent(mTitleView));
+        mRightView.setEnabled(TitleBarSupport.containContent(mRightView));
     }
 
     /**
@@ -562,7 +556,7 @@ public class TitleBar extends FrameLayout
     /**
      * 设置标题的文本溢出处理方式
      */
-    public TitleBar setTitleTextEllipsize(TextUtils.TruncateAt where) {
+    public TitleBar setTitleOverflowMode(TextUtils.TruncateAt where) {
         TitleBarSupport.setTextViewEllipsize(mTitleView, where);
         return this;
     }
@@ -570,7 +564,7 @@ public class TitleBar extends FrameLayout
     /**
      * 设置左边标题的文本溢出处理方式
      */
-    public TitleBar setLeftTitleTextEllipsize(TextUtils.TruncateAt where) {
+    public TitleBar setLeftTitleOverflowMode(TextUtils.TruncateAt where) {
         TitleBarSupport.setTextViewEllipsize(mLeftView, where);
         return this;
     }
@@ -578,7 +572,7 @@ public class TitleBar extends FrameLayout
     /**
      * 设置右边标题的文本溢出处理方式
      */
-    public TitleBar setRightTitleTextEllipsize(TextUtils.TruncateAt where) {
+    public TitleBar setRightTitleOverflowMode(TextUtils.TruncateAt where) {
         TitleBarSupport.setTextViewEllipsize(mRightView, where);
         return this;
     }
