@@ -40,7 +40,6 @@
                 app:layout_collapseMode="pin" />
 
             <TextView
-                android:id="@+id/tv_about_version"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"

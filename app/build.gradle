@@ -7,8 +7,8 @@ android {
         applicationId "com.hjq.bar.demo"
         minSdkVersion 17
         targetSdkVersion 31
-        versionCode 1030
-        versionName "10.3"
+        versionCode 1050
+        versionName "10.5"
     }
 
     // 支持 JDK 1.8

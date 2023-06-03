@@ -323,36 +323,34 @@ public class TitleBar extends FrameLayout
         int rightViewMeasuredWidth = mRightView.getMeasuredWidth();
         int rightViewMeasuredHeight = mRightView.getMeasuredHeight();
 
-        if (!TitleBarSupport.containContent(mTitleView)) {
-            if (!TitleBarSupport.containContent(mRightView)) {
-                measureTitleBar(titleBarWidth, 0, 0, heightMeasureSpec);
-                return;
-            }
-
-            if (rightViewMeasuredWidth <= titleBarWidth / 3) {
-                measureTitleBar(titleBarWidth - rightViewMeasuredWidth, 0, rightViewMeasuredWidth, heightMeasureSpec);
-                return;
-            }
-
-            measureTitleBar(titleBarWidth / 4 * 3, titleBarWidth / 4, rightViewMeasuredWidth, heightMeasureSpec);
-            return;
-        }
-
         int maxEdgeWidth = Math.max(leftViewMeasuredWidth, rightViewMeasuredWidth);
         int calculateTotalWidth = maxEdgeWidth * 2 + titleViewMeasuredWidth;
-        // 算出来总宽度是否大于标题栏的宽度
+        // 算出来总宽度是否小于标题栏的宽度
         if (calculateTotalWidth <= titleBarWidth) {
+            measureTitleBar((TitleBarSupport.containContent(mLeftView) ? leftViewMeasuredWidth : 0), titleViewMeasuredWidth,
+                    (TitleBarSupport.containContent(mRightView) ? rightViewMeasuredWidth : 0), heightMeasureSpec);
             return;
         }
+
+        int leftViewWidth;
+        int titleViewWidth;
+        int rightViewWidth;
 
         // 判断是左右项太长还是标题项太长
         if (maxEdgeWidth > titleBarWidth / 3) {
             // 如果是左右项太长，那么就进行动态计算
-            measureTitleBar(titleBarWidth / 4, titleBarWidth / 2, titleBarWidth / 4, heightMeasureSpec);
+            leftViewWidth = titleBarWidth / 4;
+            titleViewWidth = titleBarWidth / 2;
+            rightViewWidth = titleBarWidth / 4;
         } else {
             // 如果是标题项太长，那么就进行动态计算
-            measureTitleBar(maxEdgeWidth, titleBarWidth - maxEdgeWidth * 2, maxEdgeWidth, heightMeasureSpec);
+            leftViewWidth = maxEdgeWidth;
+            titleViewWidth = titleBarWidth - maxEdgeWidth * 2;
+            rightViewWidth = maxEdgeWidth;
         }
+
+        measureTitleBar((TitleBarSupport.containContent(mLeftView) ? leftViewWidth : 0), titleViewWidth,
+                (TitleBarSupport.containContent(mRightView) ? rightViewWidth : 0), heightMeasureSpec);
     }
 
     private void measureTitleBar(int leftViewWidth, int titleViewWidth, int rightViewWidth, int titleBarHeightMeasureSpec) {
