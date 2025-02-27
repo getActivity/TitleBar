@@ -1,14 +1,14 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 31
+    compileSdkVersion 34
 
     defaultConfig {
         applicationId "com.hjq.bar.demo"
-        minSdkVersion 17
-        targetSdkVersion 31
-        versionCode 1050
-        versionName "10.5"
+        minSdkVersion 18
+        targetSdkVersion 34
+        versionCode 1060
+        versionName "10.6"
     }
 
     // 支持 JDK 1.8
@@ -41,9 +41,9 @@ android {
         }
     }
 
-    applicationVariants.all { variant ->
+    applicationVariants.configureEach { variant ->
         // apk 输出文件名配置
-        variant.outputs.all { output ->
+        variant.outputs.configureEach { output ->
             outputFileName = rootProject.getName() + '.apk'
         }
     }
@@ -61,8 +61,11 @@ dependencies {
     implementation 'com.google.android.material:material:1.4.0'
 
     // 吐司工具类：https://github.com/getActivity/Toaster
-    implementation 'com.github.getActivity:Toaster:12.2'
+    implementation 'com.github.getActivity:Toaster:12.5'
 
     // 内存泄漏捕捉：https://github.com/square/leakcanary
-    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.10'
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.12'
+
+    // 权限请求框架：https://github.com/getActivity/XXPermissions
+    implementation 'com.github.getActivity:XXPermissions:18.5'
 }

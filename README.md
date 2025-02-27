@@ -4,7 +4,7 @@
 
 * 博客地址：[Android标题栏（TitleBar）绝佳解决方案](https://www.jianshu.com/p/617be02dc265)
 
-* 可以扫码下载 Demo 进行演示或者测试，如果扫码下载不了的，[点击此处可直接下载](https://github.com/getActivity/TitleBar/releases/download/10.5/TitleBar.apk)
+* 可以扫码下载 Demo 进行演示或者测试，如果扫码下载不了的，[点击此处可直接下载](https://github.com/getActivity/TitleBar/releases/download/10.6/TitleBar.apk)
 
 ![](picture/demo_code.png)
 
@@ -49,7 +49,7 @@ android {
 
 dependencies {
     // 标题栏框架：https://github.com/getActivity/TitleBar
-    implementation 'com.github.getActivity:TitleBar:10.5'
+    implementation 'com.github.getActivity:TitleBar:10.6'
 }
 ```
 
@@ -68,7 +68,6 @@ dependencies {
         <enum name="light" value="0x10" />
         <enum name="night" value="0x20" />
         <enum name="transparent" value="0x30" />
-        <enum name="ripple" value="0x40" />
     </attr>
 
     <!-- 子控件垂直内间距（可用于调整标题栏自适应的高度） -->
@@ -256,6 +255,10 @@ public class XxxApplication extends Application {
 
 * 支持全局配置样式：可以在 Application 中初始化 TitleBar 样式，达到一劳永逸的效果
 
+#### 注意事项
+
+* TitleBar 并不是为了满足所有需求而诞生的，我的设计初衷是只针对一些常用的需求，例如左边中间右边各有一个 TextView 做封装，其他情况建议进行自定义布局。
+
 #### 作者的其他开源项目
 
 * 安卓技术中台：[AndroidProject](https://github.com/getActivity/AndroidProject) ![](https://img.shields.io/github/stars/getActivity/AndroidProject.svg) ![](https://img.shields.io/github/forks/getActivity/AndroidProject.svg)
@@ -309,18 +312,6 @@ public class XxxApplication extends Application {
 #### 如果您觉得我的开源库帮你节省了大量的开发时间，请扫描下方的二维码随意打赏，要是能打赏个 10.24 :monkey_face:就太:thumbsup:了。您的支持将鼓励我继续创作:octocat:（[点击查看捐赠列表](https://github.com/getActivity/Donate)）
 
 ![](https://raw.githubusercontent.com/getActivity/Donate/master/picture/pay_ali.png) ![](https://raw.githubusercontent.com/getActivity/Donate/master/picture/pay_wechat.png)
-
-#### 广告区
-
-* 我现在任腾讯云服务器推广大使，大家如果有购买服务器的需求，可以通过下面的链接购买
-
-[![](https://upload-dianshi-1255598498.file.myqcloud.com/upload/nodir/345X200-9ae456f58874df499adf7c331c02cb0fed12b81d.jpg)](https://curl.qcloud.com/A6cYskvv)
-
- [【腾讯云】云服务器、云数据库、COS、CDN、短信等云产品特惠热卖中](https://curl.qcloud.com/A6cYskvv)
-
-[![](https://upload-dianshi-1255598498.file.myqcloud.com/345-200-b28f7dee9552f4241ea6a543f15a9798049701d4.jpg)](https://curl.qcloud.com/up4fQsdn)
-
-[【腾讯云】中小企业福利专场，多款刚需产品，满足企业通用场景需求](https://curl.qcloud.com/up4fQsdn)
 
 ## License
 
