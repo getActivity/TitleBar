@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- 标题栏水波纹点击样式 -->
+    <style name="TitleBarRippleClickStyle" parent="TitleBarDefaultStyle">
+        <item name="leftBackground">?android:attr/selectableItemBackgroundBorderless</item>
+        <item name="rightBackground">?android:attr/selectableItemBackgroundBorderless</item>
+    </style>
+
+</resources>

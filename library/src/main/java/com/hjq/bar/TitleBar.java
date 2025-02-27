@@ -16,10 +16,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.TextView;
-
 import com.hjq.bar.style.LightBarStyle;
 import com.hjq.bar.style.NightBarStyle;
-import com.hjq.bar.style.RippleBarStyle;
 import com.hjq.bar.style.TransparentBarStyle;
 
 /**
@@ -91,9 +89,6 @@ public class TitleBar extends FrameLayout
                 break;
             case 0x30:
                 mCurrentStyle = new TransparentBarStyle();
-                break;
-            case 0x40:
-                mCurrentStyle = new RippleBarStyle();
                 break;
             default:
                 mCurrentStyle = TitleBar.sGlobalStyle;

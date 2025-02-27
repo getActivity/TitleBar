@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!-- 标题栏默认样式 -->
     <style name="TitleBarDefaultStyle">
         <item name="android:background">@drawable/bar_drawable_placeholder</item>
         <item name="leftIcon">@drawable/bar_drawable_placeholder</item>
@@ -13,6 +14,10 @@
         <item name="titleOverflowMode">marquee</item>
         <item name="leftTitleOverflowMode">end</item>
         <item name="rightTitleOverflowMode">end</item>
+    </style>
+
+    <!-- 标题栏水波纹点击样式 -->
+    <style name="TitleBarRippleClickStyle" parent="TitleBarDefaultStyle">
     </style>
 
 </resources>
