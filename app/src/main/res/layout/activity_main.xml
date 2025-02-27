@@ -34,9 +34,10 @@
                 app:layout_collapseMode="pin" />
 
             <com.hjq.bar.TitleBar
+                style="@style/TitleBarRippleClickStyle"
                 android:layout_width="match_parent"
                 android:layout_height="?android:attr/actionBarSize"
-                app:barStyle="ripple"
+                app:barStyle="transparent"
                 app:layout_collapseMode="pin" />
 
             <TextView
@@ -192,13 +193,12 @@
 
                 <com.hjq.bar.TitleBar
                     android:id="@+id/tb_main_bar_click"
+                    style="@style/TitleBarRippleClickStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="15dp"
-                    app:leftBackground="?attr/selectableItemBackground"
                     app:leftIcon="@mipmap/ic_launcher"
                     app:leftTitle="左边"
-                    app:rightBackground="?attr/selectableItemBackground"
                     app:rightIcon="@mipmap/ic_launcher"
                     app:rightTitle="右边"
                     app:title="监听标题栏点击事件" />
@@ -213,6 +213,7 @@
                     app:title="夜间模式的标题栏" />
 
                 <com.hjq.bar.TitleBar
+                    style="@style/TitleBarRippleClickStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="15dp"
