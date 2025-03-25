@@ -227,8 +227,8 @@ public class XxxApplication extends Application {
     public void onCreate() {
         super.onCreate();
 
-        // 初始化 TitleBar 默认样式
-        TitleBar.setDefaultStyle(new ITitleBarStyle());
+        // 设置标题栏全局样式
+        TitleBar.setGlobalStyle(new LightBarStyle());
     }
 }
 ```

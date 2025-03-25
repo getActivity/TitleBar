@@ -19,8 +19,8 @@ public final class AppApplication extends Application {
         // 初始化 Toast
         Toaster.init(this);
 
-        // 初始化 TitleBar 默认样式
-        TitleBar.setDefaultStyle(new LightBarStyle() {
+        // 设置标题栏全局样式
+        TitleBar.setGlobalStyle(new LightBarStyle() {
 
             @Override
             public TextView newTitleView(Context context) {

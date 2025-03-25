@@ -85,7 +85,7 @@ public class TitleBar extends FrameLayout
         super(context, attrs, defStyleAttr);
 
         if (sGlobalStyle == null) {
-            setDefaultStyle(new LightBarStyle());
+            setGlobalStyle(new LightBarStyle());
         }
 
         final TypedArray array = context.obtainStyledAttributes(attrs, R.styleable.TitleBar, 0, R.style.TitleBarDefaultStyle);
@@ -102,7 +102,7 @@ public class TitleBar extends FrameLayout
                 mCurrentStyle = new TransparentBarStyle();
                 break;
             default:
-                mCurrentStyle = TitleBar.getDefaultStyle();
+                mCurrentStyle = TitleBar.getGlobalStyle();
                 break;
         }
 
@@ -1011,23 +1011,23 @@ public class TitleBar extends FrameLayout
     }
 
     /**
-     * 获取当前的初始化器
+     * 获取当前样式
      */
     public ITitleBarStyle getCurrentStyle() {
         return mCurrentStyle;
     }
 
     /**
-     * 设置默认初始化器
+     * 设置全局样式
      */
-    public static void setDefaultStyle(ITitleBarStyle style) {
+    public static void setGlobalStyle(ITitleBarStyle style) {
         sGlobalStyle = style;
     }
 
     /**
-     * 获取默认初始化器
+     * 获取全局样式
      */
-    public static ITitleBarStyle getDefaultStyle() {
+    public static ITitleBarStyle getGlobalStyle() {
         return sGlobalStyle;
     }
 }
