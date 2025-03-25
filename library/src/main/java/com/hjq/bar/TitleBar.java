@@ -42,25 +42,36 @@ public class TitleBar extends FrameLayout
     private OnTitleBarListener mListener;
 
     /** 标题栏子控件 */
-    private final TextView mLeftView, mTitleView, mRightView;
+    private final TextView mLeftView;
+    private final TextView mTitleView;
+    private final TextView mRightView;
     private final View mLineView;
 
     /** 控件水平间距 */
-    private int mLeftHorizontalPadding, mTitleHorizontalPadding, mRightHorizontalPadding;
+    private int mLeftHorizontalPadding;
+    private int mTitleHorizontalPadding;
+    private int mRightHorizontalPadding;
 
     /** 控件垂直间距 */
     private int mVerticalPadding;
 
     /** 图标显示大小 */
-    private int mLeftIconWidth, mLeftIconHeight;
-    private int mTitleIconWidth, mTitleIconHeight;
-    private int mRightIconWidth, mRightIconHeight;
+    private int mLeftIconWidth;
+    private int mLeftIconHeight;
+    private int mTitleIconWidth;
+    private int mTitleIconHeight;
+    private int mRightIconWidth;
+    private int mRightIconHeight;
 
     /** 图标显示重心 */
-    private int mLeftIconGravity, mTitleIconGravity, mRightIconGravity;
+    private int mLeftIconGravity;
+    private int mTitleIconGravity;
+    private int mRightIconGravity;
 
     /** 图标着色器 */
-    private int mLeftIconTint, mTitleIconTint, mRightIconTint = TitleBarSupport.NO_COLOR;
+    private int mLeftIconTint = TitleBarSupport.NO_COLOR;
+    private int mTitleIconTint = TitleBarSupport.NO_COLOR;
+    private int mRightIconTint = TitleBarSupport.NO_COLOR;
 
     public TitleBar(Context context) {
         this(context, null);
@@ -74,7 +85,7 @@ public class TitleBar extends FrameLayout
         super(context, attrs, defStyleAttr);
 
         if (sGlobalStyle == null) {
-            sGlobalStyle = new LightBarStyle();
+            setDefaultStyle(new LightBarStyle());
         }
 
         final TypedArray array = context.obtainStyledAttributes(attrs, R.styleable.TitleBar, 0, R.style.TitleBarDefaultStyle);
@@ -91,7 +102,7 @@ public class TitleBar extends FrameLayout
                 mCurrentStyle = new TransparentBarStyle();
                 break;
             default:
-                mCurrentStyle = TitleBar.sGlobalStyle;
+                mCurrentStyle = TitleBar.getDefaultStyle();
                 break;
         }
 
@@ -230,10 +241,9 @@ public class TitleBar extends FrameLayout
         }
 
         // 设置背景
-        if (array.hasValue(R.styleable.TitleBar_android_background)) {
-            if (array.getResourceId(R.styleable.TitleBar_android_background, 0) == R.drawable.bar_drawable_placeholder) {
-                TitleBarSupport.setBackground(this, mCurrentStyle.getTitleBarBackground(context));
-            }
+        if (array.hasValue(R.styleable.TitleBar_android_background) &&
+                    array.getResourceId(R.styleable.TitleBar_android_background, 0) == R.drawable.bar_drawable_placeholder) {
+            TitleBarSupport.setBackground(this, mCurrentStyle.getTitleBarBackground(context));
         }
 
         if (array.hasValue(R.styleable.TitleBar_leftBackground)) {
@@ -421,9 +431,9 @@ public class TitleBar extends FrameLayout
 
     @Override
     public void setLayoutParams(ViewGroup.LayoutParams params) {
-        if (params.width == LayoutParams.WRAP_CONTENT) {
+        if (params.width == ViewGroup.LayoutParams.WRAP_CONTENT) {
             // 如果当前宽度是自适应则转换成占满父布局
-            params.width = LayoutParams.MATCH_PARENT;
+            params.width = ViewGroup.LayoutParams.MATCH_PARENT;
         }
 
         int verticalPadding = 0;
@@ -438,7 +448,7 @@ public class TitleBar extends FrameLayout
 
     @Override
     protected LayoutParams generateDefaultLayoutParams() {
-        return new FrameLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+        return new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
     }
 
     /**
@@ -1012,5 +1022,12 @@ public class TitleBar extends FrameLayout
      */
     public static void setDefaultStyle(ITitleBarStyle style) {
         sGlobalStyle = style;
+    }
+
+    /**
+     * 获取默认初始化器
+     */
+    public static ITitleBarStyle getDefaultStyle() {
+        return sGlobalStyle;
     }
 }
