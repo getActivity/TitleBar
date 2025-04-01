@@ -233,14 +233,6 @@ public class XxxApplication extends Application {
 }
 ```
 
-#### 框架混淆规则
-
-* 在混淆规则文件 `proguard-rules.pro` 中加入
-
-```text
--keep class com.hjq.bar.** {*;}
-```
-
 #### 框架亮点
 
 * 性能最佳：不使用 LayoutInflater，而使用代码创建 View 的形式
