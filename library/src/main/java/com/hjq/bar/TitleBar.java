@@ -368,25 +368,37 @@ public class TitleBar extends FrameLayout
         int leftWidthMeasureSpec = MeasureSpec.makeMeasureSpec(leftViewWidth, MeasureSpec.EXACTLY);
         int titleWidthMeasureSpec = MeasureSpec.makeMeasureSpec(titleViewWidth, MeasureSpec.EXACTLY);
         int rightWidthMeasureSpec = MeasureSpec.makeMeasureSpec(rightViewWidth, MeasureSpec.EXACTLY);
-        measureChildWithMargins(mLeftView, leftWidthMeasureSpec, 0, titleBarHeightMeasureSpec, 0);
-        measureChildWithMargins(mTitleView, titleWidthMeasureSpec, 0, titleBarHeightMeasureSpec, 0);
-        measureChildWithMargins(mRightView, rightWidthMeasureSpec, 0, titleBarHeightMeasureSpec, 0);
+
+        // 重新测量子 View 的宽度，前提是设置的高度必须和之前测量的不一样，否则会导致重复测量，同时也会导致 xml 布局预览异常
+        if (leftViewWidth != mLeftView.getMeasuredWidth()) {
+            measureChildWithMargins(mLeftView, leftWidthMeasureSpec, 0, titleBarHeightMeasureSpec, 0);
+        }
+
+        if (titleViewWidth != mTitleView.getMeasuredWidth()) {
+            measureChildWithMargins(mTitleView, titleWidthMeasureSpec, 0, titleBarHeightMeasureSpec, 0);
+        }
+
+        if (rightViewWidth != mRightView.getMeasuredWidth()) {
+            measureChildWithMargins(mRightView, rightWidthMeasureSpec, 0, titleBarHeightMeasureSpec, 0);
+        }
 
         // 这里解释一下为什么那么做，这是因为不同子 View 测量出来的高度不一样
         // 由于我们的子 LeftView、TitleView、RightView、都是设置的 match_parent
         // 如果有子 View 高度有不一致的问题，则必须让它调整到和 TitleBar 布局的高度保持一致才可以
         // 主要是为了解决在 TitleView 在开启跑马灯的情况下，LeftView 和 RightView 高度没有占满 TitleBar 的问题
+        // 但是有一个前提条件，这个子 View 当前要设置的宽度不能等于 0，因为这种情况下就算调整了子 View 的高度也是没有任何意义和作用的
         // 解决方案是我参考了 FrameLayout 源码中，有看到对设置 match_parent 宽度和高度的子 View 大小进行了二次调整
         int titleBarMeasuredHeight = this.getMeasuredHeight();
-        if (titleBarMeasuredHeight != mLeftView.getMeasuredHeight()) {
+
+        if (leftViewWidth != 0 && titleBarMeasuredHeight != mLeftView.getMeasuredHeight()) {
             mLeftView.measure(leftWidthMeasureSpec, MeasureSpec.makeMeasureSpec(titleBarMeasuredHeight, MeasureSpec.EXACTLY));
         }
 
-        if (titleBarMeasuredHeight != mTitleView.getMeasuredHeight()) {
+        if (titleViewWidth != 0 && titleBarMeasuredHeight != mTitleView.getMeasuredHeight()) {
             mTitleView.measure(titleWidthMeasureSpec, MeasureSpec.makeMeasureSpec(titleBarMeasuredHeight, MeasureSpec.EXACTLY));
         }
 
-        if (titleBarMeasuredHeight != mRightView.getMeasuredHeight()) {
+        if (rightViewWidth != 0 && titleBarMeasuredHeight != mRightView.getMeasuredHeight()) {
             mRightView.measure(rightWidthMeasureSpec, MeasureSpec.makeMeasureSpec(titleBarMeasuredHeight, MeasureSpec.EXACTLY));
         }
     }
