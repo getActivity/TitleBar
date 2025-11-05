@@ -61,7 +61,7 @@ dependencies {
     implementation 'com.google.android.material:material:1.4.0'
 
     // 吐司工具类：https://github.com/getActivity/Toaster
-    implementation 'com.github.getActivity:Toaster:12.5'
+    implementation 'com.github.getActivity:Toaster:13.8'
 
     // 内存泄漏捕捉：https://github.com/square/leakcanary
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.12'
