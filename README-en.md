@@ -4,7 +4,7 @@
 
 * Project address: [Github](https://github.com/getActivity/TitleBar)
 
-* [Click here to download demo apk directly](https://github.com/getActivity/TitleBar/releases/download/10.6/TitleBar.apk)
+* [Click here to download demo apk directly](https://github.com/getActivity/TitleBar/releases/download/10.8/TitleBar.apk)
 
 ![](picture/en/demo_dynamic_figure.gif)
 
@@ -45,7 +45,7 @@ android {
 
 dependencies {
     // TitleBar framework: https://github.com/getActivity/TitleBar
-    implementation 'com.github.getActivity:TitleBar:10.6'
+    implementation 'com.github.getActivity:TitleBar:10.8'
 }
 ```
 

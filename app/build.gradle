@@ -7,8 +7,8 @@ android {
         applicationId "com.hjq.bar.demo"
         minSdkVersion 18
         targetSdkVersion 34
-        versionCode 1060
-        versionName "10.6"
+        versionCode 1080
+        versionName "10.8"
     }
 
     // 支持 JDK 1.8
@@ -65,9 +65,4 @@ dependencies {
 
     // 内存泄漏捕捉：https://github.com/square/leakcanary
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.12'
-
-    // 设备兼容框架：https://github.com/getActivity/DeviceCompat
-    implementation 'com.github.getActivity:DeviceCompat:1.0'
-    // 权限请求框架：https://github.com/getActivity/XXPermissions
-    implementation 'com.github.getActivity:XXPermissions:26.5'
 }
