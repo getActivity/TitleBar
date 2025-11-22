@@ -1,4 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">TitleBar</string>
+
+    <string name="demo_left_view_clicked">Left view clicked</string>
+    <string name="demo_center_view_clicked">Center view clicked</string>
+    <string name="demo_right_view_clicked">Right view clicked</string>
+    <string name="demo_collapsing_title">Collapsing effect</string>
+    <string name="demo_collapsing_use_with_coordinator_layout">Use with CoordinatorLayout</string>
+    <string name="demo_title_bar_default">Default title bar</string>
+    <string name="demo_title_bar_no_back_italic">No back button and title italic</string>
+    <string name="demo_title_bar_left_bold">Title left and bold</string>
+    <string name="demo_title_bar_no_divider">Title bar without divider</string>
+    <string name="demo_title_bar_marquee">The title text will automatically start the marquee effect if it is too long</string>
+    <string name="demo_title_bar_adjust_height">Adjust the height of the title bar by vertical padding</string>
+    <string name="demo_title_bar_left">Left</string>
+    <string name="demo_title_bar_right">Right</string>
+    <string name="demo_title_bar_icon_tint">Set icon tint</string>
+    <string name="demo_title_bar_scan">Scan</string>
+    <string name="demo_title_bar_message">Message</string>
+    <string name="demo_title_bar_icon_position_size">Control icon position and size</string>
+    <string name="demo_title_bar_custom_text">Custom text size and color</string>
+    <string name="demo_title_bar_click_listener">Listen for title bar click events</string>
+    <string name="demo_title_bar_back">Back</string>
+    <string name="demo_title_bar_setting">Settings</string>
+    <string name="demo_title_bar_night_mode">Title bar in night mode</string>
+    <string name="demo_title_bar_qq_style">Imitation QQ gradient style</string>
+    <string name="demo_title_bar_left_two_buttons">Two buttons on the left</string>
+    <string name="demo_title_bar_right_two_buttons">Two buttons on the right</string>
+    <string name="demo_title_bar_i_am_text">I am text</string>
+    <string name="demo_title_bar_i_am_main_title">I am the main title</string>
+    <string name="demo_title_bar_i_am_sub_title">I am the sub title</string>
+    <string name="demo_title_bar_long_text">I am a very long, long, long, long, long copy</string>
+    <string name="demo_title_bar_left_text">Left text</string>
+    <string name="demo_title_bar_right_text">Right text</string>
+    <string name="demo_title_bar_long_title">I am a very, very, very, very, very, very, very, very, very, very long title</string>
 </resources>

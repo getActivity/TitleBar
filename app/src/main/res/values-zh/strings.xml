@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">TitleBar</string>
+
+    <string name="demo_left_view_clicked">左项 View 被点击</string>
+    <string name="demo_center_view_clicked">中间 View 被点击</string>
+    <string name="demo_right_view_clicked">右项 View 被点击</string>
+    <string name="demo_collapsing_title">折叠效果</string>
+    <string name="demo_collapsing_use_with_coordinator_layout">搭配 CoordinatorLayout 使用</string>
+    <string name="demo_title_bar_default">默认的标题栏</string>
+    <string name="demo_title_bar_no_back_italic">不带返回按钮并标题斜体</string>
+    <string name="demo_title_bar_left_bold">标题向左对齐并且加粗</string>
+    <string name="demo_title_bar_no_divider">不带分割线的标题栏</string>
+    <string name="demo_title_bar_marquee">标题文字过多会自动开启自带跑马灯效果，就问你溜不溜</string>
+    <string name="demo_title_bar_adjust_height">通过垂直内间距来调整标题栏的高度</string>
+    <string name="demo_title_bar_left">左边</string>
+    <string name="demo_title_bar_right">右边</string>
+    <string name="demo_title_bar_icon_tint">设置图标重色器</string>
+    <string name="demo_title_bar_scan">扫一扫</string>
+    <string name="demo_title_bar_message">消息</string>
+    <string name="demo_title_bar_icon_position_size">控制图标的位置和大小</string>
+    <string name="demo_title_bar_custom_text">自定义文字大小和颜色</string>
+    <string name="demo_title_bar_click_listener">监听标题栏点击事件</string>
+    <string name="demo_title_bar_back">返回</string>
+    <string name="demo_title_bar_setting">设置</string>
+    <string name="demo_title_bar_night_mode">夜间模式的标题栏</string>
+    <string name="demo_title_bar_qq_style">仿QQ渐变样式</string>
+    <string name="demo_title_bar_left_two_buttons">左边两个按钮效果</string>
+    <string name="demo_title_bar_right_two_buttons">右边两个按钮效果</string>
+    <string name="demo_title_bar_i_am_text">我是文本</string>
+    <string name="demo_title_bar_i_am_main_title">我是主标题</string>
+    <string name="demo_title_bar_i_am_sub_title">我是副标题</string>
+    <string name="demo_title_bar_long_text">我是很长很长很长很长很长的文案</string>
+    <string name="demo_title_bar_left_text">左边文案</string>
+    <string name="demo_title_bar_right_text">右边文案</string>
+    <string name="demo_title_bar_long_title">我是很长很长很长很长很长很长很长很长很长很长的标题</string>
+</resources>

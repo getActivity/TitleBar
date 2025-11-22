@@ -1,3 +1,5 @@
+# [English Doc](README-en.md)
+
 # 标题栏框架
 
 * 项目地址：[Github](https://github.com/getActivity/TitleBar)
@@ -6,11 +8,11 @@
 
 * 可以扫码下载 Demo 进行演示或者测试，如果扫码下载不了的，[点击此处可直接下载](https://github.com/getActivity/TitleBar/releases/download/10.6/TitleBar.apk)
 
-![](picture/demo_code.png)
+![](picture/zh/demo_code.png)
 
 * 想了解实现原理的可以参考文章：[纯手工打造一个通用的标题栏 TitleBar](https://www.jianshu.com/p/ccf6506335e7)
 
-![](picture/dynamic_figure.gif)
+![](picture/zh/demo_dynamic_figure.gif)
 
 #### 集成步骤
 
@@ -192,7 +194,7 @@ dependencies {
 
 * [点我查看完整的 Demo 示例](app/src/main/res/layout/activity_main.xml)
 
-![](picture/demo.jpg)
+![](picture/zh/demo_preview.jpg)
 
 #### 设置监听事件
 
@@ -264,6 +266,8 @@ public class XxxApplication extends Application {
 * 网络框架：[EasyHttp](https://github.com/getActivity/EasyHttp) ![](https://img.shields.io/github/stars/getActivity/EasyHttp.svg) ![](https://img.shields.io/github/forks/getActivity/EasyHttp.svg)
 
 * 悬浮窗框架：[EasyWindow](https://github.com/getActivity/EasyWindow) ![](https://img.shields.io/github/stars/getActivity/EasyWindow.svg) ![](https://img.shields.io/github/forks/getActivity/EasyWindow.svg)
+
+* 设备兼容框架：[DeviceCompat](https://github.com/getActivity/DeviceCompat) ![](https://img.shields.io/github/stars/getActivity/DeviceCompat.svg) ![](https://img.shields.io/github/forks/getActivity/DeviceCompat.svg)
 
 * ShapeView 框架：[ShapeView](https://github.com/getActivity/ShapeView) ![](https://img.shields.io/github/stars/getActivity/ShapeView.svg) ![](https://img.shields.io/github/forks/getActivity/ShapeView.svg)
 

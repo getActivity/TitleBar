@@ -18,7 +18,7 @@
             app:collapsedTitleGravity="center"
             app:expandedTitleGravity="center"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
-            app:title="折叠效果">
+            app:title="@string/demo_collapsing_title">
 
             <ImageView
                 android:layout_width="match_parent"
@@ -45,7 +45,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="50dp"
-                android:text="搭配 CoordinatorLayout 使用"
+                android:text="@string/demo_collapsing_use_with_coordinator_layout"
                 android:textColor="#FFFFFF"
                 android:textSize="16sp"
                 app:layout_collapseMode="parallax" />
@@ -86,14 +86,14 @@
                 <com.hjq.bar.TitleBar
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:title="默认的标题栏" />
+                    app:title="@string/demo_title_bar_default" />
 
                 <com.hjq.bar.TitleBar
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="15dp"
                     app:leftIcon="@null"
-                    app:title="不带返回按钮并标题斜体"
+                    app:title="@string/demo_title_bar_no_back_italic"
                     app:titleStyle="italic" />
 
                 <com.hjq.bar.TitleBar
@@ -101,7 +101,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
                     app:leftIcon="@null"
-                    app:title="标题向左对齐并且加粗"
+                    app:title="@string/demo_title_bar_left_bold"
                     app:titleGravity="start"
                     app:titleHorizontalPadding="20dp"
                     app:titleStyle="bold" />
@@ -111,7 +111,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="15dp"
                     app:lineVisible="false"
-                    app:title="不带分割线的标题栏" />
+                    app:title="@string/demo_title_bar_no_divider" />
 
                 <com.hjq.bar.TitleBar
                     android:layout_width="wrap_content"
@@ -120,7 +120,7 @@
                     app:leftHorizontalPadding="10dp"
                     app:lineVisible="false"
                     app:rightHorizontalPadding="10dp"
-                    app:title="标题文字过多会自动开启自带跑马灯效果，就问你溜不溜"
+                    app:title="@string/demo_title_bar_marquee"
                     app:titleHorizontalPadding="0dp" />
 
                 <com.hjq.bar.TitleBar
@@ -128,7 +128,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="15dp"
                     app:childVerticalPadding="20dp"
-                    app:title="通过垂直内间距来调整标题栏的高度" />
+                    app:title="@string/demo_title_bar_adjust_height" />
 
                 <com.hjq.bar.TitleBar
                     android:layout_width="wrap_content"
@@ -138,13 +138,13 @@
                     app:leftIconHeight="20dp"
                     app:leftIconTint="#ff00ff"
                     app:leftIconWidth="20dp"
-                    app:leftTitle="左边"
+                    app:leftTitle="@string/demo_title_bar_left"
                     app:rightIcon="@mipmap/ic_launcher"
                     app:rightIconHeight="20dp"
                     app:rightIconTint="#00ff00"
                     app:rightIconWidth="20dp"
-                    app:rightTitle="右边"
-                    app:title="设置图标重色器"
+                    app:rightTitle="@string/demo_title_bar_right"
+                    app:title="@string/demo_title_bar_icon_tint"
                     app:titleIcon="@mipmap/ic_launcher"
                     app:titleIconHeight="20dp"
                     app:titleIconTint="#0000ff"
@@ -160,17 +160,17 @@
                     app:leftIconHeight="20dp"
                     app:leftIconPadding="5dp"
                     app:leftIconWidth="20dp"
-                    app:leftTitle="扫一扫"
+                    app:leftTitle="@string/demo_title_bar_scan"
                     app:leftTitleColor="#666666"
                     app:leftTitleSize="12sp"
                     app:rightIcon="@drawable/message_ic"
                     app:rightIconGravity="top"
                     app:rightIconHeight="20dp"
                     app:rightIconWidth="20dp"
-                    app:rightTitle="消息"
+                    app:rightTitle="@string/demo_title_bar_message"
                     app:rightTitleColor="#666666"
                     app:rightTitleSize="12sp"
-                    app:title="控制图标的位置和大小"
+                    app:title="@string/demo_title_bar_icon_position_size"
                     app:titleIcon="@mipmap/ic_launcher"
                     app:titleIconGravity="bottom"
                     app:titleIconHeight="10dp"
@@ -181,13 +181,13 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="15dp"
                     app:leftIcon="@null"
-                    app:leftTitle="左边"
+                    app:leftTitle="@string/demo_title_bar_left"
                     app:leftTitleColor="#FF3300"
                     app:leftTitleSize="18sp"
-                    app:rightTitle="右边"
+                    app:rightTitle="@string/demo_title_bar_right"
                     app:rightTitleColor="#0033FF"
                     app:rightTitleSize="18sp"
-                    app:title="自定义文字大小和颜色"
+                    app:title="@string/demo_title_bar_custom_text"
                     app:titleColor="#33FF00"
                     app:titleSize="20sp" />
 
@@ -198,19 +198,19 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="15dp"
                     app:leftIcon="@mipmap/ic_launcher"
-                    app:leftTitle="左边"
+                    app:leftTitle="@string/demo_title_bar_left"
                     app:rightIcon="@mipmap/ic_launcher"
-                    app:rightTitle="右边"
-                    app:title="监听标题栏点击事件" />
+                    app:rightTitle="@string/demo_title_bar_right"
+                    app:title="@string/demo_title_bar_click_listener" />
 
                 <com.hjq.bar.TitleBar
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="15dp"
                     app:barStyle="night"
-                    app:leftTitle="返回"
-                    app:rightTitle="设置"
-                    app:title="夜间模式的标题栏" />
+                    app:leftTitle="@string/demo_title_bar_back"
+                    app:rightTitle="@string/demo_title_bar_setting"
+                    app:title="@string/demo_title_bar_night_mode" />
 
                 <com.hjq.bar.TitleBar
                     style="@style/TitleBarRippleClickStyle"
@@ -219,16 +219,16 @@
                     android:layout_marginTop="15dp"
                     android:background="@drawable/shape_gradient"
                     app:barStyle="transparent"
-                    app:leftTitle="返回"
-                    app:rightTitle="设置"
-                    app:title="仿QQ渐变样式" />
+                    app:leftTitle="@string/demo_title_bar_back"
+                    app:rightTitle="@string/demo_title_bar_setting"
+                    app:title="@string/demo_title_bar_qq_style" />
 
                 <com.hjq.bar.TitleBar
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="15dp"
                     app:leftIcon="@null"
-                    app:title="左边两个按钮效果" >
+                    app:title="@string/demo_title_bar_left_two_buttons" >
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -257,7 +257,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="15dp"
                     app:leftIcon="@null"
-                    app:title="右边两个按钮效果" >
+                    app:title="@string/demo_title_bar_right_two_buttons" >
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -265,11 +265,11 @@
                         android:layout_gravity="end|center_vertical"
                         android:orientation="horizontal" >
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:text="我是文本" />
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_marginStart="5dp"
+                            android:src="@mipmap/ic_launcher" />
 
                         <ImageView
                             android:layout_width="40dp"
@@ -299,7 +299,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="我是主标题"
+                            android:text="@string/demo_title_bar_i_am_main_title"
                             android:textColor="#333333"
                             android:textSize="15sp" />
 
@@ -307,7 +307,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="3dp"
-                            android:text="我是副标题"
+                            android:text="@string/demo_title_bar_i_am_sub_title"
                             android:textColor="#666666"
                             android:textSize="14sp" />
 
@@ -320,9 +320,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="15dp"
                     app:leftIcon="@null"
-                    app:leftTitle="我是很长很长很长很长很长的文案"
-                    app:rightTitle="我是很长很长很长很长很长的文案"
-                    app:title="默认的标题栏" />
+                    app:leftTitle="@string/demo_title_bar_long_text"
+                    app:rightTitle="@string/demo_title_bar_long_text"
+                    app:title="@string/demo_title_bar_default" />
 
                 <com.hjq.bar.TitleBar
                     android:id="@+id/tb_main_bar_long_title"
@@ -330,9 +330,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="15dp"
                     app:leftIcon="@null"
-                    app:leftTitle="左边文案"
-                    app:rightTitle="右边文案"
-                    app:title="我是很长很长很长很长很长很长很长很长很长很长的标题" />
+                    app:leftTitle="@string/demo_title_bar_left_text"
+                    app:rightTitle="@string/demo_title_bar_right_text"
+                    app:title="@string/demo_title_bar_long_title" />
 
             </LinearLayout>
 

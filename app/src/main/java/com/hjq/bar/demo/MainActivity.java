@@ -26,17 +26,17 @@ public final class MainActivity extends AppCompatActivity {
 
             @Override
             public void onLeftClick(TitleBar titleBar) {
-                Toaster.show("左项 View 被点击");
+                Toaster.show(R.string.demo_left_view_clicked);
             }
 
             @Override
             public void onTitleClick(TitleBar titleBar) {
-                Toaster.show("中间 View 被点击");
+                Toaster.show(R.string.demo_center_view_clicked);
             }
 
             @Override
             public void onRightClick(TitleBar titleBar) {
-                Toaster.show("右项 View 被点击");
+                Toaster.show(R.string.demo_right_view_clicked);
             }
         });
     }
