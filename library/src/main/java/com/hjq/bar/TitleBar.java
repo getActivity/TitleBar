@@ -405,7 +405,6 @@ public class TitleBar extends FrameLayout
 
     @Override
     public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
-        // 解决在外部触摸时触发点击效果的问题
         if (!mLeftView.isClickable()) {
             mLeftView.setClickable(true);
         }
@@ -416,10 +415,18 @@ public class TitleBar extends FrameLayout
             mRightView.setClickable(true);
         }
 
-        // TextView 里面必须有东西才能被点击
-        mLeftView.setEnabled(TitleBarSupport.containContent(mLeftView));
-        mTitleView.setEnabled(TitleBarSupport.containContent(mTitleView));
-        mRightView.setEnabled(TitleBarSupport.containContent(mRightView));
+        boolean leftEnabled = TitleBarSupport.containContent(mLeftView);
+        if (mLeftView.isEnabled() != leftEnabled) {
+            mLeftView.setEnabled(leftEnabled);
+        }
+        boolean titleEnabled = TitleBarSupport.containContent(mTitleView);
+        if (mTitleView.isEnabled() != titleEnabled) {
+            mTitleView.setEnabled(titleEnabled);
+        }
+        boolean rightEnabled = TitleBarSupport.containContent(mRightView);
+        if (mRightView.isEnabled() != rightEnabled) {
+            mRightView.setEnabled(rightEnabled);
+        }
     }
 
     /**
