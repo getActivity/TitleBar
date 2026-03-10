@@ -22,10 +22,10 @@ public final class SelectorDrawable extends StateListDrawable {
         private Drawable mPressed;
         /** 选中状态 */
         private Drawable mChecked;
-        /** 启用状态 */
-        private Drawable mEnabled;
         /** 选择状态 */
         private Drawable mSelected;
+        /** 启用状态 */
+        private Drawable mEnabled;
         /** 光标悬浮状态（4.0新特性） */
         private Drawable mHovered;
 
@@ -49,13 +49,13 @@ public final class SelectorDrawable extends StateListDrawable {
             return this;
         }
 
-        public Builder setEnabled(Drawable drawable) {
-            mEnabled = drawable;
+        public Builder setSelected(Drawable drawable) {
+            mSelected = drawable;
             return this;
         }
 
-        public Builder setSelected(Drawable drawable) {
-            mSelected = drawable;
+        public Builder setEnabled(Drawable drawable) {
+            mEnabled = drawable;
             return this;
         }
 
@@ -75,11 +75,11 @@ public final class SelectorDrawable extends StateListDrawable {
             if (mChecked != null) {
                 selector.addState(new int[]{android.R.attr.state_checked}, mChecked);
             }
-            if (mEnabled != null) {
-                selector.addState(new int[]{android.R.attr.state_enabled}, mEnabled);
-            }
             if (mSelected != null) {
                 selector.addState(new int[]{android.R.attr.state_selected}, mSelected);
+            }
+            if (mEnabled != null) {
+                selector.addState(new int[]{android.R.attr.state_enabled}, mEnabled);
             }
             if (mHovered != null) {
                 selector.addState(new int[]{android.R.attr.state_hovered}, mHovered);
