@@ -1,20 +1,12 @@
 apply plugin: 'com.android.application'
+apply from : '../common.gradle'
 
 android {
-    compileSdkVersion 34
+    namespace 'com.hjq.bar.demo'
 
     defaultConfig {
-        applicationId "com.hjq.bar.demo"
+        applicationId 'com.hjq.bar.demo'
         minSdkVersion 18
-        targetSdkVersion 34
-        versionCode 1080
-        versionName "10.8"
-    }
-
-    // 支持 JDK 1.8
-    compileOptions {
-        targetCompatibility JavaVersion.VERSION_1_8
-        sourceCompatibility JavaVersion.VERSION_1_8
     }
 
     // Apk 签名的那些事：https://www.jianshu.com/p/a1f8e5896aa2
