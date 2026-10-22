@@ -1,9 +1,6 @@
 package com.hjq.bar.style;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.text.TextUtils;
@@ -11,7 +8,6 @@ import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.TextView;
-
 import com.hjq.bar.ITitleBarStyle;
 import com.hjq.bar.TitleBarSupport;
 
@@ -99,27 +95,6 @@ public abstract class CommonBarStyle implements ITitleBarStyle {
 
     @Override
     public CharSequence getTitle(Context context) {
-        // 如果当前上下文对象是 Activity，就获取 Activity 的 label 属性作为标题栏的标题
-        if (!(context instanceof Activity)) {
-            return "";
-        }
-
-        // 获取清单文件中的 android:label 属性值
-        CharSequence label = ((Activity) context).getTitle();
-        if (TextUtils.isEmpty(label)) {
-            return "";
-        }
-
-        try {
-            PackageManager packageManager = context.getPackageManager();
-            PackageInfo packageInfo = packageManager.getPackageInfo(context.getPackageName(), 0);
-            // 如果当前 Activity 没有设置 android:label 属性，则默认会返回 App 名称，则需要过滤掉
-            if (!label.toString().equals(packageInfo.applicationInfo.loadLabel(packageManager).toString())) {
-                // 设置标题
-                return label;
-            }
-        } catch (PackageManager.NameNotFoundException ignored) {}
-
         return "";
     }
 
