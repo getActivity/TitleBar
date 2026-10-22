@@ -196,17 +196,17 @@ dependencies {
 titleBar.setOnTitleBarListener(new OnTitleBarListener() {
 
     @Override
-    public void onLeftClick(TitleBar titleBar) {
+    public void onLeftClick(@NonNull TitleBar titleBar) {
         toast("Left View clicked");
     }
 
     @Override
-    public void onTitleClick(TitleBar titleBar) {
+    public void onTitleClick(@NonNull TitleBar titleBar) {
         toast("Center View clicked");
     }
 
     @Override
-    public void onRightClick(TitleBar titleBar) {
+    public void onRightClick(@NonNull TitleBar titleBar) {
         toast("Right View clicked");
     }
 });

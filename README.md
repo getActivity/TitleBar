@@ -202,17 +202,17 @@ dependencies {
 titleBar.setOnTitleBarListener(new OnTitleBarListener() {
 
     @Override
-    public void onLeftClick(TitleBar titleBar) {
+    public void onLeftClick(@NonNull TitleBar titleBar) {
         toast("左项 View 被点击");
     }
 
     @Override
-    public void onTitleClick(TitleBar titleBar) {
+    public void onTitleClick(@NonNull TitleBar titleBar) {
         toast("中间 View 被点击");
     }
 
     @Override
-    public void onRightClick(TitleBar titleBar) {
+    public void onRightClick(@NonNull TitleBar titleBar) {
         toast("右项 View 被点击");
     }
 });

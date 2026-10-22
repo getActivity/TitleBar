@@ -9,6 +9,10 @@ android {
     }
 }
 
+dependencies {
+    compileOnly 'androidx.annotation:annotation:1.0.0'
+}
+
 // Jitpack 构建配置
 publishing {
     publications {

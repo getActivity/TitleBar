@@ -34,17 +34,17 @@ public final class MainActivity extends AppCompatActivity {
         clickTitlBar.setOnTitleBarListener(new OnTitleBarListener() {
 
             @Override
-            public void onLeftClick(TitleBar titleBar) {
+            public void onLeftClick(@NonNull TitleBar titleBar) {
                 Toaster.show(R.string.demo_left_view_clicked);
             }
 
             @Override
-            public void onTitleClick(TitleBar titleBar) {
+            public void onTitleClick(@NonNull TitleBar titleBar) {
                 Toaster.show(R.string.demo_center_view_clicked);
             }
 
             @Override
-            public void onRightClick(TitleBar titleBar) {
+            public void onRightClick(@NonNull TitleBar titleBar) {
                 Toaster.show(R.string.demo_right_view_clicked);
             }
         });

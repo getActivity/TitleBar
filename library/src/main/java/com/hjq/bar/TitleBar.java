@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
@@ -16,6 +17,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.TextView;
+import androidx.annotation.AttrRes;
+import androidx.annotation.ColorInt;
+import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.Px;
+import androidx.annotation.StringRes;
 import com.hjq.bar.style.LightBarStyle;
 import com.hjq.bar.style.NightBarStyle;
 import com.hjq.bar.style.TransparentBarStyle;
@@ -34,17 +42,25 @@ public class TitleBar extends FrameLayout
     private static final String LOG_TAG = "TitleBar";
 
     /** 默认初始化器 */
-    private static ITitleBarStyle sGlobalStyle;
+    @NonNull
+    private static ITitleBarStyle sGlobalStyle = new LightBarStyle();
+
     /** 当前初始化器 */
+    @NonNull
     private final ITitleBarStyle mCurrentStyle;
 
     /** 监听器对象 */
+    @Nullable
     private OnTitleBarListener mListener;
 
     /** 标题栏子控件 */
+    @NonNull
     private final TextView mLeftView;
+    @NonNull
     private final TextView mTitleView;
+    @NonNull
     private final TextView mRightView;
+    @NonNull
     private final View mLineView;
 
     /** 控件水平间距 */
@@ -69,24 +85,20 @@ public class TitleBar extends FrameLayout
     private int mRightIconGravity;
 
     /** 图标着色器 */
-    private int mLeftIconTint = TitleBarSupport.NO_COLOR;
-    private int mTitleIconTint = TitleBarSupport.NO_COLOR;
-    private int mRightIconTint = TitleBarSupport.NO_COLOR;
+    private int mLeftIconTint = Color.TRANSPARENT;
+    private int mTitleIconTint = Color.TRANSPARENT;
+    private int mRightIconTint = Color.TRANSPARENT;
 
-    public TitleBar(Context context) {
+    public TitleBar(@NonNull Context context) {
         this(context, null);
     }
 
-    public TitleBar(Context context, AttributeSet attrs) {
+    public TitleBar(@NonNull Context context, @Nullable AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public TitleBar(Context context, AttributeSet attrs, int defStyleAttr) {
+    public TitleBar(@NonNull Context context, @Nullable AttributeSet attrs, @AttrRes int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-
-        if (sGlobalStyle == null) {
-            setGlobalStyle(new LightBarStyle());
-        }
 
         final TypedArray array = context.obtainStyledAttributes(attrs, R.styleable.TitleBar, 0, R.style.TitleBarDefaultStyle);
 
@@ -404,7 +416,7 @@ public class TitleBar extends FrameLayout
     }
 
     @Override
-    public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
+    public void onLayoutChange(View view, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
         if (!mLeftView.isClickable()) {
             mLeftView.setClickable(true);
         }
@@ -449,22 +461,24 @@ public class TitleBar extends FrameLayout
     }
 
     @Override
-    public void setLayoutParams(ViewGroup.LayoutParams params) {
-        if (params.width == ViewGroup.LayoutParams.WRAP_CONTENT) {
-            // 如果当前宽度是自适应则转换成占满父布局
-            params.width = ViewGroup.LayoutParams.MATCH_PARENT;
-        }
+    public void setLayoutParams(@Nullable ViewGroup.LayoutParams params) {
+        if (params != null) {
+            if (params.width == ViewGroup.LayoutParams.WRAP_CONTENT) {
+                // 如果当前宽度是自适应则转换成占满父布局
+                params.width = ViewGroup.LayoutParams.MATCH_PARENT;
+            }
 
-        int verticalPadding = 0;
-        // 如果当前高度是自适应则设置默认的内间距
-        if (params.height == ViewGroup.LayoutParams.WRAP_CONTENT) {
-            verticalPadding = mVerticalPadding;
+            int verticalPadding = 0;
+            // 如果当前高度是自适应则设置默认的内间距
+            if (params.height == ViewGroup.LayoutParams.WRAP_CONTENT) {
+                verticalPadding = mVerticalPadding;
+            }
+            setChildVerticalPadding(verticalPadding);
         }
-
-        setChildVerticalPadding(verticalPadding);
         super.setLayoutParams(params);
     }
 
+    @NonNull
     @Override
     protected LayoutParams generateDefaultLayoutParams() {
         return new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -473,63 +487,100 @@ public class TitleBar extends FrameLayout
     /**
      * 设置标题栏的点击监听器
      */
-    public TitleBar setOnTitleBarListener(OnTitleBarListener listener) {
+    @NonNull
+    public TitleBar setOnTitleBarListener(@Nullable OnTitleBarListener listener) {
         mListener = listener;
-        // 设置监听
-        mTitleView.setOnClickListener(this);
-        mLeftView.setOnClickListener(this);
-        mRightView.setOnClickListener(this);
+        if (listener != null) {
+            mTitleView.setOnClickListener(this);
+            mLeftView.setOnClickListener(this);
+            mRightView.setOnClickListener(this);
+        } else {
+            mTitleView.setOnClickListener(null);
+            mLeftView.setOnClickListener(null);
+            mRightView.setOnClickListener(null);
+        }
         return this;
     }
 
     /**
      * 设置标题的文本
      */
-    public TitleBar setTitle(int id) {
+    @NonNull
+    public TitleBar setTitle(@StringRes int id) {
         return setTitle(getResources().getString(id));
     }
 
-    public TitleBar setTitle(CharSequence text) {
+    @NonNull
+    public TitleBar setTitle(@Nullable CharSequence text) {
+        if (text == null) {
+            text = "";
+        }
         mTitleView.setText(text);
         return this;
     }
 
+    @NonNull
     public CharSequence getTitle() {
-        return mTitleView.getText();
+        CharSequence text = mTitleView.getText();
+        if (text == null) {
+            text = "";
+        }
+        return text;
     }
 
     /**
      * 设置左标题的文本
      */
-    public TitleBar setLeftTitle(int id) {
+    @NonNull
+    public TitleBar setLeftTitle(@StringRes int id) {
         return setLeftTitle(getResources().getString(id));
     }
 
-    public TitleBar setLeftTitle(CharSequence text) {
+    @NonNull
+    public TitleBar setLeftTitle(@Nullable CharSequence text) {
+        if (text == null) {
+            text = "";
+        }
         mLeftView.setText(text);
         return this;
     }
 
+    @NonNull
     public CharSequence getLeftTitle() {
-        return mLeftView.getText();
+        CharSequence text = mLeftView.getText();
+        if (text == null) {
+            text = "";
+        }
+        return text;
     }
 
     /**
      * 设置右标题的文本
      */
-    public TitleBar setRightTitle(int id) {
+    @NonNull
+    public TitleBar setRightTitle(@StringRes int id) {
         return setRightTitle(getResources().getString(id));
     }
 
-    public TitleBar setRightTitle(CharSequence text) {
+    @NonNull
+    public TitleBar setRightTitle(@Nullable CharSequence text) {
+        if (text == null) {
+            text = "";
+        }
         mRightView.setText(text);
         return this;
     }
 
+    @NonNull
     public CharSequence getRightTitle() {
-        return mRightView.getText();
+        CharSequence text = mRightView.getText();
+        if (text == null) {
+            text = "";
+        }
+        return text;
     }
 
+    @NonNull
     public TitleBar setTitleStyle(int style) {
         return setTitleStyle(TitleBarSupport.getTextTypeface(style), style);
     }
@@ -540,11 +591,13 @@ public class TitleBar extends FrameLayout
      * @param typeface              字体样式
      * @param style                 文字样式
      */
-    public TitleBar setTitleStyle(Typeface typeface, int style) {
+    @NonNull
+    public TitleBar setTitleStyle(@Nullable Typeface typeface, int style) {
         mTitleView.setTypeface(typeface, style);
         return this;
     }
 
+    @NonNull
     public TitleBar setLeftTitleStyle(int style) {
         return setLeftTitleStyle(TitleBarSupport.getTextTypeface(style), style);
     }
@@ -555,11 +608,13 @@ public class TitleBar extends FrameLayout
      * @param typeface              字体样式
      * @param style                 文字样式
      */
-    public TitleBar setLeftTitleStyle(Typeface typeface, int style) {
+    @NonNull
+    public TitleBar setLeftTitleStyle(@Nullable Typeface typeface, int style) {
         mLeftView.setTypeface(typeface, style);
         return this;
     }
 
+    @NonNull
     public TitleBar setRightTitleStyle(int style) {
         return setRightTitleStyle(TitleBarSupport.getTextTypeface(style), style);
     }
@@ -570,7 +625,8 @@ public class TitleBar extends FrameLayout
      * @param typeface              字体样式
      * @param style                 文字样式
      */
-    public TitleBar setRightTitleStyle(Typeface typeface, int style) {
+    @NonNull
+    public TitleBar setRightTitleStyle(@Nullable Typeface typeface, int style) {
         mRightView.setTypeface(typeface, style);
         return this;
     }
@@ -578,7 +634,8 @@ public class TitleBar extends FrameLayout
     /**
      * 设置标题的文本溢出处理方式
      */
-    public TitleBar setTitleOverflowMode(TextUtils.TruncateAt where) {
+    @NonNull
+    public TitleBar setTitleOverflowMode(@Nullable TextUtils.TruncateAt where) {
         TitleBarSupport.setTextViewEllipsize(mTitleView, where);
         return this;
     }
@@ -586,7 +643,8 @@ public class TitleBar extends FrameLayout
     /**
      * 设置左边标题的文本溢出处理方式
      */
-    public TitleBar setLeftTitleOverflowMode(TextUtils.TruncateAt where) {
+    @NonNull
+    public TitleBar setLeftTitleOverflowMode(@Nullable TextUtils.TruncateAt where) {
         TitleBarSupport.setTextViewEllipsize(mLeftView, where);
         return this;
     }
@@ -594,7 +652,8 @@ public class TitleBar extends FrameLayout
     /**
      * 设置右边标题的文本溢出处理方式
      */
-    public TitleBar setRightTitleOverflowMode(TextUtils.TruncateAt where) {
+    @NonNull
+    public TitleBar setRightTitleOverflowMode(@Nullable TextUtils.TruncateAt where) {
         TitleBarSupport.setTextViewEllipsize(mRightView, where);
         return this;
     }
@@ -602,13 +661,17 @@ public class TitleBar extends FrameLayout
     /**
      * 设置标题的字体颜色
      */
-    public TitleBar setTitleColor(int color) {
+    @NonNull
+    public TitleBar setTitleColor(@ColorInt int color) {
         return setTitleColor(ColorStateList.valueOf(color));
     }
 
-    public TitleBar setTitleColor(ColorStateList color) {
+    @NonNull
+    public TitleBar setTitleColor(@Nullable ColorStateList color) {
         if (color != null) {
             mTitleView.setTextColor(color);
+        } else {
+            mTitleView.setTextColor(ColorStateList.valueOf(Color.TRANSPARENT));
         }
         return this;
     }
@@ -616,13 +679,17 @@ public class TitleBar extends FrameLayout
     /**
      * 设置左标题的字体颜色
      */
-    public TitleBar setLeftTitleColor(int color) {
+    @NonNull
+    public TitleBar setLeftTitleColor(@ColorInt int color) {
         return setLeftTitleColor(ColorStateList.valueOf(color));
     }
 
-    public TitleBar setLeftTitleColor(ColorStateList color) {
+    @NonNull
+    public TitleBar setLeftTitleColor(@Nullable ColorStateList color) {
         if (color != null) {
             mLeftView.setTextColor(color);
+        } else {
+            mLeftView.setTextColor(ColorStateList.valueOf(Color.TRANSPARENT));
         }
         return this;
     }
@@ -630,13 +697,17 @@ public class TitleBar extends FrameLayout
     /**
      * 设置右标题的字体颜色
      */
-    public TitleBar setRightTitleColor(int color) {
+    @NonNull
+    public TitleBar setRightTitleColor(@ColorInt int color) {
         return setRightTitleColor(ColorStateList.valueOf(color));
     }
 
-    public TitleBar setRightTitleColor(ColorStateList color) {
+    @NonNull
+    public TitleBar setRightTitleColor(@Nullable ColorStateList color) {
         if (color != null) {
             mRightView.setTextColor(color);
+        } else {
+            mRightView.setTextColor(ColorStateList.valueOf(Color.TRANSPARENT));
         }
         return this;
     }
@@ -644,10 +715,12 @@ public class TitleBar extends FrameLayout
     /**
      * 设置标题的字体大小
      */
+    @NonNull
     public TitleBar setTitleSize(float size) {
         return setTitleSize(TypedValue.COMPLEX_UNIT_SP, size);
     }
 
+    @NonNull
     public TitleBar setTitleSize(int unit, float size) {
         mTitleView.setTextSize(unit, size);
         return this;
@@ -656,10 +729,12 @@ public class TitleBar extends FrameLayout
     /**
      * 设置左标题的字体大小
      */
+    @NonNull
     public TitleBar setLeftTitleSize(float size) {
         return setLeftTitleSize(TypedValue.COMPLEX_UNIT_SP, size);
     }
 
+    @NonNull
     public TitleBar setLeftTitleSize(int unit, float size) {
         mLeftView.setTextSize(unit, size);
         return this;
@@ -668,10 +743,12 @@ public class TitleBar extends FrameLayout
     /**
      * 设置右标题的字体大小
      */
+    @NonNull
     public TitleBar setRightTitleSize(float size) {
         return setRightTitleSize(TypedValue.COMPLEX_UNIT_SP, size);
     }
 
+    @NonNull
     public TitleBar setRightTitleSize(int unit, float size) {
         mRightView.setTextSize(unit, size);
         return this;
@@ -680,17 +757,20 @@ public class TitleBar extends FrameLayout
     /**
      * 设置标题的图标
      */
-    public TitleBar setTitleIcon(int id) {
+    @NonNull
+    public TitleBar setTitleIcon(@DrawableRes int id) {
         return setTitleIcon(TitleBarSupport.getDrawable(getContext(), id));
     }
 
-    public TitleBar setTitleIcon(Drawable drawable) {
+    @NonNull
+    public TitleBar setTitleIcon(@Nullable Drawable drawable) {
         TitleBarSupport.setDrawableTint(drawable, mTitleIconTint);
         TitleBarSupport.setDrawableSize(drawable, mTitleIconWidth, mTitleIconHeight);
         TitleBarSupport.setTextCompoundDrawable(mTitleView, drawable, mTitleIconGravity);
         return this;
     }
 
+    @Nullable
     public Drawable getTitleIcon() {
         return TitleBarSupport.getTextCompoundDrawable(mTitleView, mTitleIconGravity);
     }
@@ -698,17 +778,20 @@ public class TitleBar extends FrameLayout
     /**
      * 设置左标题的图标
      */
-    public TitleBar setLeftIcon(int id) {
+    @NonNull
+    public TitleBar setLeftIcon(@DrawableRes int id) {
         return setLeftIcon(TitleBarSupport.getDrawable(getContext(), id));
     }
 
-    public TitleBar setLeftIcon(Drawable drawable) {
+    @NonNull
+    public TitleBar setLeftIcon(@Nullable Drawable drawable) {
         TitleBarSupport.setDrawableTint(drawable, mLeftIconTint);
         TitleBarSupport.setDrawableSize(drawable, mLeftIconWidth, mLeftIconHeight);
         TitleBarSupport.setTextCompoundDrawable(mLeftView, drawable, mLeftIconGravity);
         return this;
     }
 
+    @Nullable
     public Drawable getLeftIcon() {
         return TitleBarSupport.getTextCompoundDrawable(mLeftView, mLeftIconGravity);
     }
@@ -716,17 +799,20 @@ public class TitleBar extends FrameLayout
     /**
      * 设置右标题的图标
      */
-    public TitleBar setRightIcon(int id) {
+    @NonNull
+    public TitleBar setRightIcon(@DrawableRes int id) {
         return setRightIcon(TitleBarSupport.getDrawable(getContext(), id));
     }
 
-    public TitleBar setRightIcon(Drawable drawable) {
+    @NonNull
+    public TitleBar setRightIcon(@Nullable Drawable drawable) {
         TitleBarSupport.setDrawableTint(drawable, mRightIconTint);
         TitleBarSupport.setDrawableSize(drawable, mRightIconWidth, mRightIconHeight);
         TitleBarSupport.setTextCompoundDrawable(mRightView, drawable, mRightIconGravity);
         return this;
     }
 
+    @Nullable
     public Drawable getRightIcon() {
         return TitleBarSupport.getTextCompoundDrawable(mRightView, mRightIconGravity);
     }
@@ -734,7 +820,8 @@ public class TitleBar extends FrameLayout
     /**
      * 设置标题的图标大小
      */
-    public TitleBar setTitleIconSize(int width, int height) {
+    @NonNull
+    public TitleBar setTitleIconSize(@Px int width, @Px int height) {
         mTitleIconWidth = width;
         mTitleIconHeight = height;
         TitleBarSupport.setDrawableSize(getTitleIcon(), width, height);
@@ -744,7 +831,8 @@ public class TitleBar extends FrameLayout
     /**
      * 设置左标题的图标大小
      */
-    public TitleBar setLeftIconSize(int width, int height) {
+    @NonNull
+    public TitleBar setLeftIconSize(@Px int width, @Px int height) {
         mLeftIconWidth = width;
         mLeftIconHeight = height;
         TitleBarSupport.setDrawableSize(getLeftIcon(), width, height);
@@ -754,7 +842,8 @@ public class TitleBar extends FrameLayout
     /**
      * 设置右标题的图标大小
      */
-    public TitleBar setRightIconSize(int width, int height) {
+    @NonNull
+    public TitleBar setRightIconSize(@Px int width, @Px int height) {
         mRightIconWidth = width;
         mRightIconHeight = height;
         TitleBarSupport.setDrawableSize(getRightIcon(), width, height);
@@ -764,7 +853,8 @@ public class TitleBar extends FrameLayout
     /**
      * 设置标题的文字和图标间距
      */
-    public TitleBar setTitleIconPadding(int padding) {
+    @NonNull
+    public TitleBar setTitleIconPadding(@Px int padding) {
         mTitleView.setCompoundDrawablePadding(padding);
         return this;
     }
@@ -772,7 +862,8 @@ public class TitleBar extends FrameLayout
     /**
      * 设置左标题的文字和图标间距
      */
-    public TitleBar setLeftIconPadding(int padding) {
+    @NonNull
+    public TitleBar setLeftIconPadding(@Px int padding) {
         mLeftView.setCompoundDrawablePadding(padding);
         return this;
     }
@@ -780,7 +871,8 @@ public class TitleBar extends FrameLayout
     /**
      * 设置右标题的文字和图标间距
      */
-    public TitleBar setRightIconPadding(int padding) {
+    @NonNull
+    public TitleBar setRightIconPadding(@Px int padding) {
         mRightView.setCompoundDrawablePadding(padding);
         return this;
     }
@@ -788,7 +880,8 @@ public class TitleBar extends FrameLayout
     /**
      * 设置标题的图标着色器
      */
-    public TitleBar setTitleIconTint(int color) {
+    @NonNull
+    public TitleBar setTitleIconTint(@ColorInt int color) {
         mTitleIconTint = color;
         TitleBarSupport.setDrawableTint(getTitleIcon(), color);
         return this;
@@ -797,7 +890,8 @@ public class TitleBar extends FrameLayout
     /**
      * 设置左标题的图标着色器
      */
-    public TitleBar setLeftIconTint(int color) {
+    @NonNull
+    public TitleBar setLeftIconTint(@ColorInt int color) {
         mLeftIconTint = color;
         TitleBarSupport.setDrawableTint(getLeftIcon(), color);
         return this;
@@ -806,7 +900,8 @@ public class TitleBar extends FrameLayout
     /**
      * 设置右标题的图标着色器
      */
-    public TitleBar setRightIconTint(int color) {
+    @NonNull
+    public TitleBar setRightIconTint(@ColorInt int color) {
         mRightIconTint = color;
         TitleBarSupport.setDrawableTint(getRightIcon(), color);
         return this;
@@ -815,8 +910,9 @@ public class TitleBar extends FrameLayout
     /**
      * 清除标题的图标着色器
      */
+    @NonNull
     public TitleBar clearTitleIconTint() {
-        mTitleIconTint = TitleBarSupport.NO_COLOR;
+        mTitleIconTint = Color.TRANSPARENT;
         TitleBarSupport.clearDrawableTint(getTitleIcon());
         return this;
     }
@@ -824,8 +920,9 @@ public class TitleBar extends FrameLayout
     /**
      * 清除左标题的图标着色器
      */
+    @NonNull
     public TitleBar clearLeftIconTint() {
-        mLeftIconTint = TitleBarSupport.NO_COLOR;
+        mLeftIconTint = Color.TRANSPARENT;
         TitleBarSupport.clearDrawableTint(getLeftIcon());
         return this;
     }
@@ -833,8 +930,9 @@ public class TitleBar extends FrameLayout
     /**
      * 清除右标题的图标着色器
      */
+    @NonNull
     public TitleBar clearRightIconTint() {
-        mRightIconTint = TitleBarSupport.NO_COLOR;
+        mRightIconTint = Color.TRANSPARENT;
         TitleBarSupport.clearDrawableTint(getRightIcon());
         return this;
     }
@@ -842,6 +940,7 @@ public class TitleBar extends FrameLayout
     /**
      * 设置标题的图标显示重心
      */
+    @NonNull
     public TitleBar setTitleIconGravity(int gravity) {
         Drawable drawable = getTitleIcon();
         mTitleIconGravity = gravity;
@@ -854,6 +953,7 @@ public class TitleBar extends FrameLayout
     /**
      * 设置左标题的图标显示重心
      */
+    @NonNull
     public TitleBar setLeftIconGravity(int gravity) {
         Drawable drawable = getLeftIcon();
         mLeftIconGravity = gravity;
@@ -866,6 +966,7 @@ public class TitleBar extends FrameLayout
     /**
      * 设置右标题的图标显示重心
      */
+    @NonNull
     public TitleBar setRightIconGravity(int gravity) {
         Drawable drawable = getRightIcon();
         mRightIconGravity = gravity;
@@ -878,11 +979,13 @@ public class TitleBar extends FrameLayout
     /**
      * 设置左标题的背景状态选择器
      */
-    public TitleBar setLeftBackground(int id) {
+    @NonNull
+    public TitleBar setLeftBackground(@DrawableRes int id) {
         return setLeftBackground(TitleBarSupport.getDrawable(getContext(), id));
     }
 
-    public TitleBar setLeftBackground(Drawable drawable) {
+    @NonNull
+    public TitleBar setLeftBackground(@Nullable Drawable drawable) {
         TitleBarSupport.setBackground(mLeftView, drawable);
         return this;
     }
@@ -890,11 +993,13 @@ public class TitleBar extends FrameLayout
     /**
      * 设置右标题的背景状态选择器
      */
-    public TitleBar setRightBackground(int id) {
+    @NonNull
+    public TitleBar setRightBackground(@DrawableRes int id) {
         return setRightBackground(TitleBarSupport.getDrawable(getContext(), id));
     }
 
-    public TitleBar setRightBackground(Drawable drawable) {
+    @NonNull
+    public TitleBar setRightBackground(@Nullable Drawable drawable) {
         TitleBarSupport.setBackground(mRightView, drawable);
         return this;
     }
@@ -902,11 +1007,13 @@ public class TitleBar extends FrameLayout
     /**
      * 设置左标题的前景状态选择器
      */
-    public TitleBar setLeftForeground(int id) {
+    @NonNull
+    public TitleBar setLeftForeground(@DrawableRes int id) {
         return setLeftForeground(TitleBarSupport.getDrawable(getContext(), id));
     }
 
-    public TitleBar setLeftForeground(Drawable drawable) {
+    @NonNull
+    public TitleBar setLeftForeground(@Nullable Drawable drawable) {
         TitleBarSupport.setForeground(mLeftView, drawable);
         return this;
     }
@@ -914,11 +1021,13 @@ public class TitleBar extends FrameLayout
     /**
      * 设置右标题的前景状态选择器
      */
-    public TitleBar setRightForeground(int id) {
+    @NonNull
+    public TitleBar setRightForeground(@DrawableRes int id) {
         return setRightForeground(TitleBarSupport.getDrawable(getContext(), id));
     }
 
-    public TitleBar setRightForeground(Drawable drawable) {
+    @NonNull
+    public TitleBar setRightForeground(@Nullable Drawable drawable) {
         TitleBarSupport.setForeground(mRightView, drawable);
         return this;
     }
@@ -926,6 +1035,7 @@ public class TitleBar extends FrameLayout
     /**
      * 设置分割线是否显示
      */
+    @NonNull
     public TitleBar setLineVisible(boolean visible) {
         mLineView.setVisibility(visible ? VISIBLE : INVISIBLE);
         return this;
@@ -934,11 +1044,13 @@ public class TitleBar extends FrameLayout
     /**
      * 设置分割线的颜色
      */
-    public TitleBar setLineColor(int color) {
+    @NonNull
+    public TitleBar setLineColor(@ColorInt int color) {
         return setLineDrawable(new ColorDrawable(color));
     }
 
-    public TitleBar setLineDrawable(Drawable drawable) {
+    @NonNull
+    public TitleBar setLineDrawable(@Nullable Drawable drawable) {
         TitleBarSupport.setBackground(mLineView, drawable);
         return this;
     }
@@ -946,9 +1058,10 @@ public class TitleBar extends FrameLayout
     /**
      * 设置分割线的大小
      */
-    public TitleBar setLineSize(int px) {
+    @NonNull
+    public TitleBar setLineSize(@Px int size) {
         ViewGroup.LayoutParams layoutParams = mLineView.getLayoutParams();
-        layoutParams.height = px;
+        layoutParams.height = size;
         mLineView.setLayoutParams(layoutParams);
         return this;
     }
@@ -957,6 +1070,7 @@ public class TitleBar extends FrameLayout
      * 设置标题重心
      */
     @SuppressLint("RtlHardcoded")
+    @NonNull
     public TitleBar setTitleGravity(int gravity) {
         gravity = TitleBarSupport.getAbsoluteGravity(this, gravity);
 
@@ -983,7 +1097,8 @@ public class TitleBar extends FrameLayout
     /**
      * 设置子 View 内间距
      */
-    public TitleBar setChildVerticalPadding(int verticalPadding) {
+    @NonNull
+    public TitleBar setChildVerticalPadding(@Px int verticalPadding) {
         mVerticalPadding = verticalPadding;
         mLeftView.setPadding(mLeftHorizontalPadding, mVerticalPadding, mLeftHorizontalPadding, mVerticalPadding);
         mTitleView.setPadding(mTitleHorizontalPadding, mVerticalPadding, mTitleHorizontalPadding, mVerticalPadding);
@@ -991,7 +1106,8 @@ public class TitleBar extends FrameLayout
         return this;
     }
 
-    public TitleBar setChildHorizontalPadding(int leftHorizontalPadding, int titleHorizontalPadding, int rightHorizontalPadding) {
+    @NonNull
+    public TitleBar setChildHorizontalPadding(@Px int leftHorizontalPadding, @Px int titleHorizontalPadding, @Px int rightHorizontalPadding) {
         mLeftHorizontalPadding = leftHorizontalPadding;
         mTitleHorizontalPadding = titleHorizontalPadding;
         mRightHorizontalPadding = rightHorizontalPadding;
@@ -1004,6 +1120,7 @@ public class TitleBar extends FrameLayout
     /**
      * 获取左标题View对象
      */
+    @NonNull
     public TextView getLeftView() {
         return mLeftView;
     }
@@ -1011,6 +1128,7 @@ public class TitleBar extends FrameLayout
     /**
      * 获取标题View对象
      */
+    @NonNull
     public TextView getTitleView() {
         return mTitleView;
     }
@@ -1018,6 +1136,7 @@ public class TitleBar extends FrameLayout
     /**
      * 获取右标题View对象
      */
+    @NonNull
     public TextView getRightView() {
         return mRightView;
     }
@@ -1025,6 +1144,7 @@ public class TitleBar extends FrameLayout
     /**
      * 获取分割线View对象
      */
+    @NonNull
     public View getLineView() {
         return mLineView;
     }
@@ -1032,6 +1152,7 @@ public class TitleBar extends FrameLayout
     /**
      * 获取当前样式
      */
+    @NonNull
     public ITitleBarStyle getCurrentStyle() {
         return mCurrentStyle;
     }
@@ -1039,13 +1160,14 @@ public class TitleBar extends FrameLayout
     /**
      * 设置全局样式
      */
-    public static void setGlobalStyle(ITitleBarStyle style) {
+    public static void setGlobalStyle(@NonNull ITitleBarStyle style) {
         sGlobalStyle = style;
     }
 
     /**
      * 获取全局样式
      */
+    @NonNull
     public static ITitleBarStyle getGlobalStyle() {
         return sGlobalStyle;
     }

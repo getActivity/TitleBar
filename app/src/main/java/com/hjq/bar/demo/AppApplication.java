@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatTextView;
 
 import com.hjq.bar.TitleBar;
@@ -22,18 +23,21 @@ public final class AppApplication extends Application {
         // 设置标题栏全局样式
         TitleBar.setGlobalStyle(new LightBarStyle() {
 
+            @NonNull
             @Override
-            public TextView newTitleView(Context context) {
+            public TextView newTitleView(@NonNull Context context) {
                 return new AppCompatTextView(context);
             }
 
+            @NonNull
             @Override
-            public TextView newLeftView(Context context) {
+            public TextView newLeftView(@NonNull Context context) {
                 return new AppCompatTextView(context);
             }
 
+            @NonNull
             @Override
-            public TextView newRightView(Context context) {
+            public TextView newRightView(@NonNull Context context) {
                 return new AppCompatTextView(context);
             }
         });

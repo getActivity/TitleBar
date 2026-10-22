@@ -12,6 +12,11 @@ import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.TextView;
+import androidx.annotation.ColorInt;
+import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.Px;
 
 /**
  *    author : Android 轮子哥
@@ -21,19 +26,20 @@ import android.widget.TextView;
  */
 public final class TitleBarSupport {
 
-    /** 无色值 */
-    static final int NO_COLOR = Color.TRANSPARENT;
-
     public static final int ELLIPSIZE_NONE = 0;
     public static final int ELLIPSIZE_START = 1;
     public static final int ELLIPSIZE_MIDDLE = 2;
     public static final int ELLIPSIZE_END = 3;
     public static final int ELLIPSIZE_MARQUEE = 4;
 
+    private TitleBarSupport() {
+        // 禁止创建对象
+    }
+
     /**
      * 获取图片资源
      */
-    public static Drawable getDrawable(Context context, int id) {
+    public static Drawable getDrawable(@NonNull Context context, @DrawableRes int id) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             return context.getResources().getDrawable(id, context.getTheme());
         } else {
@@ -44,7 +50,7 @@ public final class TitleBarSupport {
     /**
      * 设置 View 背景
      */
-    public static void setBackground(View view, Drawable drawable) {
+    public static void setBackground(@NonNull View view, @Nullable Drawable drawable) {
         view.setBackground(drawable);
     }
 
@@ -60,7 +66,7 @@ public final class TitleBarSupport {
     /**
      * 获取绝对重心
      */
-    public static int getAbsoluteGravity(View view, int gravity) {
+    public static int getAbsoluteGravity(@NonNull View view, int gravity) {
         // 适配布局反方向
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN_MR1) {
             return gravity;
@@ -71,7 +77,7 @@ public final class TitleBarSupport {
     /**
      * 是否启用了布局反方向特性
      */
-    public static boolean isLayoutRtl(Context context) {
+    public static boolean isLayoutRtl(@NonNull Context context) {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN_MR1) {
             return false;
         }
@@ -82,7 +88,7 @@ public final class TitleBarSupport {
     /**
      * TextView 是否存在内容
      */
-    public static boolean containContent(TextView textView) {
+    public static boolean containContent(@NonNull TextView textView) {
         CharSequence text = textView.getText();
         if (!TextUtils.isEmpty(text)) {
             return true;
@@ -99,11 +105,11 @@ public final class TitleBarSupport {
     /**
      * 给图片设置着色器
      */
-    public static void setDrawableTint(Drawable drawable, int color) {
+    public static void setDrawableTint(@Nullable Drawable drawable, @ColorInt int color) {
         if (drawable == null) {
             return;
         }
-        if (color == NO_COLOR) {
+        if (color == Color.TRANSPARENT) {
             return;
         }
         drawable.mutate();
@@ -117,7 +123,7 @@ public final class TitleBarSupport {
     /**
      * 清除图片设置着色器
      */
-    public static void clearDrawableTint(Drawable drawable) {
+    public static void clearDrawableTint(@Nullable Drawable drawable) {
         if (drawable == null) {
             return;
         }
@@ -128,7 +134,7 @@ public final class TitleBarSupport {
     /**
      * 根据给定的大小限制 Drawable 宽高
      */
-    public static void setDrawableSize(Drawable drawable, int width, int height) {
+    public static void setDrawableSize(@Nullable Drawable drawable, @Px int width, @Px int height) {
         if (drawable == null ) {
             return;
         }
@@ -163,7 +169,8 @@ public final class TitleBarSupport {
     /**
      * 根据图片重心获取在 TextView 的 Drawable 对象
      */
-    public static Drawable getTextCompoundDrawable(TextView textView, int gravity) {
+    @Nullable
+    public static Drawable getTextCompoundDrawable(@NonNull TextView textView, int gravity) {
         Drawable[] drawables = textView.getCompoundDrawables();
         switch (getAbsoluteGravity(textView, gravity)) {
             case Gravity.LEFT:
@@ -182,7 +189,7 @@ public final class TitleBarSupport {
     /**
      * 根据图标重心设置 TextView 某个位置的 Drawable
      */
-    public static void setTextCompoundDrawable(TextView textView, Drawable drawable, int gravity) {
+    public static void setTextCompoundDrawable(@NonNull TextView textView, @Nullable Drawable drawable, int gravity) {
         switch (getAbsoluteGravity(textView, gravity)) {
             case Gravity.LEFT:
                 textView.setCompoundDrawables(drawable, null, null, null);
@@ -205,6 +212,7 @@ public final class TitleBarSupport {
     /**
      * 根据文字样式返回不同的字体样式
      */
+    @NonNull
     public static Typeface getTextTypeface(int style) {
         switch (style) {
             case Typeface.BOLD:
@@ -221,6 +229,7 @@ public final class TitleBarSupport {
     /**
      * int 转 TruncateAt 枚举
      */
+    @Nullable
     public static TextUtils.TruncateAt convertIntToTruncateAtEnum(int ellipsize) {
         switch (ellipsize) {
             case ELLIPSIZE_START:
@@ -239,7 +248,7 @@ public final class TitleBarSupport {
     /**
      * 设置 TextView 文本溢出处理方式
      */
-    public static void setTextViewEllipsize(TextView textView, TextUtils.TruncateAt where) {
+    public static void setTextViewEllipsize(@NonNull TextView textView, @Nullable TextUtils.TruncateAt where) {
         if (textView.getEllipsize() == where) {
             return;
         }

@@ -5,6 +5,8 @@ import android.content.res.ColorStateList;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import com.hjq.bar.R;
 import com.hjq.bar.SelectorDrawable;
 import com.hjq.bar.TitleBarSupport;
@@ -17,13 +19,15 @@ import com.hjq.bar.TitleBarSupport;
  */
 public class LightBarStyle extends CommonBarStyle {
 
+    @Nullable
     @Override
-    public Drawable getTitleBarBackground(Context context) {
+    public Drawable getTitleBarBackground(@NonNull Context context) {
         return new ColorDrawable(0xFFFFFFFF);
     }
 
+    @Nullable
     @Override
-    public Drawable getLeftTitleBackground(Context context) {
+    public Drawable getLeftTitleBackground(@NonNull Context context) {
         return new SelectorDrawable.Builder()
                 .setDefault(new ColorDrawable(0x00000000))
                 .setFocused(new ColorDrawable(0x0C000000))
@@ -31,8 +35,9 @@ public class LightBarStyle extends CommonBarStyle {
                 .build();
     }
 
+    @Nullable
     @Override
-    public Drawable getRightTitleBackground(Context context) {
+    public Drawable getRightTitleBackground(@NonNull Context context) {
         return new SelectorDrawable.Builder()
                 .setDefault(new ColorDrawable(0x00000000))
                 .setFocused(new ColorDrawable(0x0C000000))
@@ -40,28 +45,33 @@ public class LightBarStyle extends CommonBarStyle {
                 .build();
     }
 
+    @Nullable
     @Override
-    public Drawable getBackButtonDrawable(Context context) {
+    public Drawable getBackButtonDrawable(@NonNull Context context) {
         return TitleBarSupport.getDrawable(context, R.drawable.bar_arrows_left_black);
     }
 
+    @Nullable
     @Override
-    public ColorStateList getTitleColor(Context context) {
+    public ColorStateList getTitleColor(@NonNull Context context) {
         return ColorStateList.valueOf(0xFF222222);
     }
 
+    @Nullable
     @Override
-    public ColorStateList getLeftTitleColor(Context context) {
+    public ColorStateList getLeftTitleColor(@NonNull Context context) {
         return ColorStateList.valueOf(0xFF666666);
     }
 
+    @Nullable
     @Override
-    public ColorStateList getRightTitleColor(Context context) {
+    public ColorStateList getRightTitleColor(@NonNull Context context) {
         return ColorStateList.valueOf(0xFFA4A4A4);
     }
 
+    @Nullable
     @Override
-    public Drawable getLineDrawable(Context context) {
+    public Drawable getLineDrawable(@NonNull Context context) {
         return new ColorDrawable(0xFFECECEC);
     }
 }
